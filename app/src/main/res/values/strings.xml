@@ -1,0 +1,159 @@
+<resources>
+    <string name="app_name">MEBMS</string>
+    <string name="action_settings">Тохиргоо</string>
+    <string name="username">Хэрэглэгчийн нэр</string>
+    <string name="password">Нууц үг</string>
+    <string name="login">Нэвтрэх</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Хадгалах</string>
+    <string name="title_activity_log_in">Нэвтрэх</string>
+    <string name="title_activity_home">Нүүр</string>
+    <string name="loadingscreen">Уншиж байна</string>
+    <string name="title_activity_main"></string>
+    <string name="title_section1">Нүүр</string>
+    <string name="title_section2">Голомт нэмэх</string>
+    <string name="title_section3">Шинжилгээ нэмэх</string>
+    <string name="title_section4">Голомт жагсаалт</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="hello_blank_fragment">Hүүр цонх</string>
+    <string name="location_choose">Байршил сонгох</string>
+    <string name="latitude">Өргөрөг</string>
+    <string name="longitude">Уртраг</string>
+    <string name="aimag">Аймаг</string>
+    <string name="sum">Сум</string>
+    <string name="golomt">Голомт</string>
+    <string name="urh_code">Өрхийн код</string>
+    <string name="urh_ezen_ner">Өрхийн эзний нэр</string>
+    <string name="bag_ner">Багийн нэр</string>
+    <string name="gazar_ner">Газрын нэр</string>
+    <string name="ezencode">Малын эзний код</string>
+    <string name="ezenner">Малын эзний нэр</string>
+    <string name="uvchin_turul">Өвчний төрөл</string>
+    <string name="uvchin_ner">Өвчний нэр</string>
+    <string name="ustgasan">Устгасан</string>
+    <string name="zuvluguu">Зөвлөгөө өгсөн</string>
+    <string name="emchilgee">Эмчилж байгаа</string>
+    <string name="edgersen">Эдгэрсэн</string>
+    <string name="uhsen">Үхсэн</string>
+    <string name="mal">Мал</string>
+    <string name="honi">Хонь</string>
+    <string name="yamaa">Яамаа</string>
+    <string name="uher">Үхэр</string>
+    <string name="mori">Морь</string>
+    <string name="temee">Тэмээ</string>
+    <string name="ustgah_arga">Устгахад ашигласан арга</string>
+    <string name="turul">Шинжилгээний төрөл</string>
+    <string name="deej">Дээжийн нэр төрөл</string>
+    <string name="arga">Шинжилгээний арга</string>
+    <string name="urval">Шинжилгээнд хэрэглэсэн урвал</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <string name="error_invalid_username">Хэрэглэгчийн нэр буруу байна</string>
+    <string name="error_invalid_password">Нууц үг буруу байна</string>
+    <string name="error_incorrect_password">Нууц үг буруу байна</string>
+    <string name="error_field_required">Хоосон байж болохгүй</string>
+
+
+    <string name="drawer_item_home">Home</string>
+    <string name="drawer_item_free_play">Free Play</string>
+    <string name="drawer_item_custom">Custom</string>
+    <string name="drawer_item_section_header">Section Header</string>
+    <string name="drawer_item_settings">Settings</string>
+    <string name="drawer_item_help">Help</string>
+    <string name="drawer_item_open_source">Open Source</string>
+    <string name="drawer_item_contact">Contact</string>
+
+
+    <string-array name="aimag_array">
+        <item>Архангай</item>
+        <item>Баян-Өлгий</item>
+        <item>Баянхонгор</item>
+        <item>Булган</item>
+        <item>Говь-Алтай</item>
+        <item>Говьсүмбэр</item>
+        <item>Дархан-Уул</item>
+        <item>Дорноговь</item>
+        <item>Дорнод</item>
+        <item>Дундговь</item>
+        <item>Завхан</item>
+        <item>Орхон</item>
+        <item>Өвөрхангай</item>
+        <item>Өмнөговь</item>
+        <item>Сүхбаатар</item>
+        <item>Сэлэнгэ</item>
+        <item>Төв</item>
+        <item>Увс</item>
+        <item>Ховд</item>
+        <item>Хөвсгөл</item>
+        <item>Хэнтий</item>
+    </string-array>
+
+    <string-array name="sum_array_1">
+        <item>Батцэнгэл сум</item>
+        <item>Булган сум</item>
+        <item>Жаргалант сум</item>
+        <item>Ихтамир сум</item>
+        <item>Өгийнуур сум</item>
+        <item>Өлзийт сум</item>
+        <item>Өндөр-Улаан сум</item>
+        <item>Тариат сум</item>
+        <item>Цахир сум</item>
+        <item>Түвшрүүлэх сум</item>
+        <item>Хайрхан сум</item>
+        <item>Хангай сум</item>
+        <item>Хашаат сум</item>
+        <item>Хотонт сум</item>
+        <item>Цэнхэр сум</item>
+        <item>Чулуут сум</item>
+        <item>Эрдэнэбулган сум</item>
+        <item>Эрдэнэмандал сум</item>
+    </string-array>
+    <string-array name="sum_array_2">
+        <item>Батцэнгэл сум2</item>
+        <item>Булган сум</item>
+        <item>Жаргалант сум</item>
+        <item>Ихтамир сум</item>
+        <item>Өгийнуур сум</item>
+        <item>Өлзийт сум</item>
+        <item>Өндөр-Улаан сум</item>
+        <item>Тариат сум</item>
+        <item>Цахир сум</item>
+        <item>Түвшрүүлэх сум</item>
+        <item>Хайрхан сум</item>
+        <item>Хангай сум</item>
+        <item>Хашаат сум</item>
+        <item>Хотонт сум</item>
+        <item>Цэнхэр сум</item>
+        <item>Чулуут сум</item>
+        <item>Эрдэнэбулган сум</item>
+        <item>Эрдэнэмандал сум</item>
+    </string-array>
+    <string-array name="empty_array"></string-array>
+    <string-array name="shinj_turul_array">
+        <item >Shinj turul 1</item>
+        <item >Shinj turul 2</item>
+        <item >Shinj turul 3</item>
+    </string-array>
+    <string-array name="deej_turul_array">
+        <item >Deej turul 1</item>
+        <item >Deej turul 2</item>
+        <item >Deej turul 3</item>
+    </string-array>
+    <string-array name="arga_array">
+        <item >Arga 1</item>
+        <item >Arga 2</item>
+        <item >Arga 3</item>
+    </string-array>
+    <string-array name="urval_array">
+        <item >Urval 1</item>
+        <item >Urval 2</item>
+        <item >Urval 3</item>
+    </string-array>
+
+
+
+
+</resources>
