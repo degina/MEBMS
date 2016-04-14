@@ -66,7 +66,7 @@ public class LoginActivity extends Activity {
     private View mProgressView;
     private View mLoginFormView;
     private Button mLogInButton;
-    private static String url_log_in = "http://10.0.2.2/mbms/login.php";
+    private static String url_log_in = "http://10.0.2.2:81/mbms/login.php";
     public static final String PREFS_NAME = "MBMS";
     public SharedPreferences prefs;
 

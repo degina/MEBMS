@@ -86,6 +86,7 @@ public class HomeActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.title_section2).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(2),
                         new PrimaryDrawerItem().withName(R.string.title_section3).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(3),
                         new PrimaryDrawerItem().withName(R.string.title_section4).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(4),
+                        new PrimaryDrawerItem().withName(R.string.title_section5).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(5),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(false),
@@ -111,9 +112,12 @@ public class HomeActivity extends AppCompatActivity {
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 4) {
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, GolomtListFragment.newInstance())
+                                        .replace(R.id.frame_container, ShinjilgeeListFragment.newInstance())
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 5) {
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container, SignUpFragment.newInstance())
+                                        .commit();
                             }
                         }
 

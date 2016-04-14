@@ -3,7 +3,16 @@
     <string name="action_settings">Тохиргоо</string>
     <string name="username">Хэрэглэгчийн нэр</string>
     <string name="password">Нууц үг</string>
+    <string name="repeat">Нууц үг</string>
+    <string name="firstname">Нэр</string>
+    <string name="lastname">Овог</string>
+    <string name="emch_id">Эмчийн дугаар</string>
+    <string name="gender">Хүйс</string>
+    <string name="male">Эр</string>
+    <string name="female">Эм</string>
+    <string name="birthday">Төрсөн өдөр</string>
     <string name="login">Нэвтрэх</string>
+    <string name="signup">Бүртгэх</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="save">Хадгалах</string>
@@ -12,16 +21,17 @@
     <string name="loadingscreen">Уншиж байна</string>
     <string name="title_activity_main"></string>
     <string name="title_section1">Нүүр</string>
-    <string name="title_section2">Голомт нэмэх</string>
-    <string name="title_section3">Шинжилгээ нэмэх</string>
-    <string name="title_section4">Голомт жагсаалт</string>
+    <string name="title_section2">Малын өвчин бүртгэх</string>
+    <string name="title_section3">Оношилгоо, шинжилгээ бүртгэх</string>
+    <string name="title_section4">Малын өвчиний жагсаалт жагсаалт</string>
+    <string name="title_section5">Малын эмч бүртгэх</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="hello_blank_fragment">Hүүр цонх</string>
     <string name="location_choose">Байршил сонгох</string>
     <string name="latitude">Өргөрөг</string>
-    <string name="longitude">Уртраг</string>
+    <string name="longitude">Уртраг</string>м
     <string name="aimag">Аймаг</string>
     <string name="sum">Сум</string>
     <string name="golomt">Голомт</string>
@@ -50,6 +60,19 @@
     <string name="arga">Шинжилгээний арга</string>
     <string name="urval">Шинжилгээнд хэрэглэсэн урвал</string>
     <string name="title_activity_login">Sign in</string>
+
+    <string name="shinjilgee_turul">Шинжилгээний төрөл</string>
+    <string name="sorits_turul">Төрөл</string>
+    <string name="sorits_nas">Нас</string>
+    <string name="sorits_huis">Хүйс</string>
+    <string name="sorits_deej">Дээж</string>
+    <string name="sorits_hemjee">Хэмжээ</string>
+    <string name="sorits_behjuulsen_arga">Бэхжүүлсэн арга</string>
+
+    <string name="huleen_avah_baiguulga">Хүлээн авах байгуулга</string>
+    <string name="ilgeesen_arga">Илгээсэн арга</string>
+
+
 
     <string name="error_invalid_username">Хэрэглэгчийн нэр буруу байна</string>
     <string name="error_invalid_password">Нууц үг буруу байна</string>

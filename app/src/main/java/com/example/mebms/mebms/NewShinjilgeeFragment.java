@@ -1,6 +1,8 @@
 package com.example.mebms.mebms;
 
 import java.util.ArrayList;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -12,6 +14,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,59 +31,61 @@ public class NewShinjilgeeFragment extends Fragment {
 
 	private NewShinjilgee mAuthTask = null;
 
-	Spinner aimag_spinner;
-	Spinner sum_spinner;
-	Spinner golomt_spinner;
-	Spinner shinj_turul_spinner;
-	Spinner deej_turul_spinner;
-	Spinner arga_spinner;
-	Spinner urval_spinner;
-	ArrayList<Integer> golomtID = new ArrayList<Integer>();
-	ArrayAdapter<CharSequence> aimag_adapter;
-	ArrayAdapter<CharSequence> sum_adapter;
-	ArrayAdapter<String> golomt_adapter;
-	ArrayAdapter<CharSequence> shinj_turul_adapter;
-	ArrayAdapter<CharSequence> deej_turul_adapter;
-	ArrayAdapter<CharSequence> arga_adapter;
-	ArrayAdapter<CharSequence> urval_adapter;
-	List<String> spinnerArray;
+	Spinner shinjilgee_turul_spinner;
+	Spinner sorits_turul_spinner;
+	Spinner sorits_nas_spinner;
+	Spinner sorits_huis_spinner;
+	Spinner sorits_deej_spinner;
+	Spinner huleen_avah_baiguulga_spinner;
+	Spinner ilgeesen_arga_spinner;
 
-	EditText urhiincodeEdt;
-	EditText urhiinterguunEdt;
-	EditText ezencodeEdt;
-	EditText ezennerEdt;
+	ArrayAdapter<CharSequence> shinjilgee_turul_adapter;
+	ArrayAdapter<CharSequence> sorits_turul_adapter;
+	ArrayAdapter<CharSequence> sorits_nas_adapter;
+	ArrayAdapter<CharSequence> sorits_huis_adapter;
+	ArrayAdapter<CharSequence> sorits_deej_adapter;
+	ArrayAdapter<CharSequence> huleen_avah_baiguulga_adapter;
+	ArrayAdapter<CharSequence> ilgeesen_arga_adapter;
+
+	EditText urhCodeEdt;
+	EditText urhEzenNerEdt;
+	EditText bagEdt;
+	EditText gazarEdt;
+	EditText soritsHemjeeEdt;
+	EditText soritsBehjuulsenArgaEdt;
+
 	Button saveBtn;
 
 	Activity parentActivity;
 
-	private static String url_log_in = "http://10.0.2.2/mbms/newgshinjilgee.php";
-	private static String url_get_golomt = "http://10.0.2.2/mbms/getgolomt.php";
-	private static String url_new_shijilgee = "http://10.0.2.2/mbms/newshinjilgee.php";
+	private static String url_new_shijilgee = "http://10.0.2.2:81/mbms/newshinjilgee.php";
 	JSONParser jsonParser = new JSONParser();
 
 
-	String urhiincode;
-	String urhiinterguun;
-	String ezencode;
-	String ezenner;
-	String aimag;
-	String sum;
-	String golomt;
-	String shinj_turul;
-	String deej_turul;
-	String arga;
-	String urval;
+	String urh_code;
+	String urh_ezen;
+	String bag;
+	String gazar;
+	String shinjilgee_turul;
+	String sorits_turul;
+	String sorits_nas;
+	String sorits_huis;
+	String sorits_deej;
+	String sorits_hemjee;
+	String sorits_behjuulsen_arga;
+	String huleen_avah_baiguulga;
+	String ilgeesen_arga;
+
+	Date date;
 
 
 
-	// TODO: Rename and change types and number of parameters
 	public static NewShinjilgeeFragment newInstance() {
 		NewShinjilgeeFragment fragment = new NewShinjilgeeFragment();
 		return fragment;
 	}
 
 	public NewShinjilgeeFragment() {
-		// Required empty public constructor
 	}
 
 	@Override
@@ -95,122 +100,83 @@ public class NewShinjilgeeFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_new_shinjilgee,
 				container, false);
 
-		urhiincodeEdt = (EditText) rootView.findViewById(R.id.urhiincodetext);
-		urhiinterguunEdt = (EditText) rootView.findViewById(R.id.urhiinterguuntext);
-		ezencodeEdt = (EditText) rootView.findViewById(R.id.ezencodetext);
-		ezennerEdt = (EditText) rootView.findViewById(R.id.ezennertext);
-		
-		aimag_spinner = (Spinner) rootView
-				.findViewById(R.id.aimag_spinner_shinjilgee);
-		aimag_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+		urhCodeEdt = (EditText) rootView.findViewById(R.id.urh_code_edt);
+		urhEzenNerEdt = (EditText) rootView.findViewById(R.id.urh_ezen_ner_edt);
+		bagEdt = (EditText) rootView.findViewById(R.id.bag_ner_edt);
+		gazarEdt = (EditText) rootView.findViewById(R.id.gazar_ner_edt);
+		soritsHemjeeEdt = (EditText) rootView.findViewById(R.id.sorits_hemjee_edt);
+		soritsBehjuulsenArgaEdt = (EditText) rootView.findViewById(R.id.sorits_behjuulsen_arga_edt);
+
+
+		shinjilgee_turul_spinner = (Spinner) rootView
+				.findViewById(R.id.shinjilgee_turul_spinner);
+		shinjilgee_turul_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
 				R.array.aimag_array, android.R.layout.simple_spinner_item);
-		aimag_adapter
+		shinjilgee_turul_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		aimag_spinner.setAdapter(aimag_adapter);
+		shinjilgee_turul_spinner.setAdapter(shinjilgee_turul_adapter);
 
-		sum_spinner = (Spinner) rootView
-				.findViewById(R.id.sum_spinner_shinjilgee);
 
-		golomt_spinner = (Spinner) rootView
-				.findViewById(R.id.golomt_spinner_shinjilgee);
-		
-		shinj_turul_spinner = (Spinner) rootView
-				.findViewById(R.id.turul_spinner_shinjilgee);
-		shinj_turul_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+
+		sorits_turul_spinner = (Spinner) rootView
+				.findViewById(R.id.sorits_turul_spinner);
+		sorits_turul_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
 				R.array.shinj_turul_array, android.R.layout.simple_spinner_item);
-		shinj_turul_adapter
+		sorits_turul_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		shinj_turul_spinner.setAdapter(shinj_turul_adapter);
+		sorits_turul_spinner.setAdapter(sorits_turul_adapter);
 
-		deej_turul_spinner = (Spinner) rootView
-				.findViewById(R.id.deej_spinner_shinjilgee);
-		deej_turul_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+		sorits_nas_spinner = (Spinner) rootView
+				.findViewById(R.id.sorits_nas_spinner);
+		sorits_nas_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
 				R.array.deej_turul_array, android.R.layout.simple_spinner_item);
-		deej_turul_adapter
+		sorits_nas_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		deej_turul_spinner.setAdapter(deej_turul_adapter);
+		sorits_nas_spinner.setAdapter(sorits_nas_adapter);
 
-		arga_spinner = (Spinner) rootView
-				.findViewById(R.id.arga_spinner_shinjilgee);
-		arga_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+		sorits_huis_spinner = (Spinner) rootView
+				.findViewById(R.id.sorits_huis_spinner);
+		sorits_huis_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
 				R.array.arga_array, android.R.layout.simple_spinner_item);
-		arga_adapter
+		sorits_huis_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		arga_spinner.setAdapter(arga_adapter);
+		sorits_huis_spinner.setAdapter(sorits_huis_adapter);
 
-		urval_spinner = (Spinner) rootView
-				.findViewById(R.id.urval_spinner_shinjilgee);
-		urval_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+		sorits_deej_spinner = (Spinner) rootView
+				.findViewById(R.id.sorits_deej_spinner);
+		sorits_deej_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
 				R.array.urval_array, android.R.layout.simple_spinner_item);
-		urval_adapter
+		sorits_deej_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		urval_spinner.setAdapter(urval_adapter);
-		
+		sorits_deej_spinner.setAdapter(sorits_deej_adapter);
 
-		saveBtn = (Button) rootView.findViewById(R.id.golomt_save);
+		huleen_avah_baiguulga_spinner = (Spinner) rootView
+				.findViewById(R.id.huleen_avah_baiguulga_spinner);
+		huleen_avah_baiguulga_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+				R.array.urval_array, android.R.layout.simple_spinner_item);
+		huleen_avah_baiguulga_adapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		huleen_avah_baiguulga_spinner.setAdapter(huleen_avah_baiguulga_adapter);
 
-		aimag_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
-				switch (pos) {
-				case 0:
-					sum_adapter = ArrayAdapter.createFromResource(
-							parent.getContext(), R.array.sum_array_1,
-							android.R.layout.simple_spinner_item);
-					break;
-				case 1:
-					sum_adapter = ArrayAdapter.createFromResource(
-							parent.getContext(), R.array.sum_array_2,
-							android.R.layout.simple_spinner_item);
-					break;
-				default:
-					break;
-				}
-				sum_adapter
-						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				sum_spinner.setAdapter(sum_adapter);
 
-			}
+		ilgeesen_arga_spinner = (Spinner) rootView
+				.findViewById(R.id.ilgeesen_arga_spinner);
+		ilgeesen_arga_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+				R.array.urval_array, android.R.layout.simple_spinner_item);
+		ilgeesen_arga_adapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		ilgeesen_arga_spinner.setAdapter(ilgeesen_arga_adapter);
 
-			public void onNothingSelected(AdapterView<?> parent) {
-				// Another interface callback
-			}
-		});
-		golomt_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
-				// An item was selected. You can retrieve the selected item
-				// using
-				// parent.getItemAtPosition(pos)
-			}
-
-			public void onNothingSelected(AdapterView<?> parent) {
-				// Another interface callback
-			}
-		});
-		sum_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
-				// An item was selected. You can retrieve the selected item
-				// using
-				// parent.getItemAtPosition(pos)
-			}
-
-			public void onNothingSelected(AdapterView<?> parent) {
-				// Another interface callback
-			}
-		});
+		saveBtn = (Button) rootView.findViewById(R.id.shinjilgee_save);
 
 		saveBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				new ShinjilgeeSave(parentActivity).execute();
+				attemptLogin();
 			}
 		});
-		
-		new NewShinjilgee(parentActivity).execute();
-		
+
 		return rootView;
 	}
 
@@ -220,87 +186,26 @@ public class NewShinjilgeeFragment extends Fragment {
 			return;
 		}
 
-		urhiincode = urhiincodeEdt.getText().toString();
-		urhiinterguun = urhiinterguunEdt.getText().toString();
-		ezencode = ezencodeEdt.getText().toString();
-		ezenner = ezennerEdt.getText().toString();
-		aimag = aimag_spinner.getSelectedItem().toString();
-		sum = sum_spinner.getSelectedItem().toString();
-		golomt = golomt_spinner.getSelectedItem().toString();
-		shinj_turul = shinj_turul_spinner.getSelectedItem().toString();
-		deej_turul = deej_turul_spinner.getSelectedItem().toString();
-		arga = arga_spinner.getSelectedItem().toString();
-		urval = urval_spinner.getSelectedItem().toString();
+		urh_code = urhCodeEdt.getText().toString();
+		urh_ezen = urhEzenNerEdt.getText().toString();
+		bag = bagEdt.getText().toString();
+		gazar = gazarEdt.getText().toString();
+		shinjilgee_turul = shinjilgee_turul_spinner.getSelectedItem().toString();
+		sorits_turul = sorits_turul_spinner.getSelectedItem().toString();
+		sorits_nas = sorits_nas_spinner.getSelectedItem().toString();
+		sorits_huis = sorits_huis_spinner.getSelectedItem().toString();
+		sorits_deej = sorits_deej_spinner.getSelectedItem().toString();
+		sorits_hemjee = soritsHemjeeEdt.getText().toString();
+		sorits_behjuulsen_arga = soritsBehjuulsenArgaEdt.getText().toString();
+		huleen_avah_baiguulga = huleen_avah_baiguulga_spinner.getSelectedItem().toString();
+		ilgeesen_arga = ilgeesen_arga_spinner.getSelectedItem().toString();
+		date = new Date(Calendar.getInstance().getTimeInMillis());
 
 		mAuthTask = new NewShinjilgee(parentActivity);
 		mAuthTask.execute();
 	}
 
 
-
-	class ShinjilgeeSave extends AsyncTask<String, String, String> {
-		private Activity pActivity;
-
-		public ShinjilgeeSave(Activity parent) {
-			this.pActivity = parent;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-
-		}
-
-		@Override
-		protected String doInBackground(String... args) {
-
-
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("urhiincode", urhiincode));
-			params.add(new BasicNameValuePair("urhiinterguun", urhiinterguun));
-			params.add(new BasicNameValuePair("ezencode", ezencode));
-			params.add(new BasicNameValuePair("ezenner", ezenner));
-			params.add(new BasicNameValuePair("aimag", aimag));
-			params.add(new BasicNameValuePair("sum", sum));
-			params.add(new BasicNameValuePair("golomt", golomt));
-			params.add(new BasicNameValuePair("shinj_turul", shinj_turul));
-			params.add(new BasicNameValuePair("deej_turul", deej_turul));
-			params.add(new BasicNameValuePair("arga", arga));
-			params.add(new BasicNameValuePair("urval", urval));
-
-			JSONObject json = jsonParser.makeHttpRequest(url_new_shijilgee, "GET",
-					params);
-
-			try {
-				int success = json.getInt("success");
-
-				if (success == 1) {
-					pActivity.runOnUiThread(new Runnable() {
-						public void run() {
-							Toast.makeText(pActivity.getBaseContext(),
-									"Амжилттай хадгалагдлаа.",
-									Toast.LENGTH_LONG).show();
-						}
-					});
-				} else {
-					pActivity.runOnUiThread(new Runnable() {
-						public void run() {
-							Toast.makeText(pActivity.getBaseContext(),
-									"Алдаа гарлаа!", Toast.LENGTH_LONG).show();
-						}
-					});
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-
-		protected void onPostExecute(String file_url) {
-			// dismiss the dialog once done
-		}
-	}
 
 	class NewShinjilgee extends AsyncTask<String, String, String> {
 		private Activity pActivity;
@@ -318,34 +223,36 @@ public class NewShinjilgeeFragment extends Fragment {
 		@Override
 		protected String doInBackground(String... args) {
 
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("list", "all"));
 
-			JSONObject json = jsonParser.makeHttpRequest(url_get_golomt, "GET",
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("urh_code", urh_code));
+			params.add(new BasicNameValuePair("urh_ezen", urh_ezen));
+			params.add(new BasicNameValuePair("bag", bag));
+			params.add(new BasicNameValuePair("gazar", gazar));
+			params.add(new BasicNameValuePair("shinjilgee_turul", shinjilgee_turul));
+			params.add(new BasicNameValuePair("sorits_turul", sorits_turul));
+			params.add(new BasicNameValuePair("sorits_nas", sorits_nas));
+			params.add(new BasicNameValuePair("sorits_huis", sorits_huis));
+			params.add(new BasicNameValuePair("sorits_deej", sorits_deej));
+			params.add(new BasicNameValuePair("sorits_hemjee", sorits_hemjee));
+			params.add(new BasicNameValuePair("sorits_behjuulsen_arga", sorits_behjuulsen_arga));
+			params.add(new BasicNameValuePair("huleen_avah_baiguulga", huleen_avah_baiguulga));
+			params.add(new BasicNameValuePair("ilgeesen_arga", ilgeesen_arga));
+			Log.d("date",date.toLocaleString());
+			params.add(new BasicNameValuePair("date", date.toString()));
+
+			JSONObject json = jsonParser.makeHttpRequest(url_new_shijilgee, "GET",
 					params);
 
 			try {
 				int success = json.getInt("success");
 
 				if (success == 1) {
-					spinnerArray = new ArrayList<String>();
-					for (int i = 0; i < json.getJSONArray("golomt").length(); i++) {
-						spinnerArray.add(json.getJSONArray("golomt")
-								.getJSONObject(i).getString("name"));
-
-						golomtID.add(json.getJSONArray("golomt")
-								.getJSONObject(i).getInt("id"));
-					}
 					pActivity.runOnUiThread(new Runnable() {
 						public void run() {
-							golomt_adapter = new ArrayAdapter<String>(pActivity
-									.getBaseContext(),
-									android.R.layout.simple_spinner_item,
-									spinnerArray);
-
-							golomt_adapter
-									.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-							golomt_spinner.setAdapter(golomt_adapter);
+							Toast.makeText(pActivity.getBaseContext(),
+									"Амжилттай хадгалагдлаа.",
+									Toast.LENGTH_LONG).show();
 						}
 					});
 				} else {

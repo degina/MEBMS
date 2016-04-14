@@ -27,30 +27,31 @@ import android.widget.Toast;
  * A simple {@link Fragment} subclass. Activities that contain this fragment
  * must implement the {@link OnFragmentInteractionListener}
  * interface to handle interaction events. Use the
- * {@link GolomtListFragment#newInstance} factory method to create an instance
+ * {@link ShinjilgeeListFragment#newInstance} factory method to create an instance
  * of this fragment.
  *
  */
-public class GolomtListFragment extends ListFragment implements OnItemClickListener {
+public class ShinjilgeeListFragment extends ListFragment implements OnItemClickListener {
 	
 
 	private OnFragmentInteractionListener mListener;
+
 	private ArrayAdapter<String> adapter;
 	List<String> listArray;
-	private static String url_get_golomt = "http://10.0.2.2/mbms/getgolomt.php";
+	private static String url_get_shinjilgee = "http://10.0.2.2:81/mbms/getshinjilgee.php";
 	JSONParser jsonParser = new JSONParser();
 	ArrayList<Integer> golomtID = new ArrayList<Integer>();
 
 	Activity parentActivity;
 	
-	public static GolomtListFragment newInstance() {
-		GolomtListFragment fragment = new GolomtListFragment();
+	public static ShinjilgeeListFragment newInstance() {
+		ShinjilgeeListFragment fragment = new ShinjilgeeListFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
 		return fragment;
 	}
 
-	public GolomtListFragment() {
+	public ShinjilgeeListFragment() {
 		// Required empty public constructor
 	}
 
@@ -63,10 +64,10 @@ public class GolomtListFragment extends ListFragment implements OnItemClickListe
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_golomt_list,
+		View rootView = inflater.inflate(R.layout.fragment_shinjilgee_list,
 				container, false);
 
-		new GolomtGet(parentActivity).execute();
+		new GetShinjilgee(parentActivity).execute();
 		return rootView;
 	}
 
@@ -103,10 +104,10 @@ public class GolomtListFragment extends ListFragment implements OnItemClickListe
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
 	}
 	
-	class GolomtGet extends AsyncTask<String, String, String> {
+	class GetShinjilgee extends AsyncTask<String, String, String> {
 		private Activity pActivity;
 
-		public GolomtGet(Activity parent) {
+		public GetShinjilgee(Activity parent) {
 			this.pActivity = parent;
 		}
 
@@ -122,7 +123,7 @@ public class GolomtListFragment extends ListFragment implements OnItemClickListe
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("list", "all"));
 
-			JSONObject json = jsonParser.makeHttpRequest(url_get_golomt, "GET",
+			JSONObject json = jsonParser.makeHttpRequest(url_get_shinjilgee, "GET",
 					params);
 
 			try {
@@ -144,7 +145,7 @@ public class GolomtListFragment extends ListFragment implements OnItemClickListe
 									android.R.layout.simple_spinner_item,
 									listArray);
 					        setListAdapter(adapter);
-					        getListView().setOnItemClickListener(GolomtListFragment.this);
+					        getListView().setOnItemClickListener(ShinjilgeeListFragment.this);
 						}
 					});
 				} else {

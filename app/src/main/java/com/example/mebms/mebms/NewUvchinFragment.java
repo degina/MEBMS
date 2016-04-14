@@ -1,6 +1,8 @@
 package com.example.mebms.mebms;
 
 import java.util.ArrayList;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +92,7 @@ public class NewUvchinFragment extends Fragment {
 
 	private UvchinNew mAuthTask = null;
 
-	private static String url_uvchin_new = "http://10.0.2.2/mbms/newuvchin.php";
+	private static String url_uvchin_new = "http://10.0.2.2:81/mbms/newuvchin.php";
     JSONParser jsonParser = new JSONParser();
 
 
@@ -132,6 +135,8 @@ public class NewUvchinFragment extends Fragment {
 	String t_edgersen;
 	String t_uhsen;
 	String t_ustgasan;
+
+	Date date;
 	
 	// TODO: Rename and change types and number of parameters
 	public static NewUvchinFragment newInstance() {
@@ -313,6 +318,7 @@ public class NewUvchinFragment extends Fragment {
 		t_uhsen = t_uhsen_Edt.getText().toString();
 		t_ustgasan = t_ustgasan_Edt.getText().toString();
 
+		date = new Date(Calendar.getInstance().getTimeInMillis());
 
 		longitude = lonEdt.getText().toString();
 		latitude = latEdt.getText().toString();
@@ -378,7 +384,11 @@ class UvchinNew extends AsyncTask<String, String, String> {
 			params.add(new BasicNameValuePair("t_edgersen", t_edgersen));
 			params.add(new BasicNameValuePair("t_uhsen", t_uhsen));
 			params.add(new BasicNameValuePair("t_ustgasan", t_ustgasan));
-	        
+
+			params.add(new BasicNameValuePair("date", date.toString()));
+
+			Log.d("date",date.toString());
+
 	        JSONObject json = jsonParser.makeHttpRequest(url_uvchin_new, "GET", params);
 
             
