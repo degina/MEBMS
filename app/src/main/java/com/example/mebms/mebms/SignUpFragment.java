@@ -118,6 +118,33 @@ public class SignUpFragment extends Fragment {
                     case 1:
                         array_id=R.array.sum_array_2;
                         break;
+                    case 2:
+                        array_id=R.array.sum_array_3;
+                        break;
+                    case 3:
+                        array_id=R.array.sum_array_4;
+                        break;
+                    case 4:
+                        array_id=R.array.sum_array_5;
+                        break;
+                    case 5:
+                        array_id=R.array.sum_array_6;
+                        break;
+                    case 6:
+                        array_id=R.array.sum_array_7;
+                        break;
+                    case 7:
+                        array_id=R.array.sum_array_8;
+                        break;
+                    case 8:
+                        array_id=R.array.sum_array_9;
+                        break;
+                    case 9:
+                        array_id=R.array.sum_array_10;
+                        break;
+                    case 10:
+                        array_id=R.array.sum_array_2;
+                        break;
                 }
 
                 sum_adapter = ArrayAdapter.createFromResource(parentActivity.getBaseContext(),

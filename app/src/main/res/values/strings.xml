@@ -2,6 +2,7 @@
     <string name="app_name">MEBMS</string>
     <string name="action_settings">Тохиргоо</string>
     <string name="app_name_full">Мал эмнэлэгийн бүртгэлийн программ</string>
+    <string name="forgot_password">Нууц үгээ мартсан уу?</string>
     <string name="username">Хэрэглэгчийн нэр</string>
     <string name="password">Нууц үг</string>
     <string name="repeat">Нууц үг</string>
@@ -136,25 +137,152 @@
         <item>Эрдэнэмандал сум</item>
     </string-array>
     <string-array name="sum_array_2">
-        <item>Батцэнгэл сум2</item>
+        <item>Алтай сум</item>
+        <item>Алтанцөгц сум</item>
+        <item>Баяннуур сум</item>
+        <item>Бугат сум</item>
         <item>Булган сум</item>
-        <item>Жаргалант сум</item>
-        <item>Ихтамир сум</item>
-        <item>Өгийнуур сум</item>
-        <item>Өлзийт сум</item>
-        <item>Өндөр-Улаан сум</item>
-        <item>Тариат сум</item>
-        <item>Цахир сум</item>
-        <item>Түвшрүүлэх сум</item>
-        <item>Хайрхан сум</item>
-        <item>Хангай сум</item>
-        <item>Хашаат сум</item>
-        <item>Хотонт сум</item>
-        <item>Цэнхэр сум</item>
-        <item>Чулуут сум</item>
-        <item>Эрдэнэбулган сум</item>
-        <item>Эрдэнэмандал сум</item>
+        <item>Буянт сум</item>
+        <item>Дэлгүүн сум</item>
+        <item>Ногооннуур сум</item>
+        <item>Сагсай сум</item>
+        <item>Цагааннуур сум</item>
+        <item>Толбо сум</item>
+        <item>Улаанхус сум</item>
+        <item>Цэнгэл сум</item>
     </string-array>
+
+    <string-array name="sum_array_3">
+        <item>Баянхонгор сум</item>
+        <item>Баацагаан сум</item>
+        <item>Баянбулаг сум</item>
+        <item>Баянговь сум</item>
+        <item>Баянлиг сум</item>
+        <item>Баян-Овоо сум</item>
+        <item>Баян-Өндөр сум</item>
+        <item>Баянцагаан сум</item>
+        <item>Богд сум</item>
+        <item>Бөмбөгөр сум</item>
+        <item>Бууцагаан сум</item>
+        <item>Галуут сум</item>
+        <item>Гурванбулаг сум</item>
+        <item>Жаргалант сум</item>
+        <item>Жинст сум</item>
+        <item>Заг сум</item>
+        <item>Өлзийт сум</item>
+        <item>Хүрээмарал сум</item>
+        <item>Шинэжинст сум</item>
+        <item>Эрдэнэцогт сум</item>
+    </string-array>
+
+    <string-array name="sum_array_4">
+        <item>Булган сум</item>
+        <item>Баян-Агт сум</item>
+        <item>Баяннуур сум</item>
+        <item>Бугат сум</item>
+        <item>Бүрэгхангай сум</item>
+        <item>Гурванбулаг сум</item>
+        <item>Дашинчилэн сум</item>
+        <item>Могод сум</item>
+        <item>Орхон сум</item>
+        <item>Рашаант сум</item>
+        <item>Сайхан сум</item>
+        <item>Сэлэнгэ сум</item>
+        <item>Тэшиг сум</item>
+        <item>Хангал сум</item>
+        <item>Хишиг-Өндөр сум</item>
+        <item>Хутаг-Өндөр сум</item>
+    </string-array>
+
+    <string-array name="sum_array_5">
+        <item>Алтай сум</item>
+        <item>Баян-Уул сум</item>
+        <item>Бигэр сум</item>
+        <item>Бугат сум</item>
+        <item>Дарви сум</item>
+        <item>Дэлгэр сум</item>
+        <item>Есөнбулаг сум</item>
+        <item>Жаргалан сум</item>
+        <item>Тайшир сум</item>
+        <item>Тонхил сум</item>
+        <item>Төгрөг сум</item>
+        <item>Халиун сум</item>
+        <item>Хөхморьт сум</item>
+        <item>Цогт сум</item>
+        <item>Цээл сум</item>
+        <item>Чандмань сум</item>
+        <item>Шарга сум</item>
+        <item>Эрдэнэ сум</item>
+    </string-array>
+
+    <string-array name="sum_array_6">
+        <item>Сүмбэр сум</item>
+        <item>Баянтал сум</item>
+        <item>Шивээговь сум</item>
+    </string-array>
+
+    <string-array name="sum_array_7">
+        <item>Дархан</item>
+        <item>Хонгор сум</item>
+        <item>Орхон сум</item>
+        <item>Шарынгол сум</item>
+    </string-array>
+
+    <string-array name="sum_array_8">
+        <item>Айраг сум</item>
+        <item>Алтанширээ сум</item>
+        <item>Даланжаргалан сум</item>
+        <item>Дэлгэрэх сум</item>
+        <item>Замын-Үүд сум</item>
+        <item>Иххэт сум</item>
+        <item>Мандах сум</item>
+        <item>Өргөн сум</item>
+        <item>Сайхандулаан сум</item>
+        <item>Улаанбадрах сум</item>
+        <item>Хатанбулаг сум</item>
+        <item>Хөвсгөл сум</item>
+        <item>Эрдэнэ сум</item>
+    </string-array>
+
+    <string-array name="sum_array_9">
+        <item>Баяндун сум</item>
+        <item>Баянтүмэн сум</item>
+        <item>Баян-Уул сум</item>
+        <item>Булган сум</item>
+        <item>Гурванзагал сум</item>
+        <item>Дашбалбар сум</item>
+        <item>Матад сум</item>
+        <item>Сэргэлэн сум</item>
+        <item>Халхгол сум</item>
+        <item>Хөлөнбуйр сум</item>
+        <item>Хэрлэн (Сүмбэр)</item>
+        <item>Цагаан-Овоо сум</item>
+        <item>Чулуунхороот сум (Эрээнцав)</item>
+        <item>Чулуунхороот сум (Эрээнцав)</item>
+        <item>Чойбалсан сум</item>
+    </string-array>
+
+    <string-array name="sum_array_10">
+        <item>Адаацаг сум</item>
+        <item>Баянжаргалан сум</item>
+        <item>Говь-Угтаал сум</item>
+        <item>Гурвансайхан сум</item>
+        <item>Дэлгэрхангай сум</item>
+        <item>Дэлгэрцогт сум</item>
+        <item>Дэрэн сум</item>
+        <item>Луус сум</item>
+        <item>Өлзийт сум</item>
+        <item>Өндөршил сум</item>
+        <item>Сайхан-Овоо сум</item>
+        <item>Сайнцагаан сум</item>
+        <item>Хулд сум</item>
+        <item>Цагаандэлгэр сум</item>
+        <item>Эрдэнэдалай сум</item>
+    </string-array>
+
+
+
+
     <string-array name="empty_array"></string-array>
     <string-array name="shinj_turul_array">
         <item >Shinj turul 1</item>
