@@ -1,6 +1,7 @@
 package com.example.mebms.mebms;
 
 import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +37,9 @@ public class HomeActivity extends AppCompatActivity {
     private AccountHeader headerResult = null;
     private Drawer result = null;
 
+    public static final String PREFS_NAME = "MBMS";
+    public SharedPreferences prefs;
+
     private CharSequence mTitle;
 
     @Override
@@ -43,17 +47,15 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
 
+        prefs = getSharedPreferences(PREFS_NAME, 0);
+
         // Handle Toolbar
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_activity_home);
 
         // Create a few sample profile
-        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(R.drawable.profile);
-        final IProfile profile2 = new ProfileDrawerItem().withName("Max Muster").withEmail("max.mustermann@gmail.com").withIcon(R.drawable.profile2);
-        final IProfile profile3 = new ProfileDrawerItem().withName("Felix House").withEmail("felix.house@gmail.com").withIcon(R.drawable.profile3);
-        final IProfile profile4 = new ProfileDrawerItem().withName("Mr. X").withEmail("mister.x.super@gmail.com").withIcon(R.drawable.profile4);
-        final IProfile profile5 = new ProfileDrawerItem().withName("Batman").withEmail("batman@gmail.com").withIcon(R.drawable.profile5);
+        final IProfile profile = new ProfileDrawerItem().withName(prefs.getString("username","User")).withIcon(R.drawable.profile2);
 
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
@@ -62,10 +64,6 @@ public class HomeActivity extends AppCompatActivity {
                 .withHeaderBackground(R.drawable.header)
                 .addProfiles(
                         profile,
-                        profile2,
-                        profile3,
-                        profile4,
-                        profile5,
                         //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
                         new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withIdentifier(PROFILE_SETTING),
                         new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
