@@ -23,7 +23,7 @@
     <string name="title_section1">Нүүр</string>
     <string name="title_section2">Малын өвчин бүртгэх</string>
     <string name="title_section3">Оношилгоо, шинжилгээ бүртгэх</string>
-    <string name="title_section4">Малын өвчиний жагсаалт жагсаалт</string>
+    <string name="title_section4">Оношилгоо, шинжилгээний жагсаалт жагсаалт</string>
     <string name="title_section5">Малын эмч бүртгэх</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -62,11 +62,11 @@
     <string name="title_activity_login">Sign in</string>
 
     <string name="shinjilgee_turul">Шинжилгээний төрөл</string>
-    <string name="sorits_turul">Төрөл</string>
-    <string name="sorits_nas">Нас</string>
-    <string name="sorits_huis">Хүйс</string>
-    <string name="sorits_deej">Дээж</string>
-    <string name="sorits_hemjee">Хэмжээ</string>
+    <string name="sorits_turul">Сорицийн малын төрөл</string>
+    <string name="sorits_nas">Сорицийн малын нас</string>
+    <string name="sorits_huis">Сорицийн малын хүйс</string>
+    <string name="sorits_deej">Сорицийн дээж</string>
+    <string name="sorits_hemjee">Сорицийн хэмжээ</string>
     <string name="sorits_behjuulsen_arga">Бэхжүүлсэн арга</string>
 
     <string name="huleen_avah_baiguulga">Хүлээн авах байгуулга</string>
@@ -176,6 +176,48 @@
         <item >Urval 3</item>
     </string-array>
 
+
+
+    <string-array name="sorits_turul_array">
+        <item >Honi</item>
+        <item >Yanaa</item>
+        <item >Uher</item>
+        <item >Mori</item>
+        <item >Temee</item>
+    </string-array>
+
+    <string-array name="sorits_nas_array">
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
+        <item >5</item>
+        <item >6</item>
+    </string-array>
+
+    <string-array name="sorits_huis_array">
+        <item >Er</item>
+        <item >Em</item>
+    </string-array>
+
+    <string-array name="sorits_deej_array">
+        <item >Sorits deej 1</item>
+        <item >Sorits deej 2</item>
+        <item >Sorits deej 3</item>
+        <item >Sorits deej 4</item>
+        <item >Sorits deej 5</item>
+    </string-array>
+
+    <string-array name="huleen_avah_baiguulga_array">
+        <item >UMEATsL</item>
+        <item >Aimgiin mal emnelegiin labarator</item>
+        <item >Sumiin mal emnelegiin labarator</item>
+    </string-array>
+    <string-array name="ilgeesen_arga_array">
+        <item >Huvi</item>
+        <item >Shuudan</item>
+        <item >Uuruu</item>
+    </string-array>
 
 
 

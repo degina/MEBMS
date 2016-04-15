@@ -21,6 +21,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -36,23 +39,24 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 
 	private OnFragmentInteractionListener mListener;
 
-	private ArrayAdapter<String> adapter;
-	List<String> listArray;
+	ArrayList<String> urh_codeArray = new ArrayList<String>();
+	ArrayList<String> shinjilgee_turulArray = new ArrayList<String>();
+	ArrayList<String> ognooArray = new ArrayList<String>();
+	ArrayList<Integer> shinjilgeeID = new ArrayList<Integer>();
+
 	private static String url_get_shinjilgee = "http://10.0.2.2:81/mbms/getshinjilgee.php";
 	JSONParser jsonParser = new JSONParser();
-	ArrayList<Integer> golomtID = new ArrayList<Integer>();
+
+	ShinjilgeeListAdapter adapter;
 
 	Activity parentActivity;
 	
 	public static ShinjilgeeListFragment newInstance() {
 		ShinjilgeeListFragment fragment = new ShinjilgeeListFragment();
-		Bundle args = new Bundle();
-		fragment.setArguments(args);
 		return fragment;
 	}
 
 	public ShinjilgeeListFragment() {
-		// Required empty public constructor
 	}
 
 	@Override
@@ -67,7 +71,12 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 		View rootView = inflater.inflate(R.layout.fragment_shinjilgee_list,
 				container, false);
 
+
+		adapter = new ShinjilgeeListAdapter(shinjilgeeID,urh_codeArray,shinjilgee_turulArray,ognooArray);
+		setListAdapter(adapter);
+
 		new GetShinjilgee(parentActivity).execute();
+
 		return rootView;
 	}
 
@@ -103,7 +112,63 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 		// TODO Auto-generated method stub
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
 	}
-	
+
+
+	private class ShinjilgeeListAdapter extends BaseAdapter {
+
+
+		ArrayList<String> urh_codeArray = new ArrayList<String>();
+		ArrayList<String> shinjilgee_turulArray = new ArrayList<String>();
+		ArrayList<String> ognooArray = new ArrayList<String>();
+		ArrayList<Integer> shinjilgeeID = new ArrayList<Integer>();
+
+		public ShinjilgeeListAdapter(ArrayList<Integer> id,ArrayList<String> urh_code,ArrayList<String> shinjilgee_turul,ArrayList<String> ognoo) {
+			this.urh_codeArray=urh_code;
+			this.shinjilgee_turulArray=shinjilgee_turul;
+			this.ognooArray=ognoo;
+			this.shinjilgeeID=id;
+		}
+		@Override
+		public int getCount() {
+			return shinjilgeeID.size();
+		}
+
+		@Override
+		public Object getItem(int i) {
+			return null;
+		}
+
+		@Override
+		public long getItemId(int i) {
+			return i;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// If we weren't given a view, inflate one
+			if (convertView == null) {
+				convertView = getActivity().getLayoutInflater().inflate(
+						R.layout.shinjilgee_list_row, null);
+			}
+
+			TextView idEdt = (TextView) convertView
+					.findViewById(R.id.id);
+			TextView urhCodeEdt = (TextView) convertView
+					.findViewById(R.id.urh_code);
+			TextView shinj_turulEdt = (TextView) convertView
+					.findViewById(R.id.shinjilgee_turul);
+			TextView ognooEdt = (TextView) convertView
+					.findViewById(R.id.ognoo);
+			idEdt.setText("Дугаар: "+shinjilgeeID.get(position).toString());
+			urhCodeEdt.setText("Өрхийн код: "+urh_codeArray.get(position));
+			shinj_turulEdt.setText("Шинжилгээ төрөл: "+shinjilgee_turulArray.get(position));
+			ognooEdt.setText("Огноо: "+ognooArray.get(position));
+			return convertView;
+		}
+	}
+
+
+
 	class GetShinjilgee extends AsyncTask<String, String, String> {
 		private Activity pActivity;
 
@@ -130,22 +195,20 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 				int success = json.getInt("success");
 
 				if (success == 1) {
-					listArray = new ArrayList<String>();
-					for (int i = 0; i < json.getJSONArray("golomt").length(); i++) {
-						listArray.add(json.getJSONArray("golomt")
-								.getJSONObject(i).getString("name"));
-
-						golomtID.add(json.getJSONArray("golomt")
+					for (int i = 0; i < json.getJSONArray("shinjilgee").length(); i++) {
+						urh_codeArray.add(json.getJSONArray("shinjilgee")
+								.getJSONObject(i).getString("urh_code"));
+						shinjilgee_turulArray.add(json.getJSONArray("shinjilgee")
+								.getJSONObject(i).getString("shinjilgee_turul"));
+						ognooArray.add(json.getJSONArray("shinjilgee")
+								.getJSONObject(i).getString("date"));
+						shinjilgeeID.add(json.getJSONArray("shinjilgee")
 								.getJSONObject(i).getInt("id"));
 					}
 					pActivity.runOnUiThread(new Runnable() {
 						public void run() {
-							adapter = new ArrayAdapter<String>(pActivity
-									.getBaseContext(),
-									android.R.layout.simple_spinner_item,
-									listArray);
-					        setListAdapter(adapter);
-					        getListView().setOnItemClickListener(ShinjilgeeListFragment.this);
+							adapter = new ShinjilgeeListAdapter(shinjilgeeID,urh_codeArray,shinjilgee_turulArray,ognooArray);
+							setListAdapter(adapter);
 						}
 					});
 				} else {

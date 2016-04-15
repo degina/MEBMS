@@ -111,7 +111,7 @@ public class NewShinjilgeeFragment extends Fragment {
 		shinjilgee_turul_spinner = (Spinner) rootView
 				.findViewById(R.id.shinjilgee_turul_spinner);
 		shinjilgee_turul_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.aimag_array, android.R.layout.simple_spinner_item);
+				R.array.shinj_turul_array, android.R.layout.simple_spinner_item);
 		shinjilgee_turul_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		shinjilgee_turul_spinner.setAdapter(shinjilgee_turul_adapter);
@@ -121,7 +121,7 @@ public class NewShinjilgeeFragment extends Fragment {
 		sorits_turul_spinner = (Spinner) rootView
 				.findViewById(R.id.sorits_turul_spinner);
 		sorits_turul_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.shinj_turul_array, android.R.layout.simple_spinner_item);
+				R.array.sorits_turul_array, android.R.layout.simple_spinner_item);
 		sorits_turul_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sorits_turul_spinner.setAdapter(sorits_turul_adapter);
@@ -129,7 +129,7 @@ public class NewShinjilgeeFragment extends Fragment {
 		sorits_nas_spinner = (Spinner) rootView
 				.findViewById(R.id.sorits_nas_spinner);
 		sorits_nas_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.deej_turul_array, android.R.layout.simple_spinner_item);
+				R.array.sorits_nas_array, android.R.layout.simple_spinner_item);
 		sorits_nas_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sorits_nas_spinner.setAdapter(sorits_nas_adapter);
@@ -137,7 +137,7 @@ public class NewShinjilgeeFragment extends Fragment {
 		sorits_huis_spinner = (Spinner) rootView
 				.findViewById(R.id.sorits_huis_spinner);
 		sorits_huis_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.arga_array, android.R.layout.simple_spinner_item);
+				R.array.sorits_huis_array, android.R.layout.simple_spinner_item);
 		sorits_huis_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sorits_huis_spinner.setAdapter(sorits_huis_adapter);
@@ -145,7 +145,7 @@ public class NewShinjilgeeFragment extends Fragment {
 		sorits_deej_spinner = (Spinner) rootView
 				.findViewById(R.id.sorits_deej_spinner);
 		sorits_deej_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.urval_array, android.R.layout.simple_spinner_item);
+				R.array.sorits_deej_array, android.R.layout.simple_spinner_item);
 		sorits_deej_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sorits_deej_spinner.setAdapter(sorits_deej_adapter);
@@ -153,7 +153,7 @@ public class NewShinjilgeeFragment extends Fragment {
 		huleen_avah_baiguulga_spinner = (Spinner) rootView
 				.findViewById(R.id.huleen_avah_baiguulga_spinner);
 		huleen_avah_baiguulga_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.urval_array, android.R.layout.simple_spinner_item);
+				R.array.huleen_avah_baiguulga_array, android.R.layout.simple_spinner_item);
 		huleen_avah_baiguulga_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		huleen_avah_baiguulga_spinner.setAdapter(huleen_avah_baiguulga_adapter);
@@ -162,7 +162,7 @@ public class NewShinjilgeeFragment extends Fragment {
 		ilgeesen_arga_spinner = (Spinner) rootView
 				.findViewById(R.id.ilgeesen_arga_spinner);
 		ilgeesen_arga_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.urval_array, android.R.layout.simple_spinner_item);
+				R.array.ilgeesen_arga_array, android.R.layout.simple_spinner_item);
 		ilgeesen_arga_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		ilgeesen_arga_spinner.setAdapter(ilgeesen_arga_adapter);
