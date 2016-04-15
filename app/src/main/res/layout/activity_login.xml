@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/login_background"
     tools:context="com.example.mebms.mebms.LoginActivity">
 
     <!-- Login progress -->
@@ -19,16 +20,36 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <ScrollView
-        android:id="@+id/login_form"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:layout_gravity="top">
+
+        <TextView
+            android:id="@+id/username_text"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="none"
+            android:maxLines="100"
+            android:scrollHorizontally="false"
+            android:textSize="30dp"
+            android:text="@string/app_name_full"
+            android:textAlignment="center"
+            android:inputType="textMultiLine"
+            android:layout_gravity="center"
+            android:singleLine="true" />
+
+
+    </FrameLayout>
 
         <LinearLayout
             android:id="@+id/login_form_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
             <EditText
                 android:id="@+id/username"
@@ -58,5 +79,4 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+</FrameLayout>

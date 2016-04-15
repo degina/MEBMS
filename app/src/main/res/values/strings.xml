@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MEBMS</string>
     <string name="action_settings">Тохиргоо</string>
+    <string name="app_name_full">Мал эмнэлэгийн бүртгэлийн программ</string>
     <string name="username">Хэрэглэгчийн нэр</string>
     <string name="password">Нууц үг</string>
     <string name="repeat">Нууц үг</string>
