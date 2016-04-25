@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.mebms.mebms.NewShinjilgeeFragment">
+    tools:context="com.example.mebms.mebms.NewEmchilgeeFragment">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -86,14 +86,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" >
                 <TextView
-                    android:id="@+id/shinjilgee_turul"
+                    android:id="@+id/emchilgee_turul"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/shinjilgee_turul" />
+                    android:text="@string/emchilgee_turul" />
                 <Spinner
-                    android:id="@+id/shinjilgee_turul_spinner"
+                    android:id="@+id/emchilgee_turul_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -103,138 +103,147 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/sorits_ner"
+                    android:id="@+id/shimegchteh_uvchin_ner"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/sorits_ner" />
+                    android:text="@string/shimegchteh_uvchin_ner" />
                 <Spinner
-                    android:id="@+id/sorits_ner_spinner"
+                    android:id="@+id/shimegchteh_ner_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/shimegchteh_hamragdsan_too_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/sorits_turul"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content" >
+                <LinearLayout
                     android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sorits_turul" />
-                <Spinner
-                    android:id="@+id/sorits_turul_spinner"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/shimegchteh_hamragdsan_too"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shimegchteh_hamragdsan_too" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/shimegchteh_honi"
+                            android:paddingLeft="10dp"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/honi" />
+
+                        <EditText
+                            android:id="@+id/shimegchteh_honi_edt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/shimegchteh_yamaa"
+                            android:paddingLeft="10dp"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/yamaa" />
+                        <EditText
+                            android:id="@+id/shimegchteh_yamaa_edt"
+                            android:padding="15dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/shimegchteh_uher"
+                            android:paddingLeft="10dp"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/uher" />
+
+                        <EditText
+                            android:id="@+id/shimegchteh_uher_edt"
+                            android:padding="15dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/shimegchteh_mori"
+                            android:paddingLeft="10dp"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mori" />
+
+                        <EditText
+                            android:id="@+id/shimegchteh_mori_edt"
+                            android:padding="15dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/shimegchteh_temee"
+                            android:paddingLeft="10dp"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/temee" />
+
+                        <EditText
+                            android:id="@+id/shimegchteh_temee_edt"
+                            android:padding="15dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"/>
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/mal_nas"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mal_nas" />
-                <Spinner
-                    android:id="@+id/mal_nas_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/mal_huis"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mal_huis" />
-                <Spinner
-                    android:id="@+id/mal_huis_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/sorits_too"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sorits_too" />
-                <Spinner
-                    android:id="@+id/sorits_too_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/negj"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/negj" />
-                <Spinner
-                    android:id="@+id/negj_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/sorits_behjuulsen_arga"
+                    android:id="@+id/beldmel_ner"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="fill"
-                    android:text="@string/sorits_behjuulsen_arga" />
+                    android:text="@string/beldmel_ner" />
                 <EditText
-                    android:id="@+id/sorits_behjuulsen_arga_edt"
+                    android:id="@+id/beldmel_ner_edt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/huleen_avah_baiguullaga"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="fill"
-                    android:text="@string/huleen_avah_baiguullaga" />
-                <Spinner
-                    android:id="@+id/huleen_avah_baiguullaga_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/ilgeeh_arga"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="fill"
-                    android:text="@string/ilgeeh_arga" />
-                <Spinner
-                    android:id="@+id/ilgeeh_arga_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:inputType="text" >
+                </EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -274,7 +283,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
                 <Button
-                    android:id="@+id/shinjilgee_save"
+                    android:id="@+id/emchilgee_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/save" />
@@ -284,4 +293,3 @@
     </ScrollView>
 
 </LinearLayout>
-    

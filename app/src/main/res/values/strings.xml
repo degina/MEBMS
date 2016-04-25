@@ -1,86 +1,111 @@
 <resources>
-    <string name="app_name">MEBMS</string>
-    <string name="action_settings">Тохиргоо</string>
-    <string name="app_name_full">Мал эмнэлэгийн бүртгэлийн программ</string>
-    <string name="forgot_password">Нууц үгээ мартсан уу?</string>
-    <string name="username">Хэрэглэгчийн нэр</string>
-    <string name="password">Нууц үг</string>
-    <string name="repeat">Нууц үг</string>
-    <string name="firstname">Нэр</string>
-    <string name="lastname">Овог</string>
-    <string name="emch_id">Эмчийн дугаар</string>
-    <string name="gender">Хүйс</string>
-    <string name="male">Эр</string>
-    <string name="female">Эм</string>
-    <string name="birthday">Төрсөн өдөр</string>
+    <string name="app_name">MEBP</string>
+    <string name="settings">Тохиргоо</string>
+    <string name="app_name_full">Мал эмнэлгийн бүртгэлийн программ</string>
     <string name="login">Нэвтрэх</string>
+    <string name="forgot_password">Нууц үгээ мартсан уу?</string>
+    <string name="username">Хэрэглэгчийн нэр*</string>
+    <string name="password">Нууц үг*</string>
+    <string name="repeat_password">Нууц үг давтах*</string>
+    <string name="lastname">Овог*</string>
+    <string name="firstname">Нэр*</string>
+    <string name="emch_code">Эмчийн код*</string>
+    <string name="aimag_niislel">Аймаг/Нийслэл*</string>
+    <string name="sum_duureg">Сум/Дүүрэг*</string>
     <string name="signup">Бүртгэх</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
+    <string name="ok">Зөвшөөрөх</string>
+    <string name="cancel">Цуцлах</string>
     <string name="save">Хадгалах</string>
-    <string name="title_activity_log_in">Нэвтрэх</string>
-    <string name="title_activity_home">Нүүр</string>
+
+    <string name="title_activity_home">Нүүр цонх</string>
     <string name="loadingscreen">Уншиж байна</string>
-    <string name="title_activity_main"></string>
-    <string name="title_section1">Нүүр</string>
-    <string name="title_section2">Малын өвчин бүртгэх</string>
-    <string name="title_section3">Оношилгоо, шинжилгээ бүртгэх</string>
-    <string name="title_section4">Оношилгоо, шинжилгээний жагсаалт жагсаалт</string>
-    <string name="title_section5">Малын эмч бүртгэх</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="hello_blank_fragment">Hүүр цонх</string>
-    <string name="location_choose">Байршил сонгох</string>
-    <string name="latitude">Өргөрөг</string>
-    <string name="longitude">Уртраг</string>м
-    <string name="aimag">Аймаг</string>
-    <string name="sum">Сум</string>
-    <string name="golomt">Голомт</string>
-    <string name="urh_code">Өрхийн код</string>
-    <string name="urh_ezen_ner">Өрхийн эзний нэр</string>
-    <string name="bag_ner">Багийн нэр</string>
-    <string name="gazar_ner">Газрын нэр</string>
-    <string name="ezencode">Малын эзний код</string>
-    <string name="ezenner">Малын эзний нэр</string>
-    <string name="uvchin_turul">Өвчний төрөл</string>
-    <string name="uvchin_ner">Өвчний нэр</string>
-    <string name="ustgasan">Устгасан</string>
-    <string name="zuvluguu">Зөвлөгөө өгсөн</string>
-    <string name="emchilgee">Эмчилж байгаа</string>
-    <string name="edgersen">Эдгэрсэн</string>
-    <string name="uhsen">Үхсэн</string>
-    <string name="mal">Мал</string>
-    <string name="honi">Хонь</string>
-    <string name="yamaa">Яамаа</string>
-    <string name="uher">Үхэр</string>
-    <string name="mori">Морь</string>
-    <string name="temee">Тэмээ</string>
-    <string name="ustgah_arga">Устгахад ашигласан арга</string>
-    <string name="turul">Шинжилгээний төрөл</string>
-    <string name="deej">Дээжийн нэр төрөл</string>
-    <string name="arga">Шинжилгээний арга</string>
-    <string name="urval">Шинжилгээнд хэрэглэсэн урвал</string>
-    <string name="title_activity_login">Sign in</string>
-
-    <string name="shinjilgee_turul">Шинжилгээний төрөл</string>
-    <string name="sorits_turul">Сорицийн малын төрөл</string>
-    <string name="sorits_nas">Сорицийн малын нас</string>
-    <string name="sorits_huis">Сорицийн малын хүйс</string>
-    <string name="sorits_deej">Сорицийн дээж</string>
-    <string name="sorits_hemjee">Сорицийн хэмжээ</string>
-    <string name="sorits_behjuulsen_arga">Бэхжүүлсэн арга</string>
-
-    <string name="huleen_avah_baiguulga">Хүлээн авах байгуулга</string>
-    <string name="ilgeesen_arga">Илгээсэн арга</string>
-
-
 
     <string name="error_invalid_username">Хэрэглэгчийн нэр буруу байна</string>
     <string name="error_invalid_password">Нууц үг буруу байна</string>
     <string name="error_incorrect_password">Нууц үг буруу байна</string>
     <string name="error_field_required">Хоосон байж болохгүй</string>
 
+    <string name="title_section">Нүүр</string>
+    <string name="title_section1">Малын өвчин</string>
+    <string name="title_section2">Урьдчилан сэргийлэлт</string>
+    <string name="title_section3">Шимэгчтэх өвчний эмчилгээ</string>
+    <string name="title_section4">Оношилгоо, шинжилгээ</string>
+    <string name="title_section5">Шилжилт хөдөлгөөн</string>
+    <string name="title_section6">Малын эмч бүртгэх</string>
+    <string name="title_section7">Тайлан</string>
+    <string name="title_section8">Өвчилсөн малын жагсаалт</string>
+    <string name="title_section9">Урьдчилан сэргийлэлтийн жагсаалт</string>
+    <string name="title_section10">Шимэгчтэх өвчний эмчилгээний жагсаалт</string>
+    <string name="title_section11">Оношилгоо, шинжилгээний жагсаалт</string>
+    <string name="title_section12">Шилжилт хөдөлгөөний жагсаалт</string>
+    <string name="title_section13">Малын эмчийн жагсаалт</string>
+    <string name="title_section14">Тайлангийн жагсаалт</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="hello_blank_fragment">Hүүр цонх</string>
+
+    <string name="urh_code">Өрхийн код</string>
+    <string name="urh_ezen_ner">Өрхийн эзний нэр</string>
+    <string name="bag_horoo">Баг/Хороо</string>
+    <string name="gazar_ner">Газрын нэр</string>
+    <string name="uvchin_turul">Өвчний төрөл</string>
+    <string name="uvchin_ner">Өвчний нэр</string>
+    <string name="uvchilsun">Өвчилсөн</string>
+    <string name="zuvlusun">Зөвлөсөн</string>
+    <string name="ustgasan">Устгасан</string>
+    <string name="emchilsen">Эмчилсэн</string>
+    <string name="edgersen">Эдгэрсэн</string>
+    <string name="uhsen">Үхсэн</string>
+    <string name="emchilj_baigaa">Эмчилж байгаа</string>
+    <string name="horogdson">Хорогдсон</string>
+    <string name="mal">Мал</string>
+    <string name="honi">Хонь</string>
+    <string name="yamaa">Ямаа</string>
+    <string name="uher">Үхэр</string>
+    <string name="mori">Морь</string>
+    <string name="temee">Тэмээ</string>
+    <string name="ustgah_arga">Устгал хийхэд ашигласан арга</string>
+    <string name="longitude">Уртраг</string>
+    <string name="latitude">Өргөрөг</string>
+    <string name="date_filter">Огноогоор шүүх</string>
+    <string name="type_filter">Төрлөөр шүүх</string>
+
+    <string name="sergiilelt_turul">Сэргийлэлтийн төрөл*</string>
+    <string name="darhlaajuulalt">Дархлаажуулалт</string>
+    <string name="haldvarguitgel">Халдваргүйтгэл</string>
+    <string name="darhlaajuulalt_tuluv">Дархлаажуулалтын төлөв*</string>
+    <string name="niit_too">Малчин өрхийн малын тоо*</string>
+    <string name="hamragdsan_too">Хамрагдсан малын тоо*</string>
+    <string name="darhlaajuulalt_ner">Дархлаажуулалтын нэр</string>
+    <string name="vaktsin_nershil">Хэрэглэсэн вакцины нэршил</string>
+    <string name="haldvarguitgesen_obekt">Халдваргүйтгэсэн объект</string>
+
+    <string name="emchilgee_turul">Эмчилгээний төрөл*</string>
+    <string name="shimegchteh_uvchin_ner">Шимэгчтэх өвчний нэр*</string>
+    <string name="shimegchteh_hamragdsan_too">Хамрагдсан малын тоо*</string>
+    <string name="beldmel_ner">Хэрэглэсэн бэлдмэлийн нэр*</string>
+
+    <string name="shinjilgee_turul">Шинжилгээний төрөл*</string>
+    <string name="sorits_turul">Сорьцын төрөл*</string>
+    <string name="sorits_ner">Сорьцын нэр*</string>
+    <string name="mal_nas">Сорьцын нас*</string>
+    <string name="mal_huis">Сорьцын хүйс*</string>
+    <string name="mal_male">Эр*</string>
+    <string name="mal_female">Эм*</string>
+    <string name="sorits_too">Сорьцын тоо*</string>
+    <string name="negj">Сорьцын нэгж*</string>
+    <string name="sorits_behjuulsen_arga">Сорьцыг бэхжүүлсэн арга*</string>
+    <string name="huleen_avah_baiguullaga">Хүлээн авах байгууллага*</string>
+    <string name="ilgeeh_arga">Илгээх арга*</string>
+
+    <string name="shiljilt_turul">Шилжилтийн төрөл*</string>
+    <string name="buteegdehuun">Бүтээгдэхүүн</string>
+    <string name="hudaldsan_mal_too">Худалдсан малын тоо</string>
+    <string name="hudaldsan_buteegdehuun_ner">Худалдсан бүтээгдэхүүний нэр</string>
+    <string name="hudaldsan_buteegdehuun_too">Худалдсан бүтээгдэхүүний тоо</string>
+    <string name="hudaldsan_buteegdehuun_negj">Худалдсан бүтээгдэхүүний нэгж</string>
 
     <string name="drawer_item_home">Home</string>
     <string name="drawer_item_free_play">Free Play</string>
@@ -90,7 +115,6 @@
     <string name="drawer_item_help">Help</string>
     <string name="drawer_item_open_source">Open Source</string>
     <string name="drawer_item_contact">Contact</string>
-
 
     <string-array name="aimag_array">
         <item>Архангай</item>
@@ -114,240 +138,554 @@
         <item>Ховд</item>
         <item>Хөвсгөл</item>
         <item>Хэнтий</item>
+        <item>Улаанбаатар</item>
     </string-array>
 
     <string-array name="sum_array_1">
-        <item>Батцэнгэл сум</item>
-        <item>Булган сум</item>
-        <item>Жаргалант сум</item>
-        <item>Ихтамир сум</item>
-        <item>Өгийнуур сум</item>
-        <item>Өлзийт сум</item>
-        <item>Өндөр-Улаан сум</item>
-        <item>Тариат сум</item>
-        <item>Цахир сум</item>
-        <item>Түвшрүүлэх сум</item>
-        <item>Хайрхан сум</item>
-        <item>Хангай сум</item>
-        <item>Хашаат сум</item>
-        <item>Хотонт сум</item>
-        <item>Цэнхэр сум</item>
-        <item>Чулуут сум</item>
-        <item>Эрдэнэбулган сум</item>
-        <item>Эрдэнэмандал сум</item>
+        <item>Батцэнгэл</item>
+        <item>Булган</item>
+        <item>Жаргалант</item>
+        <item>Ихтамир</item>
+        <item>Өгийнуур</item>
+        <item>Өлзийт</item>
+        <item>Өндөр-Улаан</item>
+        <item>Тариат</item>
+        <item>Цахир</item>
+        <item>Түвшрүүлэх</item>
+        <item>Хайрхан</item>
+        <item>Хангай</item>
+        <item>Хашаат</item>
+        <item>Хотонт</item>
+        <item>Цэнхэр</item>
+        <item>Чулуут</item>
+        <item>Эрдэнэбулган</item>
+        <item>Эрдэнэмандал</item>
     </string-array>
+
     <string-array name="sum_array_2">
-        <item>Алтай сум</item>
-        <item>Алтанцөгц сум</item>
-        <item>Баяннуур сум</item>
-        <item>Бугат сум</item>
-        <item>Булган сум</item>
-        <item>Буянт сум</item>
-        <item>Дэлгүүн сум</item>
-        <item>Ногооннуур сум</item>
-        <item>Сагсай сум</item>
-        <item>Цагааннуур сум</item>
-        <item>Толбо сум</item>
-        <item>Улаанхус сум</item>
-        <item>Цэнгэл сум</item>
+        <item>Алтай</item>
+        <item>Алтанцөгц</item>
+        <item>Баяннуур</item>
+        <item>Бугат</item>
+        <item>Булган</item>
+        <item>Буянт</item>
+        <item>Дэлгүүн</item>
+        <item>Ногооннуур</item>
+        <item>Сагсай</item>
+        <item>Цагааннуур</item>
+        <item>Толбо</item>
+        <item>Улаанхус</item>
+        <item>Цэнгэл</item>
     </string-array>
 
     <string-array name="sum_array_3">
-        <item>Баянхонгор сум</item>
-        <item>Баацагаан сум</item>
-        <item>Баянбулаг сум</item>
-        <item>Баянговь сум</item>
-        <item>Баянлиг сум</item>
-        <item>Баян-Овоо сум</item>
-        <item>Баян-Өндөр сум</item>
-        <item>Баянцагаан сум</item>
-        <item>Богд сум</item>
-        <item>Бөмбөгөр сум</item>
-        <item>Бууцагаан сум</item>
-        <item>Галуут сум</item>
-        <item>Гурванбулаг сум</item>
-        <item>Жаргалант сум</item>
-        <item>Жинст сум</item>
-        <item>Заг сум</item>
-        <item>Өлзийт сум</item>
-        <item>Хүрээмарал сум</item>
-        <item>Шинэжинст сум</item>
-        <item>Эрдэнэцогт сум</item>
+        <item>Баянхонгор</item>
+        <item>Баацагаан</item>
+        <item>Баянбулаг</item>
+        <item>Баянговь</item>
+        <item>Баянлиг</item>
+        <item>Баян-Овоо</item>
+        <item>Баян-Өндөр</item>
+        <item>Баянцагаан</item>
+        <item>Богд</item>
+        <item>Бөмбөгөр</item>
+        <item>Бууцагаан</item>
+        <item>Галуут</item>
+        <item>Гурванбулаг</item>
+        <item>Жаргалант</item>
+        <item>Жинст</item>
+        <item>Заг</item>
+        <item>Өлзийт</item>
+        <item>Хүрээмарал</item>
+        <item>Шинэжинст</item>
+        <item>Эрдэнэцогт</item>
     </string-array>
 
     <string-array name="sum_array_4">
-        <item>Булган сум</item>
-        <item>Баян-Агт сум</item>
-        <item>Баяннуур сум</item>
-        <item>Бугат сум</item>
-        <item>Бүрэгхангай сум</item>
-        <item>Гурванбулаг сум</item>
-        <item>Дашинчилэн сум</item>
-        <item>Могод сум</item>
-        <item>Орхон сум</item>
-        <item>Рашаант сум</item>
-        <item>Сайхан сум</item>
-        <item>Сэлэнгэ сум</item>
-        <item>Тэшиг сум</item>
-        <item>Хангал сум</item>
-        <item>Хишиг-Өндөр сум</item>
-        <item>Хутаг-Өндөр сум</item>
+        <item>Булган</item>
+        <item>Баян-Агт</item>
+        <item>Баяннуур</item>
+        <item>Бугат</item>
+        <item>Бүрэгхангай</item>
+        <item>Гурванбулаг</item>
+        <item>Дашинчилэн</item>
+        <item>Могод</item>
+        <item>Орхон</item>
+        <item>Рашаант</item>
+        <item>Сайхан</item>
+        <item>Сэлэнгэ</item>
+        <item>Тэшиг</item>
+        <item>Хангал</item>
+        <item>Хишиг-Өндөр</item>
+        <item>Хутаг-Өндөр</item>
     </string-array>
 
     <string-array name="sum_array_5">
-        <item>Алтай сум</item>
-        <item>Баян-Уул сум</item>
-        <item>Бигэр сум</item>
-        <item>Бугат сум</item>
-        <item>Дарви сум</item>
-        <item>Дэлгэр сум</item>
-        <item>Есөнбулаг сум</item>
-        <item>Жаргалан сум</item>
-        <item>Тайшир сум</item>
-        <item>Тонхил сум</item>
-        <item>Төгрөг сум</item>
-        <item>Халиун сум</item>
-        <item>Хөхморьт сум</item>
-        <item>Цогт сум</item>
-        <item>Цээл сум</item>
-        <item>Чандмань сум</item>
-        <item>Шарга сум</item>
-        <item>Эрдэнэ сум</item>
+        <item>Алтай</item>
+        <item>Баян-Уул</item>
+        <item>Бигэр</item>
+        <item>Бугат</item>
+        <item>Дарви</item>
+        <item>Дэлгэр</item>
+        <item>Есөнбулаг</item>
+        <item>Жаргалан</item>
+        <item>Тайшир</item>
+        <item>Тонхил</item>
+        <item>Төгрөг</item>
+        <item>Халиун</item>
+        <item>Хөхморьт</item>
+        <item>Цогт</item>
+        <item>Цээл</item>
+        <item>Чандмань</item>
+        <item>Шарга</item>
+        <item>Эрдэнэ</item>
     </string-array>
 
     <string-array name="sum_array_6">
-        <item>Сүмбэр сум</item>
-        <item>Баянтал сум</item>
-        <item>Шивээговь сум</item>
+        <item>Сүмбэр</item>
+        <item>Баянтал</item>
+        <item>Шивээговь</item>
     </string-array>
 
     <string-array name="sum_array_7">
         <item>Дархан</item>
-        <item>Хонгор сум</item>
-        <item>Орхон сум</item>
-        <item>Шарынгол сум</item>
+        <item>Хонгор</item>
+        <item>Орхон</item>
+        <item>Шарынгол</item>
     </string-array>
 
     <string-array name="sum_array_8">
-        <item>Айраг сум</item>
-        <item>Алтанширээ сум</item>
-        <item>Даланжаргалан сум</item>
-        <item>Дэлгэрэх сум</item>
-        <item>Замын-Үүд сум</item>
-        <item>Иххэт сум</item>
-        <item>Мандах сум</item>
-        <item>Өргөн сум</item>
-        <item>Сайхандулаан сум</item>
-        <item>Улаанбадрах сум</item>
-        <item>Хатанбулаг сум</item>
-        <item>Хөвсгөл сум</item>
-        <item>Эрдэнэ сум</item>
+        <item>Айраг</item>
+        <item>Алтанширээ</item>
+        <item>Даланжаргалан</item>
+        <item>Дэлгэрэх</item>
+        <item>Замын-Үүд</item>
+        <item>Иххэт</item>
+        <item>Мандах</item>
+        <item>Өргөн</item>
+        <item>Сайхандулаан</item>
+        <item>Улаанбадрах</item>
+        <item>Хатанбулаг</item>
+        <item>Хөвсгөл</item>
+        <item>Эрдэнэ</item>
     </string-array>
 
     <string-array name="sum_array_9">
-        <item>Баяндун сум</item>
-        <item>Баянтүмэн сум</item>
-        <item>Баян-Уул сум</item>
-        <item>Булган сум</item>
-        <item>Гурванзагал сум</item>
-        <item>Дашбалбар сум</item>
-        <item>Матад сум</item>
-        <item>Сэргэлэн сум</item>
-        <item>Халхгол сум</item>
-        <item>Хөлөнбуйр сум</item>
-        <item>Хэрлэн (Сүмбэр)</item>
-        <item>Цагаан-Овоо сум</item>
-        <item>Чулуунхороот сум (Эрээнцав)</item>
-        <item>Чулуунхороот сум (Эрээнцав)</item>
-        <item>Чойбалсан сум</item>
+        <item>Баяндун</item>
+        <item>Баянтүмэн</item>
+        <item>Баян-Уул</item>
+        <item>Булган</item>
+        <item>Гурванзагал</item>
+        <item>Дашбалбар</item>
+        <item>Матад</item>
+        <item>Сэргэлэн</item>
+        <item>Халхгол</item>
+        <item>Хөлөнбуйр</item>
+        <item>Хэрлэн</item>
+        <item>Цагаан-Овоо</item>
+        <item>Чулуунхороот(Эрээнцав)</item>
+        <item>Чойбалсан</item>
     </string-array>
 
     <string-array name="sum_array_10">
-        <item>Адаацаг сум</item>
-        <item>Баянжаргалан сум</item>
-        <item>Говь-Угтаал сум</item>
-        <item>Гурвансайхан сум</item>
-        <item>Дэлгэрхангай сум</item>
-        <item>Дэлгэрцогт сум</item>
-        <item>Дэрэн сум</item>
-        <item>Луус сум</item>
-        <item>Өлзийт сум</item>
-        <item>Өндөршил сум</item>
-        <item>Сайхан-Овоо сум</item>
-        <item>Сайнцагаан сум</item>
-        <item>Хулд сум</item>
-        <item>Цагаандэлгэр сум</item>
-        <item>Эрдэнэдалай сум</item>
+        <item>Адаацаг</item>
+        <item>Баянжаргалан</item>
+        <item>Говь-Угтаал</item>
+        <item>Гурвансайхан</item>
+        <item>Дэлгэрхангай</item>
+        <item>Дэлгэрцогт</item>
+        <item>Дэрэн</item>
+        <item>Луус</item>
+        <item>Өлзийт</item>
+        <item>Өндөршил</item>
+        <item>Сайхан-Овоо</item>
+        <item>Сайнцагаан</item>
+        <item>Хулд</item>
+        <item>Цагаандэлгэр</item>
+        <item>Эрдэнэдалай</item>
     </string-array>
 
-
-
-
-    <string-array name="empty_array"></string-array>
-    <string-array name="shinj_turul_array">
-        <item >Shinj turul 1</item>
-        <item >Shinj turul 2</item>
-        <item >Shinj turul 3</item>
-    </string-array>
-    <string-array name="deej_turul_array">
-        <item >Deej turul 1</item>
-        <item >Deej turul 2</item>
-        <item >Deej turul 3</item>
-    </string-array>
-    <string-array name="arga_array">
-        <item >Arga 1</item>
-        <item >Arga 2</item>
-        <item >Arga 3</item>
-    </string-array>
-    <string-array name="urval_array">
-        <item >Urval 1</item>
-        <item >Urval 2</item>
-        <item >Urval 3</item>
-    </string-array>
-
-
-
-    <string-array name="sorits_turul_array">
-        <item >Honi</item>
-        <item >Yanaa</item>
-        <item >Uher</item>
-        <item >Mori</item>
-        <item >Temee</item>
+    <string-array name="sum_array_11">
+        <item>Алдархаан</item>
+        <item>Асгат</item>
+        <item>Баянтэс</item>
+        <item>Баянхайрхан</item>
+        <item>Дөрвөлжин</item>
+        <item>Завханмандал</item>
+        <item>Идэр</item>
+        <item>Их-Уул</item>
+        <item>Нөмрөг</item>
+        <item>Отгон</item>
+        <item>Сантмаргац</item>
+        <item>Сонгино</item>
+        <item>Тосонцэнгэл</item>
+        <item>Түдэвтэй</item>
+        <item>Тэлмэн</item>
+        <item>Тэс</item>
+        <item>Ургамал</item>
+        <item>Цагаанхайрхан</item>
+        <item>Цагаанчулуут</item>
+        <item>Цэцэн-Уул</item>
+        <item>Шилүүстэй</item>
+        <item>Эрдэнэхайрхан</item>
+        <item>Яруу</item>
     </string-array>
 
-    <string-array name="sorits_nas_array">
+    <string-array name="sum_array_12">
+        <item>Баян-Өндөр</item>
+        <item>Жаргалант</item>
+    </string-array>
+
+    <string-array name="sum_array_13">
+        <item>Арвайхээр</item>
+        <item>Баруунбаян-Улаан</item>
+        <item>Бат-Өлзий</item>
+        <item>Баянгол</item>
+        <item>Баян-Өндөр</item>
+        <item>Богд</item>
+        <item>Бүрд</item>
+        <item>Гучин-Ус</item>
+        <item>Хархорин</item>
+        <item>Хайрхандулаан</item>
+        <item>Хужирт</item>
+        <item>Нарийнтээл</item>
+        <item>Өлзийт</item>
+        <item>Сант</item>
+        <item>Тарагт</item>
+        <item>Төгрөг</item>
+        <item>Уянга</item>
+        <item>Есөнзүйл</item>
+        <item>Зүүнбаян-Улаан</item>
+    </string-array>
+
+    <string-array name="sum_array_14">
+        <item>Баяндалай</item>
+        <item>Баян-Овоо</item>
+        <item>Булган</item>
+        <item>Гурвантэс</item>
+        <item>Мандал-Овоо</item>
+        <item>Манлай</item>
+        <item>Ноён</item>
+        <item>Номгон</item>
+        <item>Сэврэй</item>
+        <item>Ханбогд</item>
+        <item>Ханхонгор</item>
+        <item>Хүрмэн</item>
+        <item>Цогт-Овоо</item>
+        <item>Цогтцэций сум</item>
+    </string-array>
+
+    <string-array name="sum_array_15">
+        <item>Асгат</item>
+        <item>Баяндэлгэр</item>
+        <item>Дарьганга</item>
+        <item>Мөнххаан</item>
+        <item>Наран</item>
+        <item>Онгон</item>
+        <item>Сүхбаатар</item>
+        <item>Түвшинширээ</item>
+        <item>Түмэнцогт</item>
+        <item>Уулбаян</item>
+        <item>Халзан</item>
+        <item>Эрдэнэцагаан</item>
+    </string-array>
+
+    <string-array name="sum_array_16">
+        <item>Алтанбулаг</item>
+        <item>Баруунбүрэн</item>
+        <item>Баянгол</item>
+        <item>Ерөө</item>
+        <item>Жавхлант</item>
+        <item>Зүүнбүрэн</item>
+        <item>Мандал</item>
+        <item>Орхон</item>
+        <item>Орхонтуул</item>
+        <item>Сайхан</item>
+        <item>Сант</item>
+        <item>Сүхбаатар</item>
+        <item>Түшиг</item>
+        <item>Хүдэр</item>
+        <item>Хушаат</item>
+        <item>Цагааннуур</item>
+        <item>Шаамар</item>
+    </string-array>
+
+    <string-array name="sum_array_17">
+        <item>Алтанбулаг</item>
+        <item>Аргалант</item>
+        <item>Архуст</item>
+        <item>Баян</item>
+        <item>Батсүмбэр</item>
+        <item>Баяндэлгэр</item>
+        <item>Баянжаргалан</item>
+        <item>Баян-Өнжүүл</item>
+        <item>Баянхангай</item>
+        <item>Баянцагаан</item>
+        <item>Баянцогт</item>
+        <item>Баянчандмань</item>
+        <item>Борнуур</item>
+        <item>Бүрэн</item>
+        <item>Дэлгэрхаан</item>
+        <item>Жаргалант</item>
+        <item>Заамар</item>
+        <item>Лүн</item>
+        <item>Мөнгөнморьт</item>
+        <item>Өндөрширээт</item>
+        <item>Сэргэлэн</item>
+        <item>Сүмбэр</item>
+        <item>Угтаал</item>
+        <item>Цээл</item>
+        <item>Эрдэнэ</item>
+        <item>Эрдэнэсант</item>
+    </string-array>
+
+    <string-array name="sum_array_18">
+        <item>Баруунтуруун</item>
+        <item>Бөхмөрөн</item>
+        <item>Давст</item>
+        <item>Завхан</item>
+        <item>Зүүнговь</item>
+        <item>Зүүнхангай</item>
+        <item>Малчин</item>
+        <item>Наранбулаг</item>
+        <item>Өлгий</item>
+        <item>Өмнөговь</item>
+        <item>Өндөрхангай</item>
+        <item>Сагил</item>
+        <item>Тариалан</item>
+        <item>Тэс</item>
+        <item>Түргэн</item>
+        <item>Улаангом</item>
+        <item>Ховд</item>
+        <item>Хяргас</item>
+        <item>Цагаанхайрхан</item>
+    </string-array>
+
+    <string-array name="sum_array_19">
+        <item>Ховд</item>
+        <item>Алтай</item>
+        <item>Булган</item>
+        <item>Буянт</item>
+        <item>Дарви</item>
+        <item>Дөргөн</item>
+        <item>Дуут</item>
+        <item>Зэрэг</item>
+        <item>Манхан</item>
+        <item>Мөнххайрхан</item>
+        <item>Мөст</item>
+        <item>Мянгад</item>
+        <item>Үенч</item>
+        <item>Ховд</item>
+        <item>Цэцэг</item>
+        <item>Чандмань</item>
+        <item>Эрдэнэбүрэн</item>
+    </string-array>
+
+    <string-array name="sum_array_20">
+        <item>Алаг-Эрдэнэ</item>
+        <item>Арбулаг</item>
+        <item>Баянзүрх</item>
+        <item>Бүрэнтогтох</item>
+        <item>Галт</item>
+        <item>Жаргалант</item>
+        <item>Их-Уул</item>
+        <item>Мөрөн</item>
+        <item>Рашаант</item>
+        <item>Рэнчинлхүмбэ</item>
+        <item>Тариалан</item>
+        <item>Тосонцэнгэл</item>
+        <item>Төмөрбулаг</item>
+        <item>Түнэл</item>
+        <item>Улаан-Уул</item>
+        <item>Ханх</item>
+        <item>Хатгал</item>
+        <item>Цагааннуур</item>
+        <item>Цагаан-Уул</item>
+        <item>Цагаан-Үүр</item>
+        <item>Цэцэрлэг</item>
+        <item>Чандмань-Өндөр</item>
+        <item>Шинэ-Идэр</item>
+        <item>Эрдэнэбулган</item>
+    </string-array>
+
+    <string-array name="sum_array_21">
+        <item>Өндөрхаан</item>
+        <item>Бэрх</item>
+        <item>Өлзийт</item>
+        <item>Бор-Өндөр</item>
+    </string-array>
+
+    <string-array name="sum_array_22">
+        <item>Багануур</item>
+        <item>Багахангай</item>
+        <item>Баянгол</item>
+        <item>Баянзүрх</item>
+        <item>Налайх</item>
+        <item>Сонгинохайрхан</item>
+        <item>Сүхбаатар</item>
+        <item>Хан-Уул</item>
+        <item>Чингэлтэй</item>
+    </string-array>
+
+    <string-array name="uvchin_turul_array">
+        <item>Халдварт</item>
+        <item>Шимэгчтэх</item>
+        <item>Халдваргүй</item>
+    </string-array>
+
+    <string-array name="haldvart_ner_array">
+        <item>Боом</item>
+        <item>Галзуу</item>
+        <item>Бруцеллёз</item>
+        <item>Сальмонеллёз</item>
+        <item>Цусан халдвар</item>
+        <item>Сүрьеэ</item>
+        <item>Лейкоз</item>
+        <item>Томуу</item>
+        <item>Цусан суулга</item>
+        <item>Листериоз</item>
+        <item>Үхрийн дуут хавдар</item>
+        <item>Хорт салст халуурал</item>
+        <item>Эфемер чичрэг</item>
+        <item>Адууны ям</item>
+        <item>Халдварт цус багадах</item>
+        <item>Уушиг гялтангийн үрэвсэл</item>
+        <item>Сахуу</item>
+        <item>Бог малын дотрын халдварт хордлого</item>
+        <item>Энтеробактериоз</item>
+        <item>Брадзот</item>
+        <item>Сохор догол</item>
+        <item>Шөвөг яр</item>
+        <item>Колибактериоз</item>
+        <item>Ямааны годрон</item>
+        <item>Гахайн ёлом</item>
+        <item>Нохойн гударга</item>
+    </string-array>
+
+    <string-array name="shimegchteh_ner_array">
+        <item>Туузан хорхой</item>
+        <item>Дугариг хорхой</item>
+        <item>Хавтгай хорхой</item>
+        <item>Бэтэг</item>
+        <item>Үхрийн арьсны гуур</item>
+        <item>Хамрын хөндийн гуур</item>
+        <item>Адууны ходоодны гуур</item>
+        <item>Хамуу</item>
+        <item>Ширхтэх</item>
+        <item>Шалзтах</item>
+        <item>Цахлай</item>
+        <item>Өтөх</item>
+    </string-array>
+
+    <string-array name="haldvargui_ner_array">
+        <item>Амьсгалын замын</item>
+        <item>Хоол боловсруулах замын</item>
+        <item>Шээс ялгаруулах замын</item>
+        <item>Арьсны</item>
+        <item>Мэдрэлийн, </item>
+        <item>Зүрх судасны</item>
+    </string-array>
+
+    <string-array name="ustgal_arga_array">
+        <item>Механик/Булшлах/</item>
+        <item>Физик/Шатаах/</item>
+        <item>Хими/Бодисоор задлах/</item>
+    </string-array>
+
+    <string-array name="sergiilelt_turul_array">
+        <item>Дархлаажуулалт</item>
+        <item>Халдваргүйтгэл</item>
+    </string-array>
+
+    <string-array name="darhlaajuulalt_tuluv_array">
+        <item>Төлөвлөгөөт</item>
+        <item>Яаралтай</item>
+    </string-array>
+
+    <string-array name="haldvarguitgesen_obekt_array">
+        <item>Хашаа байр</item>
+        <item>Тоног төхөөрөмж</item>
+        <item>Талбай</item>
+        <item>Техник хэрэгсэл</item>
+        <item >Бусад</item>
+    </string-array>
+
+    <string-array name="emchilgee_turul_array">
+        <item>Угаалга</item>
+        <item>Туулгалт</item>
+        <item>Боловсруулалт</item>
+        <item>Тарилга</item>
+    </string-array>
+
+    <string-array name="shinjilgee_turul_array">
+        <item >Тандалт судалгаа</item>
+        <item >Яаралтай хариу арга хэмжээ</item>
+    </string-array>
+
+    <string-array name="sorits_ner_array">
+        <item >Цус</item>
+        <item >Арьс</item>
+        <item >Хэл</item>
+        <item>Бусад</item>
+    </string-array>
+
+    <string-array name="sorits_too_array">
         <item >1</item>
         <item >2</item>
         <item >3</item>
-        <item >4</item>
-        <item >5</item>
-        <item >6</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 
-    <string-array name="sorits_huis_array">
-        <item >Er</item>
-        <item >Em</item>
+    <string-array name="huleen_avah_baiguullaga_array">
+        <item >УМЭАЦТЛ</item>
+        <item >Аймгийн МЭЛ</item>
+        <item >Нийслэлийн МЭЛ</item>
     </string-array>
 
-    <string-array name="sorits_deej_array">
-        <item >Sorits deej 1</item>
-        <item >Sorits deej 2</item>
-        <item >Sorits deej 3</item>
-        <item >Sorits deej 4</item>
-        <item >Sorits deej 5</item>
+    <string-array name="ilgeeh_arga_array">
+        <item >Хувь хүн</item>
+        <item >Шуудан</item>
+        <item >Өөрөө</item>
+        <item >Бусад</item>
     </string-array>
 
-    <string-array name="huleen_avah_baiguulga_array">
-        <item >UMEATsL</item>
-        <item >Aimgiin mal emnelegiin labarator</item>
-        <item >Sumiin mal emnelegiin labarator</item>
-    </string-array>
-    <string-array name="ilgeesen_arga_array">
-        <item >Huvi</item>
-        <item >Shuudan</item>
-        <item >Uuruu</item>
+    <string-array name="shiljilt_turul_array">
+        <item >Мал</item>
+        <item >Бүтээгдэхүүн</item>
     </string-array>
 
+    <string-array name="buteegdehuun_ner_array">
+        <item >Мах</item>
+        <item >Арьс</item>
+        <item >Ноос</item>
+        <item >Бусад</item>
+    </string-array>
 
+    <string-array name="mal_turul_array">
+        <item>Хонь</item>
+        <item>Ямаа</item>
+        <item>Үхэр</item>
+        <item>Морь</item>
+        <item>Тэмээ</item>
+    </string-array>
+
+    <string-array name="mal_nas_array">
+        <item>Хээлтүүлэгч</item>
+        <item>Төл</item>
+        <item>Бусад</item>
+    </string-array>
+
+    <string-array name="mal_huis_array">
+        <item>Эр</item>
+        <item>Эм</item>
+    </string-array>
+
+    <string-array name="negj_array">
+        <item>кг</item>
+        <item>грам</item>
+        <item>ширхэг</item>
+        <item>литр</item>
+    </string-array>
 
 </resources>

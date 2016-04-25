@@ -76,10 +76,10 @@ public class MalExpandableListAdapter extends BaseExpandableListAdapter {
         TextView item = (TextView) convertView.findViewById(R.id.arga_hemjee);
         switch (childPosition){
             case 0:
-                item.setText(R.string.zuvluguu);
+                item.setText(R.string.zuvlusun);
                 break;
             case 1:
-                item.setText(R.string.emchilgee);
+                item.setText(R.string.emchilsen);
                 break;
             case 2:
                 item.setText(R.string.edgersen);

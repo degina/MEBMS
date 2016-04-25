@@ -43,8 +43,6 @@ public class SignUpFragment extends Fragment {
     EditText lastnameEdt;
     EditText emch_dugaarEdt;
 
-    DatePicker birthdayPicker;
-
     ArrayAdapter<CharSequence> aimag_adapter;
     ArrayAdapter<CharSequence> sum_adapter;
 
@@ -52,12 +50,9 @@ public class SignUpFragment extends Fragment {
     Spinner sum_spinner;
 
 
-    RadioButton maleRadioBtn;
-    RadioButton femaleRadioBtn;
-    RadioGroup genderRadioGroup;
     Button okBtn;
 
-    private static String url_sign_up = "http://10.0.2.2:81/mbms/signup.php";
+    private static String url_sign_up = "http://10.0.2.2:81/mebp/signup.php";
     JSONParser jsonParser = new JSONParser();
 
     String username;
@@ -67,8 +62,6 @@ public class SignUpFragment extends Fragment {
     String aimag;
     String sum;
     String emch_dugaar;
-    Date birthday;
-    String gender;
 
     public static SignUpFragment newInstance() {
         SignUpFragment fragment = new SignUpFragment();
@@ -93,9 +86,7 @@ public class SignUpFragment extends Fragment {
         repeatEdt = (EditText) rootView.findViewById(R.id.repeat_edt);
         firstnameEdt = (EditText) rootView.findViewById(R.id.firstname_edt);
         lastnameEdt = (EditText) rootView.findViewById(R.id.lastname_edt);
-        emch_dugaarEdt = (EditText) rootView.findViewById(R.id.emch_id_edt);
-
-        birthdayPicker = (DatePicker) rootView.findViewById(R.id.birthday_picker);
+        emch_dugaarEdt = (EditText) rootView.findViewById(R.id.emch_code_edt);
 
         aimag_spinner = (Spinner) rootView.findViewById(R.id.aimag_spinner);
         aimag_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
@@ -143,7 +134,40 @@ public class SignUpFragment extends Fragment {
                         array_id=R.array.sum_array_10;
                         break;
                     case 10:
-                        array_id=R.array.sum_array_2;
+                        array_id=R.array.sum_array_11;
+                        break;
+                    case 11:
+                        array_id=R.array.sum_array_12;
+                        break;
+                    case 12:
+                        array_id=R.array.sum_array_13;
+                        break;
+                    case 13:
+                        array_id=R.array.sum_array_14;
+                        break;
+                    case 14:
+                        array_id=R.array.sum_array_15;
+                        break;
+                    case 15:
+                        array_id=R.array.sum_array_16;
+                        break;
+                    case 16:
+                        array_id=R.array.sum_array_17;
+                        break;
+                    case 17:
+                        array_id=R.array.sum_array_18;
+                        break;
+                    case 18:
+                        array_id=R.array.sum_array_19;
+                        break;
+                    case 19:
+                        array_id=R.array.sum_array_20;
+                        break;
+                    case 20:
+                        array_id=R.array.sum_array_21;
+                        break;
+                    case 21:
+                        array_id=R.array.sum_array_22;
                         break;
                 }
 
@@ -168,9 +192,6 @@ public class SignUpFragment extends Fragment {
 
 
 
-        maleRadioBtn = (RadioButton) rootView.findViewById(R.id.male_radio_button);
-        femaleRadioBtn = (RadioButton) rootView.findViewById(R.id.female_radio_button);
-        genderRadioGroup = (RadioGroup) rootView.findViewById(R.id.gender_radio_group);
 
         okBtn = (Button) rootView.findViewById(R.id.ok_btn);
 
@@ -178,7 +199,7 @@ public class SignUpFragment extends Fragment {
         okBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptLogin();
+                attemptSignUp();
             }
 
         });
@@ -186,29 +207,26 @@ public class SignUpFragment extends Fragment {
         return rootView;
     }
 
-    private void attemptLogin() {
+    private void attemptSignUp() {
         if (mAuthTask != null) {
             return;
         }
-        username = usernameEdt.getText().toString();
-        password = passwordEdt.getText().toString();
-        firstname = lastnameEdt.getText().toString();
-        lastname = lastnameEdt.getText().toString();
-        emch_dugaar = emch_dugaarEdt.getText().toString();
-        aimag = aimag_spinner.getSelectedItem().toString();
-        sum = sum_spinner.getSelectedItem().toString();
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(birthdayPicker.getYear(), birthdayPicker.getMonth(), birthdayPicker.getDayOfMonth(),
-                0, 0, 0);
-        birthday = new Date(calendar.getTimeInMillis());
-        if (genderRadioGroup.getCheckedRadioButtonId() == maleRadioBtn
-                .getId())
-                gender="male";
-        else
-            gender="female";
+        if(usernameEdt.getText().toString().equals("") || passwordEdt.getText().toString().equals("") || firstnameEdt.getText().toString().equals("")
+                || lastnameEdt.getText().toString().equals("") || emch_dugaarEdt.getText().toString().equals("")) {
+            Toast.makeText(parentActivity.getBaseContext(), "Шаардлагатай нүдийг бөглөнө үү!", Toast.LENGTH_LONG).show();
+        }else {
+            username = usernameEdt.getText().toString();
+            password = passwordEdt.getText().toString();
+            firstname = firstnameEdt.getText().toString();
+            lastname = lastnameEdt.getText().toString();
+            emch_dugaar = emch_dugaarEdt.getText().toString();
+            aimag = aimag_spinner.getSelectedItem().toString();
+            sum = sum_spinner.getSelectedItem().toString();
 
-        mAuthTask = new SignUp(parentActivity);
-        mAuthTask.execute();
+
+            mAuthTask = new SignUp(parentActivity);
+            mAuthTask.execute();
+        }
     }
 
     class SignUp extends AsyncTask<String, String, String> {
@@ -236,8 +254,8 @@ public class SignUpFragment extends Fragment {
             params.add(new BasicNameValuePair("emch_dugaar", emch_dugaar));
             params.add(new BasicNameValuePair("aimag", aimag));
             params.add(new BasicNameValuePair("sum", sum));
-            params.add(new BasicNameValuePair("birthday", birthday.toString()));
-            params.add(new BasicNameValuePair("gender", gender));
+            params.add(new BasicNameValuePair("birthday",""));
+            params.add(new BasicNameValuePair("gender", ""));
 
             JSONObject json = jsonParser.makeHttpRequest(url_sign_up, "GET",
                     params);
@@ -249,7 +267,7 @@ public class SignUpFragment extends Fragment {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(pActivity.getBaseContext(),
-                                    "Амжилттай бүртэглээ.", Toast.LENGTH_LONG).show();
+                                    "Амжилттай бүртгэлээ.", Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
@@ -272,7 +290,7 @@ public class SignUpFragment extends Fragment {
         super.onAttach(activity);
 
         parentActivity = activity;
-        ((HomeActivity) activity).onSectionAttached(3);
+        ((HomeActivity) activity).onSectionAttached(7);
     }
 
     @Override

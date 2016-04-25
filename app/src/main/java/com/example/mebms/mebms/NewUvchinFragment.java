@@ -31,400 +31,423 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class NewUvchinFragment extends Fragment {
 
+    CheckBox zuvlusun_check;
+    CheckBox ustgasan_check;
+    CheckBox emchilsen_check;
+    CheckBox horogdson_check;
 
-	Spinner uvchin_turul_spinner;
-	Spinner uvchin_ner_spinner;
-	Spinner ustgah_arga_spinner;
-	ArrayAdapter<CharSequence> uvchin_turul_adapter;
-	ArrayAdapter<CharSequence> uvchin_ner_adapter;
-	ArrayAdapter<CharSequence> ustgah_arga_adapter;
-	
-	EditText urhCodeEdt;
-	EditText urhEzenNerEdt;
-	EditText bagEdt;
-	EditText gazarEdt;
-	EditText latEdt;
-	EditText lonEdt;
+    LinearLayout zuvlusun_layout;
+    LinearLayout ustgasan_layout;
+    LinearLayout emchilsen_layout;
+    LinearLayout horogdson_layout;
+    LinearLayout ustgah_arga_layout;
 
-	EditText h_zuvluguu_Edt;
-	EditText h_emchilgee_Edt;
-	EditText h_edgersen_Edt;
-	EditText h_uhsen_Edt;
-	EditText h_ustgasan_Edt;
+    Spinner uvchin_turul_spinner;
+    Spinner uvchin_ner_spinner;
+    Spinner ustgah_arga_spinner;
 
-	EditText y_zuvluguu_Edt;
-	EditText y_emchilgee_Edt;
-	EditText y_edgersen_Edt;
-	EditText y_uhsen_Edt;
-	EditText y_ustgasan_Edt;
+    ArrayAdapter<CharSequence> uvchin_turul_adapter;
+    ArrayAdapter<CharSequence> uvchin_ner_adapter;
+    ArrayAdapter<CharSequence> ustgah_arga_adapter;
 
-	EditText u_zuvluguu_Edt;
-	EditText u_emchilgee_Edt;
-	EditText u_edgersen_Edt;
-	EditText u_uhsen_Edt;
-	EditText u_ustgasan_Edt;
+    EditText urhCodeEdt;
+    EditText urhEzenNerEdt;
+    EditText bagEdt;
+    EditText gazarEdt;
+    EditText latEdt;
+    EditText lonEdt;
 
-	EditText m_zuvluguu_Edt;
-	EditText m_emchilgee_Edt;
-	EditText m_edgersen_Edt;
-	EditText m_uhsen_Edt;
-	EditText m_ustgasan_Edt;
+    EditText zuvlusun_h_edt;
+    EditText zuvlusun_y_edt;
+    EditText zuvlusun_u_edt;
+    EditText zuvlusun_m_edt;
+    EditText zuvlusun_t_edt;
 
-	EditText t_zuvluguu_Edt;
-	EditText t_emchilgee_Edt;
-	EditText t_edgersen_Edt;
-	EditText t_uhsen_Edt;
-	EditText t_ustgasan_Edt;
+    EditText ustgasan_h_edt;
+    EditText ustgasan_y_edt;
+    EditText ustgasan_u_edt;
+    EditText ustgasan_m_edt;
+    EditText ustgasan_t_edt;
 
+    EditText emchilsen_h_edt;
+    EditText emchilsen_y_edt;
+    EditText emchilsen_u_edt;
+    EditText emchilsen_m_edt;
+    EditText emchilsen_t_edt;
 
-	Button saveBtn;
-	
-	Activity parentActivity;
+    EditText horogdson_h_edt;
+    EditText horogdson_y_edt;
+    EditText horogdson_u_edt;
+    EditText horogdson_m_edt;
+    EditText horogdson_t_edt;
 
-	private UvchinNew mAuthTask = null;
+    Button saveBtn;
 
-	private static String url_uvchin_new = "http://10.0.2.2:81/mbms/newuvchin.php";
+    Activity parentActivity;
+
+    private UvchinNew mAuthTask = null;
+
+    private static String url_uvchin_new = "http://10.0.2.2:81/mebp/newuvchin.php";
     JSONParser jsonParser = new JSONParser();
 
+    String urh_code;
+    String urh_ezen_ner;
+    String bag_horoo;
+    String gazar_ner;
+    String uvchin_turul;
+    String uvchin_ner;
+    String ustgah_arga;
+    String latitude;
+    String longitude;
 
-	String urh_code;
-	String urh_ezen_ner;
-	String bag_ner;
-	String gazar_ner;
-	String uvchin_turul;
-	String uvchin_ner;
-	String ustgah_arga;
-	String latitude;
-	String longitude;
+    String zuvlusun_h;
+    String zuvlusun_y;
+    String zuvlusun_u;
+    String zuvlusun_m;
+    String zuvlusun_t;
 
-	String h_zuvluguu;
-	String h_emchilgee;
-	String h_edgersen;
-	String h_uhsen;
-	String h_ustgasan;
+    String ustgasan_h;
+    String ustgasan_y;
+    String ustgasan_u;
+    String ustgasan_m;
+    String ustgasan_t;
 
-	String y_zuvluguu;
-	String y_emchilgee;
-	String y_edgersen;
-	String y_uhsen;
-	String y_ustgasan;
+    String emchilsen_h;
+    String emchilsen_y;
+    String emchilsen_u;
+    String emchilsen_m;
+    String emchilsen_t;
 
-	String u_zuvluguu;
-	String u_emchilgee;
-	String u_edgersen;
-	String u_uhsen;
-	String u_ustgasan;
+    String horogdson_h;
+    String horogdson_y;
+    String horogdson_u;
+    String horogdson_m;
+    String horogdson_t;
 
-	String m_zuvluguu;
-	String m_emchilgee;
-	String m_edgersen;
-	String m_uhsen;
-	String m_ustgasan;
+    Date date;
 
-	String t_zuvluguu;
-	String t_emchilgee;
-	String t_edgersen;
-	String t_uhsen;
-	String t_ustgasan;
+    // TODO: Rename and change types and number of parameters
+    public static NewUvchinFragment newInstance() {
+        NewUvchinFragment fragment = new NewUvchinFragment();
+        return fragment;
+    }
 
-	Date date;
-	
-	// TODO: Rename and change types and number of parameters
-	public static NewUvchinFragment newInstance() {
-		NewUvchinFragment fragment = new NewUvchinFragment();
-		return fragment;
-	}
+    public NewUvchinFragment() {
+        // Required empty public constructor
+    }
 
-	public NewUvchinFragment() {
-		// Required empty public constructor
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		
-	}
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_new_uvchin, container,  
-			    false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_new_uvchin, container,
+                false);
+
+        zuvlusun_layout = (LinearLayout) rootView.findViewById(R.id.zuvlusun_layout);
+        ustgasan_layout = (LinearLayout) rootView.findViewById(R.id.ustgasan_layout);
+        emchilsen_layout = (LinearLayout) rootView.findViewById(R.id.emchilsen_layout);
+        horogdson_layout = (LinearLayout) rootView.findViewById(R.id.horogdson_layout);
+        ustgah_arga_layout = (LinearLayout) rootView.findViewById(R.id.ustgah_arga_layout);
+
+        zuvlusun_check = (CheckBox) rootView.findViewById(R.id.zuvlusun_check);
+        zuvlusun_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    zuvlusun_layout.setVisibility(View.VISIBLE);
+                } else {
+                    zuvlusun_layout.setVisibility(View.GONE);
+                }
+            }
+        });
+        ustgasan_check = (CheckBox) rootView.findViewById(R.id.ustgasan_check);
+        ustgasan_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    ustgasan_layout.setVisibility(View.VISIBLE);
+                    ustgah_arga_layout.setVisibility(View.VISIBLE);
+                } else {
+                    ustgasan_layout.setVisibility(View.GONE);
+                    ustgah_arga_layout.setVisibility(View.GONE);
+                }
+            }
+        });
+        emchilsen_check = (CheckBox) rootView.findViewById(R.id.emchilsen_check);
+        emchilsen_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    emchilsen_layout.setVisibility(View.VISIBLE);
+                } else {
+                    emchilsen_layout.setVisibility(View.GONE);
+                }
+            }
+        });
+        horogdson_check = (CheckBox) rootView.findViewById(R.id.horogdson_check);
+        horogdson_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    horogdson_layout.setVisibility(View.VISIBLE);
+                } else {
+                    horogdson_layout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        urhCodeEdt = (EditText) rootView.findViewById(R.id.urh_code_edt);
+        urhEzenNerEdt = (EditText) rootView.findViewById(R.id.urh_ezen_ner_edt);
+        bagEdt = (EditText) rootView.findViewById(R.id.bag_horoo_edt);
+        gazarEdt = (EditText) rootView.findViewById(R.id.gazar_ner_edt);
+        latEdt = (EditText) rootView.findViewById(R.id.latitude_edt);
+        lonEdt = (EditText) rootView.findViewById(R.id.longitude_edt);
+
+        zuvlusun_h_edt = (EditText) rootView.findViewById(R.id.zuvlusun_honi_edt);
+        zuvlusun_y_edt = (EditText) rootView.findViewById(R.id.zuvlusun_yamaa_edt);
+        zuvlusun_u_edt = (EditText) rootView.findViewById(R.id.zuvlusun_uher_edt);
+        zuvlusun_m_edt = (EditText) rootView.findViewById(R.id.zuvlusun_mori_edt);
+        zuvlusun_t_edt = (EditText) rootView.findViewById(R.id.zuvlusun_temee_edt);
+
+        ustgasan_h_edt = (EditText) rootView.findViewById(R.id.ustgasan_honi_edt);
+        ustgasan_y_edt = (EditText) rootView.findViewById(R.id.ustgasan_yamaa_edt);
+        ustgasan_u_edt = (EditText) rootView.findViewById(R.id.ustgasan_uher_edt);
+        ustgasan_m_edt = (EditText) rootView.findViewById(R.id.ustgasan_mori_edt);
+        ustgasan_t_edt = (EditText) rootView.findViewById(R.id.ustgasan_temee_edt);
+
+        emchilsen_h_edt = (EditText) rootView.findViewById(R.id.emchilsen_honi_edt);
+        emchilsen_y_edt = (EditText) rootView.findViewById(R.id.emchilsen_yamaa_edt);
+        emchilsen_u_edt = (EditText) rootView.findViewById(R.id.emchilsen_uher_edt);
+        emchilsen_m_edt = (EditText) rootView.findViewById(R.id.emchilsen_mori_edt);
+        emchilsen_t_edt = (EditText) rootView.findViewById(R.id.emchilsen_temee_edt);
+
+        horogdson_h_edt = (EditText) rootView.findViewById(R.id.horogdson_honi_edt);
+        horogdson_y_edt = (EditText) rootView.findViewById(R.id.horogdson_yamaa_edt);
+        horogdson_u_edt = (EditText) rootView.findViewById(R.id.horogdson_uher_edt);
+        horogdson_m_edt = (EditText) rootView.findViewById(R.id.horogdson_mori_edt);
+        horogdson_t_edt = (EditText) rootView.findViewById(R.id.horogdson_temee_edt);
 
 
+        uvchin_turul_spinner = (Spinner) rootView.findViewById(R.id.uvchin_turul_spinner);
+        uvchin_turul_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+                R.array.uvchin_turul_array, android.R.layout.simple_spinner_item);
+        uvchin_turul_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        uvchin_turul_spinner.setAdapter(uvchin_turul_adapter);
 
-		urhCodeEdt = (EditText)rootView.findViewById(R.id.urh_code_edt);
-		urhEzenNerEdt = (EditText)rootView.findViewById(R.id.urh_ezen_ner_edt);
-		bagEdt = (EditText)rootView.findViewById(R.id.bag_ner_edt);
-		gazarEdt = (EditText)rootView.findViewById(R.id.gazar_ner_edt);
-		latEdt = (EditText)rootView.findViewById(R.id.latitudenum);
-		lonEdt = (EditText)rootView.findViewById(R.id.longitudenum);
+        uvchin_ner_spinner = (Spinner) rootView.findViewById(R.id.uvchin_ner_spinner);
+        uvchin_ner_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+                R.array.haldvart_ner_array, android.R.layout.simple_spinner_item);
 
+        ustgah_arga_spinner = (Spinner) rootView.findViewById(R.id.ustgah_arga_spinner);
+        ustgah_arga_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
+                R.array.ustgal_arga_array, android.R.layout.simple_spinner_item);
+        ustgah_arga_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ustgah_arga_spinner.setAdapter(ustgah_arga_adapter);
 
-		h_zuvluguu_Edt = (EditText)rootView.findViewById(R.id.honi_zuvluguu_edt);
-		h_emchilgee_Edt = (EditText)rootView.findViewById(R.id.honi_emchilgee_edt);
-		h_edgersen_Edt = (EditText)rootView.findViewById(R.id.honi_edgersen_edt);
-		h_uhsen_Edt = (EditText)rootView.findViewById(R.id.honi_uhsen_edt);
-		h_ustgasan_Edt = (EditText)rootView.findViewById(R.id.honi_ustgasan_edt);
+        saveBtn = (Button) rootView.findViewById(R.id.uvchin_save);
 
-
-		y_zuvluguu_Edt = (EditText)rootView.findViewById(R.id.yamaa_zuvluguu_edt);
-		y_emchilgee_Edt = (EditText)rootView.findViewById(R.id.yamaa_emchilgee_edt);
-		y_edgersen_Edt = (EditText)rootView.findViewById(R.id.yamaa_edgersen_edt);
-		y_uhsen_Edt = (EditText)rootView.findViewById(R.id.yamaa_uhsen_edt);
-		y_ustgasan_Edt = (EditText)rootView.findViewById(R.id.yamaa_ustgasan_edt);
-
-		u_zuvluguu_Edt = (EditText)rootView.findViewById(R.id.uher_zuvluguu_edt);
-		u_emchilgee_Edt = (EditText)rootView.findViewById(R.id.uher_emchilgee_edt);
-		u_edgersen_Edt = (EditText)rootView.findViewById(R.id.uher_edgersen_edt);
-		u_uhsen_Edt = (EditText)rootView.findViewById(R.id.uher_uhsen_edt);
-		u_ustgasan_Edt = (EditText)rootView.findViewById(R.id.uher_ustgasan_edt);
-
-		m_zuvluguu_Edt = (EditText)rootView.findViewById(R.id.mori_zuvluguu_edt);
-		m_emchilgee_Edt = (EditText)rootView.findViewById(R.id.mori_emchilgee_edt);
-		m_edgersen_Edt = (EditText)rootView.findViewById(R.id.mori_edgersen_edt);
-		m_uhsen_Edt = (EditText)rootView.findViewById(R.id.mori_uhsen_edt);
-		m_ustgasan_Edt = (EditText)rootView.findViewById(R.id.mori_ustgasan_edt);
-
-		t_zuvluguu_Edt = (EditText)rootView.findViewById(R.id.temee_zuvluguu_edt);
-		t_emchilgee_Edt = (EditText)rootView.findViewById(R.id.temee_emchilgee_edt);
-		t_edgersen_Edt = (EditText)rootView.findViewById(R.id.temee_edgersen_edt);
-		t_uhsen_Edt = (EditText)rootView.findViewById(R.id.temee_uhsen_edt);
-		t_ustgasan_Edt = (EditText)rootView.findViewById(R.id.temee_ustgasan_edt);
-
-		uvchin_turul_spinner = (Spinner) rootView.findViewById(R.id.uvchin_turul_spinner);
-		uvchin_turul_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.aimag_array, android.R.layout.simple_spinner_item);
-		uvchin_turul_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		uvchin_turul_spinner.setAdapter(uvchin_turul_adapter);
-
-
-		uvchin_ner_spinner = (Spinner) rootView.findViewById(R.id.uvchin_ner_spinner);
-		uvchin_ner_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.sum_array_1, android.R.layout.simple_spinner_item);
-
-		ustgah_arga_spinner = (Spinner) rootView.findViewById(R.id.ustgah_arga_spinner);
-		ustgah_arga_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-				R.array.arga_array, android.R.layout.simple_spinner_item);
-		ustgah_arga_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		ustgah_arga_spinner.setAdapter(ustgah_arga_adapter);
-		
-		saveBtn = (Button)rootView.findViewById(R.id.uvchin_save);
-		
-		uvchin_turul_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View view, 
-		            int pos, long id) {
-				switch (pos) 
-	            {
-	                case 0: uvchin_ner_adapter = ArrayAdapter.createFromResource(parent.getContext(),
-					        R.array.sum_array_1, android.R.layout.simple_spinner_item);
-	                        break;
-	                case 1: uvchin_ner_adapter = ArrayAdapter.createFromResource(parent.getContext(),
-					        R.array.sum_array_2, android.R.layout.simple_spinner_item);
-	                        break;
-	                default:
-	                        break;
-	            }
+        uvchin_turul_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                switch (pos) {
+                    case 0:
+                        uvchin_ner_adapter = ArrayAdapter.createFromResource(parent.getContext(),
+                                R.array.haldvart_ner_array, android.R.layout.simple_spinner_item);
+                        break;
+                    case 1:
+                        uvchin_ner_adapter = ArrayAdapter.createFromResource(parent.getContext(),
+                                R.array.shimegchteh_ner_array, android.R.layout.simple_spinner_item);
+                        break;
+                    case 2:
+                        uvchin_ner_adapter = ArrayAdapter.createFromResource(parent.getContext(),
+                                R.array.haldvargui_ner_array, android.R.layout.simple_spinner_item);
+                        break;
+                    default:
+                        break;
+                }
                 uvchin_ner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        		uvchin_ner_spinner.setAdapter(uvchin_ner_adapter);
-				
-		    }
+                uvchin_ner_spinner.setAdapter(uvchin_ner_adapter);
+            }
 
-		    public void onNothingSelected(AdapterView<?> parent) {
-		        // Another interface callback
-		    }
-		});
-		uvchin_ner_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View view, 
-		            int pos, long id) {
-		        // An item was selected. You can retrieve the selected item using
-		        // parent.getItemAtPosition(pos)
-		    }
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+        uvchin_ner_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                // An item was selected. You can retrieve the selected item using
+                // parent.getItemAtPosition(pos)
+            }
 
-		    public void onNothingSelected(AdapterView<?> parent) {
-		        // Another interface callback
-		    }
-		});
-		
-		saveBtn.setOnClickListener(new OnClickListener() {
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
 
-			@Override
-			public void onClick(View v) {
-				attemptLogin();
-			}
-		});
+        saveBtn.setOnClickListener(new OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                attemptLogin();
+            }
+        });
 
 
+        return rootView;
+    }
 
 
-
-
-		
-		
-			  return rootView;
-	}
-
-
-	private void attemptLogin() {
-		if (mAuthTask != null) {
-			return;
-		}
-
-
-		urh_code = urhCodeEdt.getText().toString();
-		urh_ezen_ner = urhEzenNerEdt.getText().toString();
-		bag_ner = bagEdt.getText().toString();
-		gazar_ner = gazarEdt.getText().toString();
-		uvchin_turul = uvchin_turul_spinner.getSelectedItem().toString();
-		uvchin_ner = uvchin_ner_spinner.getSelectedItem().toString();
-		ustgah_arga = ustgah_arga_spinner.getSelectedItem().toString();
-
-		h_zuvluguu = h_zuvluguu_Edt.getText().toString();
-		h_emchilgee = h_emchilgee_Edt.getText().toString();
-		h_edgersen = h_edgersen_Edt.getText().toString();
-		h_uhsen = h_uhsen_Edt.getText().toString();
-		h_ustgasan = h_ustgasan_Edt.getText().toString();
-
-		y_zuvluguu = y_zuvluguu_Edt.getText().toString();
-		y_emchilgee = y_emchilgee_Edt.getText().toString();
-		y_edgersen = y_edgersen_Edt.getText().toString();
-		y_uhsen = y_uhsen_Edt.getText().toString();
-		y_ustgasan = y_ustgasan_Edt.getText().toString();
-
-		u_zuvluguu = u_zuvluguu_Edt.getText().toString();
-		u_emchilgee = u_emchilgee_Edt.getText().toString();
-		u_edgersen = u_edgersen_Edt.getText().toString();
-		u_uhsen = u_uhsen_Edt.getText().toString();
-		u_ustgasan = u_ustgasan_Edt.getText().toString();
-
-		m_zuvluguu = m_zuvluguu_Edt.getText().toString();
-		m_emchilgee = m_emchilgee_Edt.getText().toString();
-		m_edgersen = m_edgersen_Edt.getText().toString();
-		m_uhsen = m_uhsen_Edt.getText().toString();
-		m_ustgasan = m_ustgasan_Edt.getText().toString();
-
-		t_zuvluguu = t_zuvluguu_Edt.getText().toString();
-		t_emchilgee = t_emchilgee_Edt.getText().toString();
-		t_edgersen = t_edgersen_Edt.getText().toString();
-		t_uhsen = t_uhsen_Edt.getText().toString();
-		t_ustgasan = t_ustgasan_Edt.getText().toString();
-
-		date = new Date(Calendar.getInstance().getTimeInMillis());
-
-		longitude = lonEdt.getText().toString();
-		latitude = latEdt.getText().toString();
-
-		mAuthTask = new UvchinNew(parentActivity);
-		mAuthTask.execute();
-	}
-
-
-class UvchinNew extends AsyncTask<String, String, String> {
-    	private Activity pActivity;
-    	public UvchinNew(Activity parent){
-    		this.pActivity = parent;
-    	}
-    	@Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            
+    private void attemptLogin() {
+        if (mAuthTask != null) {
+            mAuthTask=null;
+            return;
         }
 
-		@Override
-		protected String doInBackground(String... args) {
+        if(urhCodeEdt.getText().toString().equals("") || urhEzenNerEdt.getText().toString().equals("") || bagEdt.getText().toString().equals("")
+                || gazarEdt.getText().toString().equals("")|| lonEdt.getText().toString().equals("")|| latEdt.getText().toString().equals("")) {
+            Toast.makeText(parentActivity.getBaseContext(), "Шаардлагатай нүдийг бөглөнө үү!", Toast.LENGTH_LONG).show();
+        }else {
+            urh_code = urhCodeEdt.getText().toString();
+            urh_ezen_ner = urhEzenNerEdt.getText().toString();
+            bag_horoo = bagEdt.getText().toString();
+            gazar_ner = gazarEdt.getText().toString();
+            uvchin_turul = uvchin_turul_spinner.getSelectedItem().toString();
+            uvchin_ner = uvchin_ner_spinner.getSelectedItem().toString();
+            ustgah_arga = ustgah_arga_spinner.getSelectedItem().toString();
 
-	        
-	        List<NameValuePair> params = new ArrayList<NameValuePair>();
-	        params.add(new BasicNameValuePair("urh_code", urh_code));
-	        params.add(new BasicNameValuePair("urh_ezen_ner", urh_ezen_ner));
-	        params.add(new BasicNameValuePair("bag_ner", bag_ner));
-	        params.add(new BasicNameValuePair("gazar_ner", gazar_ner));
-			params.add(new BasicNameValuePair("uvchin_turul", uvchin_turul));
-			params.add(new BasicNameValuePair("uvchin_ner", uvchin_ner));
-			params.add(new BasicNameValuePair("ustgah_arga", ustgah_arga));
-			params.add(new BasicNameValuePair("latitude", latitude));
-			params.add(new BasicNameValuePair("longitude", longitude));
+            zuvlusun_h = zuvlusun_h_edt.getText().toString().equals("") ? "0" : zuvlusun_h_edt.getText().toString();
+            zuvlusun_y = zuvlusun_y_edt.getText().toString().equals("") ? "0" : zuvlusun_y_edt.getText().toString();
+            zuvlusun_u = zuvlusun_u_edt.getText().toString().equals("") ? "0" : zuvlusun_u_edt.getText().toString();
+            zuvlusun_m = zuvlusun_m_edt.getText().toString().equals("") ? "0" : zuvlusun_m_edt.getText().toString();
+            zuvlusun_t = zuvlusun_t_edt.getText().toString().equals("") ? "0" : zuvlusun_t_edt.getText().toString();
 
-			params.add(new BasicNameValuePair("h_zuvluguu", h_zuvluguu));
-			params.add(new BasicNameValuePair("h_emchilgee", h_emchilgee));
-			params.add(new BasicNameValuePair("h_edgersen", h_edgersen));
-			params.add(new BasicNameValuePair("h_uhsen", h_uhsen));
-			params.add(new BasicNameValuePair("h_ustgasan", h_ustgasan));
+            ustgasan_h = ustgasan_h_edt.getText().toString().equals("") ? "0" : ustgasan_h_edt.getText().toString();
+            ustgasan_y = ustgasan_y_edt.getText().toString().equals("") ? "0" : ustgasan_y_edt.getText().toString();
+            ustgasan_u = ustgasan_u_edt.getText().toString().equals("") ? "0" : ustgasan_u_edt.getText().toString();
+            ustgasan_m = ustgasan_m_edt.getText().toString().equals("") ? "0" : ustgasan_m_edt.getText().toString();
+            ustgasan_t = ustgasan_t_edt.getText().toString().equals("") ? "0" : ustgasan_t_edt.getText().toString();
 
-			params.add(new BasicNameValuePair("y_zuvluguu", y_zuvluguu));
-			params.add(new BasicNameValuePair("y_emchilgee", y_emchilgee));
-			params.add(new BasicNameValuePair("y_edgersen", y_edgersen));
-			params.add(new BasicNameValuePair("y_uhsen", y_uhsen));
-			params.add(new BasicNameValuePair("y_ustgasan", y_ustgasan));
+            emchilsen_h = emchilsen_h_edt.getText().toString().equals("") ? "0" : emchilsen_h_edt.getText().toString();
+            emchilsen_y = emchilsen_y_edt.getText().toString().equals("") ? "0" : emchilsen_y_edt.getText().toString();
+            emchilsen_u = emchilsen_u_edt.getText().toString().equals("") ? "0" : emchilsen_u_edt.getText().toString();
+            emchilsen_m = emchilsen_m_edt.getText().toString().equals("") ? "0" : emchilsen_m_edt.getText().toString();
+            emchilsen_t = emchilsen_t_edt.getText().toString().equals("") ? "0" : emchilsen_t_edt.getText().toString();
 
-			params.add(new BasicNameValuePair("u_zuvluguu", u_zuvluguu));
-			params.add(new BasicNameValuePair("u_emchilgee", u_emchilgee));
-			params.add(new BasicNameValuePair("u_edgersen", u_edgersen));
-			params.add(new BasicNameValuePair("u_uhsen", u_uhsen));
-			params.add(new BasicNameValuePair("u_ustgasan", u_ustgasan));
+            horogdson_h = horogdson_h_edt.getText().toString().equals("") ? "0" : horogdson_h_edt.getText().toString();
+            horogdson_y = horogdson_y_edt.getText().toString().equals("") ? "0" : horogdson_y_edt.getText().toString();
+            horogdson_u = horogdson_u_edt.getText().toString().equals("") ? "0" : horogdson_u_edt.getText().toString();
+            horogdson_m = horogdson_m_edt.getText().toString().equals("") ? "0" : horogdson_m_edt.getText().toString();
+            horogdson_t = horogdson_t_edt.getText().toString().equals("") ? "0" : horogdson_t_edt.getText().toString();
 
-			params.add(new BasicNameValuePair("m_zuvluguu", m_zuvluguu));
-			params.add(new BasicNameValuePair("m_emchilgee", m_emchilgee));
-			params.add(new BasicNameValuePair("m_edgersen", m_edgersen));
-			params.add(new BasicNameValuePair("m_uhsen", m_uhsen));
-			params.add(new BasicNameValuePair("m_ustgasan", m_ustgasan));
+            date = new Date(Calendar.getInstance().getTimeInMillis());
 
-			params.add(new BasicNameValuePair("t_zuvluguu", t_zuvluguu));
-			params.add(new BasicNameValuePair("t_emchilgee", t_emchilgee));
-			params.add(new BasicNameValuePair("t_edgersen", t_edgersen));
-			params.add(new BasicNameValuePair("t_uhsen", t_uhsen));
-			params.add(new BasicNameValuePair("t_ustgasan", t_ustgasan));
+            longitude = lonEdt.getText().toString().equals("") ? "0" : lonEdt.getText().toString();
+            latitude = latEdt.getText().toString().equals("") ? "0" : latEdt.getText().toString();
+            mAuthTask = new UvchinNew(parentActivity);
+            mAuthTask.execute();
+        }
+    }
+    
+    class UvchinNew extends AsyncTask<String, String, String> {
+        private Activity pActivity;
+        public UvchinNew(Activity parent) {
+            this.pActivity = parent;
+        }
 
-			params.add(new BasicNameValuePair("date", date.toString()));
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
-			Log.d("date",date.toString());
+        @Override
+        protected String doInBackground(String... args) {
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("urh_code", urh_code));
+            params.add(new BasicNameValuePair("urh_ezen_ner", urh_ezen_ner));
+            params.add(new BasicNameValuePair("bag_horoo", bag_horoo));
+            params.add(new BasicNameValuePair("gazar_ner", gazar_ner));
+            params.add(new BasicNameValuePair("uvchin_turul", uvchin_turul));
+            params.add(new BasicNameValuePair("uvchin_ner", uvchin_ner));
+            params.add(new BasicNameValuePair("ustgah_arga", ustgah_arga));
+            params.add(new BasicNameValuePair("latitude", latitude));
+            params.add(new BasicNameValuePair("longitude", longitude));
 
-	        JSONObject json = jsonParser.makeHttpRequest(url_uvchin_new, "GET", params);
+            params.add(new BasicNameValuePair("zuvlusun_h", zuvlusun_h));
+            params.add(new BasicNameValuePair("zuvlusun_y", zuvlusun_y));
+            params.add(new BasicNameValuePair("zuvlusun_u", zuvlusun_u));
+            params.add(new BasicNameValuePair("zuvlusun_m", zuvlusun_m));
+            params.add(new BasicNameValuePair("zuvlusun_t", zuvlusun_t));
 
-            
-	        try {
-	            int success = json.getInt("success");
+            params.add(new BasicNameValuePair("ustgasan_h", ustgasan_h));
+            params.add(new BasicNameValuePair("ustgasan_y", ustgasan_y));
+            params.add(new BasicNameValuePair("ustgasan_u", ustgasan_u));
+            params.add(new BasicNameValuePair("ustgasan_m", ustgasan_m));
+            params.add(new BasicNameValuePair("ustgasan_t", ustgasan_t));
 
-	            if (success == 1) {
-	                pActivity.runOnUiThread(new Runnable() {
-	            		  public void run() {
-	            		    Toast.makeText(pActivity.getBaseContext(), "Амжилттай хадгалагдлаа.", Toast.LENGTH_LONG).show();
-	            		  }
-	            		});
-	            } else {
-	            	pActivity.runOnUiThread(new Runnable() {
-	            		  public void run() {
-	            		    Toast.makeText(pActivity.getBaseContext(), "Алдаа гарлаа!", Toast.LENGTH_LONG).show();
-	            		  }
-	            		});
-	            }
-	        } catch (JSONException e) {
-	            e.printStackTrace();
-	        }
-			
-			return null;
-		}
-		
-		
-		protected void onPostExecute(String file_url) {
+            params.add(new BasicNameValuePair("emchilsen_h", emchilsen_h));
+            params.add(new BasicNameValuePair("emchilsen_y", emchilsen_y));
+            params.add(new BasicNameValuePair("emchilsen_u", emchilsen_u));
+            params.add(new BasicNameValuePair("emchilsen_m", emchilsen_m));
+            params.add(new BasicNameValuePair("emchilsen_t", emchilsen_t));
+
+            params.add(new BasicNameValuePair("horogdson_h", horogdson_h));
+            params.add(new BasicNameValuePair("horogdson_y", horogdson_y));
+            params.add(new BasicNameValuePair("horogdson_u", horogdson_u));
+            params.add(new BasicNameValuePair("horogdson_m", horogdson_m));
+            params.add(new BasicNameValuePair("horogdson_t", horogdson_t));
+
+            params.add(new BasicNameValuePair("date", date.toString()));
+            Log.d("date", date.toString());
+
+            JSONObject json = jsonParser.makeHttpRequest(url_uvchin_new, "GET", params);
+
+            try {
+                int success = json.getInt("success");
+
+                if (success == 1) {
+                    pActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(pActivity.getBaseContext(), "Амжилттай хадгалагдлаа.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    pActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(pActivity.getBaseContext(), "Алдаа гарлаа!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
         }
     }
 
-	@Override  
-	 public void onAttach(Activity activity) {  
-	  super.onAttach(activity);  
-	  parentActivity=activity;
-	  ((HomeActivity) activity).onSectionAttached(2);
-	 } 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        parentActivity = activity;
+        ((HomeActivity) activity).onSectionAttached(1);
+    }
 }

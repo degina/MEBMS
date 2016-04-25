@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     private AccountHeader headerResult = null;
     private Drawer result = null;
 
-    public static final String PREFS_NAME = "MBMS";
+    public static final String PREFS_NAME = "MEBP";
     public SharedPreferences prefs;
 
     private CharSequence mTitle;
@@ -55,13 +55,13 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_activity_home);
 
         // Create a few sample profile
-        final IProfile profile = new ProfileDrawerItem().withName(prefs.getString("username","User")).withIcon(R.drawable.profile2);
+        final IProfile profile = new ProfileDrawerItem().withName(prefs.getString("username","User")).withIcon(R.drawable.my_profile);
 
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withCompactStyle(true)
-                .withHeaderBackground(R.drawable.header)
+                .withHeaderBackground(R.drawable.header_2)
                 .addProfiles(
                         profile,
                         //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
@@ -80,11 +80,13 @@ public class HomeActivity extends AppCompatActivity {
                 .withItemAnimator(new AlphaCrossFadeAnimator())
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.title_section1).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
-                        new PrimaryDrawerItem().withName(R.string.title_section2).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(2),
-                        new PrimaryDrawerItem().withName(R.string.title_section3).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(3),
-                        new PrimaryDrawerItem().withName(R.string.title_section4).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(4),
-                        new PrimaryDrawerItem().withName(R.string.title_section5).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(5),
+                        new PrimaryDrawerItem().withName(R.string.title_section1).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.title_section2).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(2),
+                        new PrimaryDrawerItem().withName(R.string.title_section3).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(3),
+                        new PrimaryDrawerItem().withName(R.string.title_section4).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(4),
+                        new PrimaryDrawerItem().withName(R.string.title_section5).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(5),
+                        new PrimaryDrawerItem().withName(R.string.title_section11).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(6),
+                        new PrimaryDrawerItem().withName(R.string.title_section6).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(7),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(false),
@@ -98,21 +100,29 @@ public class HomeActivity extends AppCompatActivity {
                             FragmentManager fragmentManager = getFragmentManager();
                             if (drawerItem.getIdentifier() == 1) {
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, HomeFragment.newInstance())
+                                        .replace(R.id.frame_container, NewUvchinFragment.newInstance())
                                         .commit();
                              } else if (drawerItem.getIdentifier() == 2) {
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, NewUvchinFragment.newInstance())
+                                        .replace(R.id.frame_container, NewSergiileltFragment.newInstance())
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 3) {
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, NewShinjilgeeFragment.newInstance())
+                                        .replace(R.id.frame_container, NewEmchilgeeFragment.newInstance())
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 4) {
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, ShinjilgeeListFragment.newInstance())
+                                        .replace(R.id.frame_container, NewShinjilgeeFragment.newInstance())
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 5) {
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container, NewShiljiltFragment.newInstance())
+                                        .commit();
+                             } else if (drawerItem.getIdentifier() == 6) {
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container, ShinjilgeeListFragment.newInstance())
+                                        .commit();
+                            } else if (drawerItem.getIdentifier() == 7) {
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container, SignUpFragment.newInstance())
                                         .commit();
@@ -135,8 +145,9 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         //set the back arrow in the toolbar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
+        result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
     }
 
     public void onSectionAttached(int number) {
@@ -151,7 +162,16 @@ public class HomeActivity extends AppCompatActivity {
                 mTitle = getString(R.string.title_section3);
                 break;
             case 4:
-                mTitle = getString(R.string.title_section3);
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
+                break;
+            case 6:
+                mTitle = getString(R.string.title_section11);
+                break;
+            case 7:
+                mTitle = getString(R.string.title_section6);
                 break;
         }
     }

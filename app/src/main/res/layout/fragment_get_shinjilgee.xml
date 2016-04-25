@@ -18,7 +18,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/urh_code" />
+                <TextView
+                    android:id="@+id/date_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                </TextView>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -26,14 +41,14 @@
                     android:id="@+id/urh_code"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/urh_code" />
-                <EditText
-                    android:id="@+id/urh_code_edt"
+                <TextView
+                    android:id="@+id/urh_code_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal">
-                    <requestFocus />
-                </EditText>
+                    android:padding="10dp">
+                </TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -43,13 +58,14 @@
                     android:id="@+id/urh_ezen_ner"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/urh_ezen_ner" />
-                <EditText
-                    android:id="@+id/urh_ezen_ner_edt"
+                <TextView
+                    android:id="@+id/urh_ezen_ner_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text">
-                </EditText>
+                    android:padding="10dp">
+                </TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -59,13 +75,14 @@
                     android:id="@+id/bag_horoo"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/bag_horoo" />
-                <EditText
-                    android:id="@+id/bag_horoo_edt"
+                <TextView
+                    android:id="@+id/bag_horoo_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal">
-                </EditText>
+                    android:padding="10dp">
+                </TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -75,13 +92,14 @@
                     android:id="@+id/gazar_ner"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/gazar_ner" />
-                <EditText
-                    android:id="@+id/gazar_ner_edt"
+                <TextView
+                    android:id="@+id/gazar_ner_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text">
-                </EditText>
+                    android:padding="10dp">
+                </TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -91,12 +109,14 @@
                     android:id="@+id/shinjilgee_turul"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/shinjilgee_turul" />
-                <Spinner
-                    android:id="@+id/shinjilgee_turul_spinner"
+                <TextView
+                    android:id="@+id/shinjilgee_turul_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:padding="10dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -106,11 +126,13 @@
                     android:id="@+id/sorits_ner"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/sorits_ner" />
-                <Spinner
-                    android:id="@+id/sorits_ner_spinner"
+                <TextView
+                    android:id="@+id/sorits_ner_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -121,11 +143,13 @@
                     android:id="@+id/sorits_turul"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/sorits_turul" />
-                <Spinner
-                    android:id="@+id/sorits_turul_spinner"
+                <TextView
+                    android:id="@+id/sorits_turul_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -136,11 +160,13 @@
                     android:id="@+id/mal_nas"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/mal_nas" />
-                <Spinner
-                    android:id="@+id/mal_nas_spinner"
+                <TextView
+                    android:id="@+id/mal_nas_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -151,11 +177,13 @@
                     android:id="@+id/mal_huis"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/mal_huis" />
-                <Spinner
-                    android:id="@+id/mal_huis_spinner"
+                <TextView
+                    android:id="@+id/mal_huis_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -166,11 +194,13 @@
                     android:id="@+id/sorits_too"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/sorits_too" />
-                <Spinner
-                    android:id="@+id/sorits_too_spinner"
+                <TextView
+                    android:id="@+id/sorits_too_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -181,11 +211,13 @@
                     android:id="@+id/negj"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/negj" />
-                <Spinner
-                    android:id="@+id/negj_spinner"
+                <TextView
+                    android:id="@+id/negj_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -197,11 +229,13 @@
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="fill"
+                    android:padding="10dp"
                     android:text="@string/sorits_behjuulsen_arga" />
-                <EditText
-                    android:id="@+id/sorits_behjuulsen_arga_edt"
+                <TextView
+                    android:id="@+id/sorits_behjuulsen_arga_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -213,11 +247,13 @@
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="fill"
+                    android:padding="10dp"
                     android:text="@string/huleen_avah_baiguullaga" />
-                <Spinner
-                    android:id="@+id/huleen_avah_baiguullaga_spinner"
+                <TextView
+                    android:id="@+id/huleen_avah_baiguullaga_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -229,11 +265,13 @@
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="fill"
+                    android:padding="10dp"
                     android:text="@string/ilgeeh_arga" />
-                <Spinner
-                    android:id="@+id/ilgeeh_arga_spinner"
+                <TextView
+                    android:id="@+id/ilgeeh_arga_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -244,13 +282,15 @@
                     android:id="@+id/longitude"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/longitude" />
-                <EditText
-                    android:id="@+id/longitude_edt"
+                <TextView
+                    android:id="@+id/longitude_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:inputType="numberDecimal">
-                </EditText>
+                </TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -260,24 +300,15 @@
                     android:id="@+id/latitude"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="@string/latitude" />
-                <EditText
-                    android:id="@+id/latitude_edt"
+                <TextView
+                    android:id="@+id/latitude_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:inputType="numberDecimal">
-                </EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-                <Button
-                    android:id="@+id/shinjilgee_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/save" />
+                </TextView>
             </LinearLayout>
 
         </LinearLayout>

@@ -1,5 +1,4 @@
 package com.example.mebms.mebms;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -42,31 +41,14 @@ import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
-/**
- * A login screen that offers login via email/password.
- */
 public class LoginActivity extends Activity {
-
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
     private UserLoginTask mAuthTask = null;
-
-    // UI references.
     private EditText mUsernameView;
     private EditText mPasswordView;
-    private View mProgressView;
+    private View newProgressView;
     private Button mLogInButton;
-    private static String url_log_in = "http://10.0.2.2:81/mbms/login.php";
-    public static final String PREFS_NAME = "MBMS";
+    private static String url_log_in = "http://10.0.2.2:81/mebp/login.php";
+    public static final String PREFS_NAME = "MEBP";
     public SharedPreferences prefs;
 
     JSONParser jsonParser = new JSONParser();
@@ -78,7 +60,6 @@ public class LoginActivity extends Activity {
         // Set up the login form.
         prefs = getSharedPreferences(PREFS_NAME, 0);
         mUsernameView = (EditText) findViewById(R.id.username);
-
         mPasswordView = (EditText) findViewById(R.id.password);
 
         mLogInButton = (Button) findViewById(R.id.log_in_button);
@@ -89,11 +70,11 @@ public class LoginActivity extends Activity {
             }
         });
 
-        mProgressView = findViewById(R.id.login_progress);
+        newProgressView = findViewById(R.id.progress_bar);
     }
 
     private void attemptLogin() {
-        if (mAuthTask != null) {
+        if (mAuthTask != null) {//davhar holbolt
             return;
         }
 
@@ -154,26 +135,18 @@ public class LoginActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            newProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            newProgressView.animate().setDuration(shortAnimTime).alpha(show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                    newProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            newProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
         }
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mUsername;
@@ -189,15 +162,15 @@ public class LoginActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(Void... args) {
-            // TODO: attempt authentication against a network service.
-
-
-
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("username", mUsername));
             params.add(new BasicNameValuePair("password", mPassword));
 
+
+
             json = jsonParser.makeHttpRequest(url_log_in, "GET", params);
+
+
 
 
             try {
@@ -232,7 +205,7 @@ public class LoginActivity extends Activity {
                 } else {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(pActivity.getBaseContext(), "Нэвтрэх нэр эсвэл нууц үг буруу байна!!!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(pActivity.getBaseContext(), "Нэвтрэх нэр эсвэл нууц үг буруу байна!", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
