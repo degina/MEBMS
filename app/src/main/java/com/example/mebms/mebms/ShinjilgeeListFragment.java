@@ -48,8 +48,6 @@ import android.widget.Toast;
  */
 public class ShinjilgeeListFragment extends ListFragment implements OnItemClickListener {
 
-	public static final String PREFS_NAME = "MEBP";
-	public SharedPreferences prefs;
 
 	private OnFragmentInteractionListener mListener;
 
@@ -99,7 +97,6 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 							 Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_shinjilgee_list,
 				container, false);
-		prefs = ((HomeActivity)parentActivity).getSharedPreferences(PREFS_NAME, 0);
 		dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		calendar = Calendar.getInstance();
 		datePickerDialog = new DatePickerDialog(parentActivity, new OnDateSetListener() {
@@ -178,9 +175,8 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 								long id) {
 		// TODO Auto-generated method stub
 
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putInt("shinjilgeeID", shinjilgeeID.get(position));
-		editor.commit();
+		getActivity().getIntent().putExtra("selected_shinjilgee_id",shinjilgeeID.get(position));
+
 
 		Log.d("on item click","asd");
 
@@ -195,11 +191,6 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 							long id) {
 		// TODO Auto-generated method stub
-//
-//		SharedPreferences.Editor editor = prefs.edit();
-//		editor.putInt("shinjilgeeID", shinjilgeeID.get(position));
-//		editor.commit();
-//
 //		Log.d("on item click","asd");
 //
 //		FragmentManager fragmentManager = getFragmentManager();

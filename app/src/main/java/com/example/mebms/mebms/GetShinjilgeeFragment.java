@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -52,14 +53,13 @@ public class GetShinjilgeeFragment extends Fragment {
     TextView lat_text;
     TextView lon_text;
 
-    Button saveBtn;
+    Button editBtn;
+    Button deleteBtn;
 
     Activity parentActivity;
 
     private static String url_get_shijilgee = "http://10.0.2.2:81/mebp/getshinjilgee.php";
     JSONParser jsonParser = new JSONParser();
-    public static final String PREFS_NAME = "MEBP";
-    public SharedPreferences prefs;
 
     int shinjilgee_id;
 
@@ -85,7 +85,6 @@ public class GetShinjilgeeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_get_shinjilgee,
                 container, false);
 
-        prefs = ((HomeActivity)parentActivity).getSharedPreferences(PREFS_NAME, 0);
 
         urh_code_text = (TextView) rootView.findViewById(R.id.urh_code_text);
         urh_ezen_ner_text = (TextView) rootView.findViewById(R.id.urh_ezen_ner_text);
@@ -106,7 +105,25 @@ public class GetShinjilgeeFragment extends Fragment {
         huleen_avah_baiguullaga_text = (TextView) rootView.findViewById(R.id.huleen_avah_baiguullaga_text);
         ilgeeh_arga_text = (TextView) rootView.findViewById(R.id.ilgeeh_arga_text);
 
-        saveBtn = (Button) rootView.findViewById(R.id.shinjilgee_save);
+        editBtn = (Button) rootView.findViewById(R.id.edit_shinjilgee);
+        deleteBtn = (Button) rootView.findViewById(R.id.delete_shinjilgee);
+
+        editBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, EditShinjilgeeFragment.newInstance())
+                        .commit();
+            }
+        });
+        deleteBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         getInfo();
 
@@ -117,7 +134,7 @@ public class GetShinjilgeeFragment extends Fragment {
         if (mAuthTask != null) {
             return;
         }
-        shinjilgee_id =prefs.getInt("shinjilgeeID",0);
+        shinjilgee_id =getActivity().getIntent().getIntExtra("selected_shinjilgee_id",0);
 
         if(shinjilgee_id==0) {
             Toast.makeText(parentActivity.getBaseContext(), "Шаардлагатай нүдийг бөглөнө үү!", Toast.LENGTH_LONG).show();
