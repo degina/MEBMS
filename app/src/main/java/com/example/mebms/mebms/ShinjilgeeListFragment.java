@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -38,6 +39,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.swipe.SimpleSwipeListener;
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.BaseSwipeAdapter;
+import com.rey.material.widget.FloatingActionButton;
+
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
  * must implement the {@link OnFragmentInteractionListener}
@@ -57,17 +63,23 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 	ArrayList<Integer> shinjilgeeID = new ArrayList<Integer>();
 
 	private static String url_get_shinjilgee = "http://10.0.2.2:81/mebp/shinjilgeelist.php";
+	private static String url_delete_shijilgee = "http://10.0.2.2:81/mebp/deleteshinjilgee.php";
 	JSONParser jsonParser = new JSONParser();
-	private GetShinjilgee mAuthTask = null;
+	private GetShinjilgee mListAuthTask = null;
+	private DeleteShinjilgee mDeleteAuthTask = null;
 
 //	Spinner shinjilgee_turul_spinner;
 //	ArrayAdapter<CharSequence> shinjilgee_turul_adapter;
 
+	private FloatingActionButton addShinjilgee;
 	private Button btnChangeDate;
 	private DatePickerDialog datePickerDialog;
 	private SimpleDateFormat dateFormatter;
 	private Calendar calendar;
 	public Date date;
+
+
+	JSONObject json;
 
 	ShinjilgeeListAdapter adapter;
 
@@ -75,6 +87,7 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 
 	String date_filter ="";
 //	String type_filter ="";
+
 
 
 	public static ShinjilgeeListFragment newInstance() {
@@ -118,6 +131,18 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 			}
 		});
 
+		addShinjilgee = (FloatingActionButton ) rootView.findViewById(R.id.addButtonFloat);
+		addShinjilgee.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction()
+						.replace(R.id.frame_container, NewShinjilgeeFragment.newInstance())
+						.commit();
+			}
+		});
+
 //		shinjilgee_turul_spinner = (Spinner) rootView
 //				.findViewById(R.id.turul_spinner);
 //		shinjilgee_turul_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
@@ -137,7 +162,7 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 //			}
 //		});
 
-		adapter = new ShinjilgeeListAdapter(shinjilgeeID,urh_codeArray,shinjilgee_turulArray,ognooArray);
+		adapter = new ShinjilgeeListAdapter(parentActivity,shinjilgeeID,urh_codeArray,shinjilgee_turulArray,ognooArray);
 		setListAdapter(adapter);
 
 		getList();
@@ -178,7 +203,6 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 		getActivity().getIntent().putExtra("selected_shinjilgee_id",shinjilgeeID.get(position));
 
 
-		Log.d("on item click","asd");
 
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
@@ -201,19 +225,26 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 	}
 
 
-	private class ShinjilgeeListAdapter extends BaseAdapter {
+	private class ShinjilgeeListAdapter extends BaseSwipeAdapter {
 
+		private Context mContext;
 
 		ArrayList<String> urh_codeArray = new ArrayList<String>();
 		ArrayList<String> shinjilgee_turulArray = new ArrayList<String>();
 		ArrayList<String> ognooArray = new ArrayList<String>();
 		ArrayList<Integer> shinjilgeeID = new ArrayList<Integer>();
 
-		public ShinjilgeeListAdapter(ArrayList<Integer> id,ArrayList<String> urh_code,ArrayList<String> shinjilgee_turul,ArrayList<String> ognoo) {
+		public ShinjilgeeListAdapter(Context mContext,ArrayList<Integer> id,ArrayList<String> urh_code,ArrayList<String> shinjilgee_turul,ArrayList<String> ognoo) {
 			this.urh_codeArray=urh_code;
 			this.shinjilgee_turulArray=shinjilgee_turul;
 			this.ognooArray=ognoo;
 			this.shinjilgeeID=id;
+			this.mContext = mContext;
+		}
+
+		@Override
+		public int getSwipeLayoutResourceId(int position) {
+			return R.id.swipe;
 		}
 		@Override
 		public int getCount() {
@@ -229,17 +260,51 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 		public long getItemId(int i) {
 			return i;
 		}
+		@Override
+		public View generateView(int position, ViewGroup parent) {
+			View v = LayoutInflater.from(mContext).inflate(R.layout.shinjilgee_list_row, null);
+
+			final int p = position;
+
+			SwipeLayout swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
+			swipeLayout.addSwipeListener(new SimpleSwipeListener() {
+				@Override
+				public void onOpen(SwipeLayout layout) {
+//					YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
+				}
+			});
+			swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
+				@Override
+				public void onDoubleClick(SwipeLayout layout, boolean surface) {
+					Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
+				}
+			});
+			v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					deleteRow(shinjilgeeID.get(p));
+				}
+			});
+			v.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					getActivity().getIntent().putExtra("selected_shinjilgee_id",shinjilgeeID.get(p));
+
+
+
+					FragmentManager fragmentManager = getFragmentManager();
+					fragmentManager.beginTransaction()
+							.replace(R.id.frame_container, EditShinjilgeeFragment.newInstance())
+							.commit();
+				}
+			});
+			return v;
+		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			// If we weren't given a view, inflate one
-			if (convertView == null) {
-				convertView = getActivity().getLayoutInflater().inflate(
-						R.layout.shinjilgee_list_row, null);
-			}
-
+		public void fillValues(int position, View convertView) {
 			TextView idEdt = (TextView) convertView
-					.findViewById(R.id.id);
+				.findViewById(R.id.id);
 			TextView urhCodeEdt = (TextView) convertView
 					.findViewById(R.id.urh_code);
 			TextView shinj_turulEdt = (TextView) convertView
@@ -250,20 +315,84 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 			urhCodeEdt.setText("Өрхийн код: "+urh_codeArray.get(position));
 			shinj_turulEdt.setText("Шинжилгээ төрөл: "+shinjilgee_turulArray.get(position));
 			ognooEdt.setText("Огноо: "+ognooArray.get(position));
-			return convertView;
 		}
 	}
 
-	private void getList() {
-		if (mAuthTask != null) {
+	private void deleteRow(int shinjilgee_id) {
+		if (mDeleteAuthTask != null) {
 			return;
 		}
-			if(date!=null)
-				date_filter = dateFormatter.format(date);
+
+		mDeleteAuthTask = new DeleteShinjilgee(parentActivity,shinjilgee_id);
+		mDeleteAuthTask.execute();
+	}
+	class DeleteShinjilgee extends AsyncTask<String, String, String> {
+		private Activity pActivity;
+		private int shinjilgee_id;
+		public DeleteShinjilgee(Activity parent,int shinjilgee_id) {
+			this.shinjilgee_id=shinjilgee_id;
+			this.pActivity = parent;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+
+		@Override
+		protected String doInBackground(String... args) {
+
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("shinjilgee_id", String.valueOf(shinjilgee_id)));
+
+			json = jsonParser.makeHttpRequest(url_delete_shijilgee, "GET",
+					params);
+
+			try {
+				int success = json.getInt("success");
+
+				if (success == 1) {
+					pActivity.runOnUiThread(new Runnable() {
+						public void run() {
+							getList();
+							Toast.makeText(pActivity.getBaseContext(),
+									"Амжилттай устаглаа.", Toast.LENGTH_LONG).show();
+						}
+					});
+				} else {
+					pActivity.runOnUiThread(new Runnable() {
+						public void run() {
+							Toast.makeText(pActivity.getBaseContext(),
+									"Алдаа гарлаа!", Toast.LENGTH_LONG).show();
+						}
+					});
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once done
+			mDeleteAuthTask = null;
+		}
+	}
+	private void getList() {
+		if (mListAuthTask != null) {
+			Log.d("on item click","1");
+			return;
+		}
+		Log.d("on item click","2");
+		if(date!=null)
+			date_filter = dateFormatter.format(date);
 //			if(shinjilgee_turul_spinner.getSelectedItem()!=null)
 //			type_filter = shinjilgee_turul_spinner.getSelectedItem().toString();
 
-			new GetShinjilgee(parentActivity).execute();
+		mListAuthTask = new GetShinjilgee(parentActivity);
+		mListAuthTask.execute();
+		Log.d("on item click","3");
 	}
 	class GetShinjilgee extends AsyncTask<String, String, String> {
 		private Activity pActivity;
@@ -286,7 +415,7 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 
 //			params.add(new BasicNameValuePair("type_filter", type_filter));
 
-			JSONObject json = jsonParser.makeHttpRequest(url_get_shinjilgee, "GET",
+			json = jsonParser.makeHttpRequest(url_get_shinjilgee, "GET",
 					params);
 
 			try {
@@ -310,7 +439,7 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 					pActivity.runOnUiThread(new Runnable() {
 						public void run() {
 							setListAdapter(null);
-							adapter = new ShinjilgeeListAdapter(shinjilgeeID,urh_codeArray,shinjilgee_turulArray,ognooArray);
+							adapter = new ShinjilgeeListAdapter(pActivity,shinjilgeeID,urh_codeArray,shinjilgee_turulArray,ognooArray);
 							setListAdapter(adapter);
 							adapter.notifyDataSetChanged();
 						}
@@ -332,6 +461,7 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog once done
+			mListAuthTask = null;
 		}
 	}
 }

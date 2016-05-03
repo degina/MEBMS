@@ -46,6 +46,7 @@
     <string name="action_example">Example action</string>
     <string name="hello_blank_fragment">Hүүр цонх</string>
 
+    <string name="id">Дугаар</string>
     <string name="urh_code">Өрхийн код</string>
     <string name="urh_ezen_ner">Өрхийн эзний нэр</string>
     <string name="bag_horoo">Баг/Хороо</string>

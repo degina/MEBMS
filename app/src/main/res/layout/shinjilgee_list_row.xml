@@ -1,47 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="false">
-
-    <TextView
-        android:id="@+id/id"
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/right_wrapper"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:textSize="24dp"
+        android:weightSum="1"
+        android:layout_height="match_parent">
+        <ImageButton
+            android:id="@+id/edit"
+            android:background="#FFFF00"
+            android:theme="?android:borderlessButtonStyle"
+            android:src="@drawable/edit"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+        <ImageButton
+            android:id="@+id/delete"
+            android:background="#FF0000"
+            android:theme="?android:borderlessButtonStyle"
+            android:src="@drawable/trash"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+        <!--What you want to show-->
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:clickable="false"
-        android:text="ID: asdasda"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/urh_code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:clickable="false"
-        android:textSize="20dp"
-        android:text="Өрхийн код: " />
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:text="ID: 00000"
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/shinjilgee_turul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:clickable="false"
-        android:textSize="20dp"
-        android:text="Шинжилгээний төрөл: "/>
+        <TextView
+            android:id="@+id/urh_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:text="Өрхийн код: "
+            android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/ognoo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:clickable="false"
-        android:textSize="20dp"
-        android:text="Огноо: "/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/shinjilgee_turul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:text="Шинжилгээний төрөл: "
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/ognoo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:text="Огноо: "
+            android:textSize="20dp" />
+    </LinearLayout>
+</com.daimajia.swipe.SwipeLayout>
