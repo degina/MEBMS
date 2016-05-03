@@ -54,6 +54,7 @@ public class SignUpFragment extends Fragment {
 
     private static String url_sign_up = "http://10.0.2.2:81/mebp/signup.php";
     JSONParser jsonParser = new JSONParser();
+    JSONObject json;
 
     String username;
     String password;
@@ -207,6 +208,19 @@ public class SignUpFragment extends Fragment {
         return rootView;
     }
 
+
+    private boolean isUsernameValid(String username) {
+        return  username.matches("[A-Za-z0-9]+");
+    }
+
+    private boolean isPasswordValid(String password) {
+        if(!password.matches("[A-Za-z0-9]+"))
+            return false;
+        if(password.length() < 8)
+            return false;
+        return true;
+    }
+
     private void attemptSignUp() {
         if (mAuthTask != null) {
             return;
@@ -214,7 +228,11 @@ public class SignUpFragment extends Fragment {
         if(usernameEdt.getText().toString().equals("") || passwordEdt.getText().toString().equals("") || firstnameEdt.getText().toString().equals("")
                 || lastnameEdt.getText().toString().equals("") || emch_dugaarEdt.getText().toString().equals("")) {
             Toast.makeText(parentActivity.getBaseContext(), "Шаардлагатай нүдийг бөглөнө үү!", Toast.LENGTH_LONG).show();
-        }else {
+        } else if(!isPasswordValid(passwordEdt.getText().toString())){
+            Toast.makeText(parentActivity.getBaseContext(), "Нууц үгийн урт 8 ба түүнээс их үсэг тооноос бүрдсэн байх ёстой!", Toast.LENGTH_LONG).show();
+        } else if(!passwordEdt.getText().toString().equals(repeatEdt.getText().toString())){
+            Toast.makeText(parentActivity.getBaseContext(), "Нууц үгүүд тохирохгүй байна!", Toast.LENGTH_LONG).show();
+        } else {
             username = usernameEdt.getText().toString();
             password = passwordEdt.getText().toString();
             firstname = firstnameEdt.getText().toString();
@@ -254,10 +272,8 @@ public class SignUpFragment extends Fragment {
             params.add(new BasicNameValuePair("emch_dugaar", emch_dugaar));
             params.add(new BasicNameValuePair("aimag", aimag));
             params.add(new BasicNameValuePair("sum", sum));
-            params.add(new BasicNameValuePair("birthday",""));
-            params.add(new BasicNameValuePair("gender", ""));
 
-            JSONObject json = jsonParser.makeHttpRequest(url_sign_up, "GET",
+            json = jsonParser.makeHttpRequest(url_sign_up, "GET",
                     params);
 
             try {
@@ -273,17 +289,36 @@ public class SignUpFragment extends Fragment {
                 } else {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(pActivity.getBaseContext(),
-                                    "Алдаа гарлаа!", Toast.LENGTH_LONG).show();
+                            try {
+                                Toast.makeText(pActivity.getBaseContext(),
+                                        json.getString("message"), Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                 }
             } catch (JSONException e) {
+                pActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(pActivity.getBaseContext(),
+                                "Алдаа гарлаа!", Toast.LENGTH_LONG).show();
+                    }
+                });
                 e.printStackTrace();
             }
 
             return null;
         }
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            mAuthTask = null;
+        }
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+        }
+
     }
     @Override
     public void onAttach(Activity activity) {
