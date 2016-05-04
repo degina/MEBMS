@@ -22,9 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Personal on 4/12/2016.
- */
 public class MalExpandableListAdapter extends BaseExpandableListAdapter {
     private Activity context;
     private Map<String, List<Integer>> malCollections;

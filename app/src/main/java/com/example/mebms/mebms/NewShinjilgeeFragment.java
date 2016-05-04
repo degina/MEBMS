@@ -1,5 +1,7 @@
 package com.example.mebms.mebms;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.Calendar;
@@ -221,6 +223,7 @@ public class NewShinjilgeeFragment extends Fragment {
 			huleen_avah_baiguullaga = huleen_avah_baiguullaga_spinner.getSelectedItem().toString();
 			ilgeeh_arga = ilgeeh_arga_spinner.getSelectedItem().toString();
 			date = new Date(Calendar.getInstance().getTimeInMillis());
+			Log.i("DATE",date.toString());
 			longitude = lonEdt.getText().toString().equals("") ? "0" : lonEdt.getText().toString();
 			latitude = latEdt.getText().toString().equals("") ? "0" : latEdt.getText().toString();
 
@@ -260,8 +263,9 @@ public class NewShinjilgeeFragment extends Fragment {
 			params.add(new BasicNameValuePair("ilgeeh_arga", ilgeeh_arga));
 			params.add(new BasicNameValuePair("latitude", latitude));
 			params.add(new BasicNameValuePair("longitude", longitude));
-			Log.d("date",date.toLocaleString());
-			params.add(new BasicNameValuePair("date", date.toString()));
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Log.d("date",df.format(date));
+			params.add(new BasicNameValuePair("date", df.format(date)));
 
 			JSONObject json = jsonParser.makeHttpRequest(url_new_shijilgee, "GET",
 					params);

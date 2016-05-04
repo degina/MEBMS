@@ -16,8 +16,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,12 +27,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,11 +38,11 @@ import android.widget.Toast;
  * A simple {@link Fragment} subclass. Activities that contain this fragment
  * must implement the {@link OnFragmentInteractionListener}
  * interface to handle interaction events. Use the
- * {@link ShinjilgeeListFragment#newInstance} factory method to create an instance
+ * {@link ListShinjilgeeFragment#newInstance} factory method to create an instance
  * of this fragment.
  *
  */
-public class ShinjilgeeListFragment extends ListFragment implements OnItemClickListener {
+public class ListShinjilgeeFragment extends ListFragment implements OnItemClickListener {
 
 
 	private OnFragmentInteractionListener mListener;
@@ -77,12 +73,12 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 //	String type_filter ="";
 
 
-	public static ShinjilgeeListFragment newInstance() {
-		ShinjilgeeListFragment fragment = new ShinjilgeeListFragment();
+	public static ListShinjilgeeFragment newInstance() {
+		ListShinjilgeeFragment fragment = new ListShinjilgeeFragment();
 		return fragment;
 	}
 
-	public ShinjilgeeListFragment() {
+	public ListShinjilgeeFragment() {
 	}
 
 	@Override
@@ -248,7 +244,7 @@ public class ShinjilgeeListFragment extends ListFragment implements OnItemClickL
 					.findViewById(R.id.ognoo);
 			idEdt.setText("Дугаар: "+shinjilgeeID.get(position).toString());
 			urhCodeEdt.setText("Өрхийн код: "+urh_codeArray.get(position));
-			shinj_turulEdt.setText("Шинжилгээ төрөл: "+shinjilgee_turulArray.get(position));
+			shinj_turulEdt.setText("Шинжилгээний төрөл: "+shinjilgee_turulArray.get(position));
 			ognooEdt.setText("Огноо: "+ognooArray.get(position));
 			return convertView;
 		}
