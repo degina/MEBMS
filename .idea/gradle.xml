@@ -12,7 +12,6 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/material" />
-            <option value="$PROJECT_DIR$/swipe" />
           </set>
         </option>
         <option name="myModules">
@@ -21,7 +20,6 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/material" />
-            <option value="$PROJECT_DIR$/swipe" />
           </set>
         </option>
       </GradleProjectSettings>
