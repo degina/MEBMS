@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
@@ -50,6 +52,7 @@ public class EditShinjilgeeFragment extends Fragment {
     ArrayAdapter<CharSequence> huleen_avah_baiguullaga_adapter;
     ArrayAdapter<CharSequence> ilgeeh_arga_adapter;
 
+    TextView idText;
     EditText urhCodeEdt;
     EditText urhEzenNerEdt;
     EditText bagEdt;
@@ -109,7 +112,8 @@ public class EditShinjilgeeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit_shinjilgee,
                 container, false);
-
+        idText=(TextView)rootView.findViewById(R.id.id);
+        idText.setText(String.valueOf(getActivity().getIntent().getIntExtra("selected_shinjilgee_id",0)));
         urhCodeEdt = (EditText) rootView.findViewById(R.id.urh_code_edt);
         urhEzenNerEdt = (EditText) rootView.findViewById(R.id.urh_ezen_ner_edt);
         bagEdt = (EditText) rootView.findViewById(R.id.bag_horoo_edt);
@@ -363,6 +367,11 @@ public class EditShinjilgeeFragment extends Fragment {
                             Toast.makeText(pActivity.getBaseContext(),
                                     "Амжилттай хадгалагдлаа.",
                                     Toast.LENGTH_LONG).show();
+
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, ShinjilgeeListFragment.newInstance())
+                                    .commit();
                         }
                     });
                 } else {

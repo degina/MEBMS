@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -279,6 +280,10 @@ public class NewShinjilgeeFragment extends Fragment {
 							Toast.makeText(pActivity.getBaseContext(),
 									"Амжилттай хадгалагдлаа.",
 									Toast.LENGTH_LONG).show();
+							FragmentManager fragmentManager = getFragmentManager();
+							fragmentManager.beginTransaction()
+									.replace(R.id.frame_container, ShinjilgeeListFragment.newInstance())
+									.commit();
 						}
 					});
 				} else {
