@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -425,6 +426,11 @@ public class NewUvchinFragment extends Fragment {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(pActivity.getBaseContext(), "Амжилттай хадгалагдлаа.", Toast.LENGTH_LONG).show();
+
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, ListUvchinFragment.newInstance())
+                                    .commit();
                         }
                     });
                 } else {

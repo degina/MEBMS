@@ -95,12 +95,12 @@ public class HomeActivity extends AppCompatActivity {
                 .withItemAnimator(new AlphaCrossFadeAnimator())
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.title_section1).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(1),
-                        new PrimaryDrawerItem().withName(R.string.title_section2).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(2),
-                        new PrimaryDrawerItem().withName(R.string.title_section3).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(3),
-                        new PrimaryDrawerItem().withName(R.string.title_section4).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(4),
-                        new PrimaryDrawerItem().withName(R.string.title_section5).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(5),
-                        new PrimaryDrawerItem().withName(R.string.title_section11).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(6),
+                        new PrimaryDrawerItem().withName(R.string.title_section).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.title_section8).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(2),
+                        new PrimaryDrawerItem().withName(R.string.title_section9).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(3),
+                        new PrimaryDrawerItem().withName(R.string.title_section10).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(4),
+                        new PrimaryDrawerItem().withName(R.string.title_section11).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(5),
+                        new PrimaryDrawerItem().withName(R.string.title_section12).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(6),
                         new PrimaryDrawerItem().withName(R.string.title_section6).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(7),
                         new PrimaryDrawerItem().withName("Тайлан татах").withIcon(FontAwesome.Icon.faw_paperclip).withIdentifier(8),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
@@ -116,35 +116,35 @@ public class HomeActivity extends AppCompatActivity {
                             FragmentManager fragmentManager = getFragmentManager();
                             if (drawerItem.getIdentifier() == 1) {
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, NewUvchinFragment.newInstance())
+                                        .replace(R.id.frame_container, HomeFragment.newInstance())
                                         .commit();
                              } else if (drawerItem.getIdentifier() == 2) {
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, NewSergiileltFragment.newInstance())
+                                        .replace(R.id.frame_container, ListUvchinFragment.newInstance())
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 3) {
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, NewEmchilgeeFragment.newInstance())
+                                        .replace(R.id.frame_container, ListSergiileltFragment.newInstance())
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 4) {
-                                fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, NewShinjilgeeFragment.newInstance())
-                                        .commit();
+//                                fragmentManager.beginTransaction()
+//                                        .replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
+//                                        .commit();
                             } else if (drawerItem.getIdentifier() == 5) {
-                                fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, NewShiljiltFragment.newInstance())
-                                        .commit();
-                             } else if (drawerItem.getIdentifier() == 6) {
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
                                         .commit();
+                             } else if (drawerItem.getIdentifier() == 6) {
+//                                fragmentManager.beginTransaction()
+//                                        .replace(R.id.frame_container, ListShiljiltFragment.newInstance())
+//                                        .commit();
                             } else if (drawerItem.getIdentifier() == 7) {
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container, SignUpFragment.newInstance())
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 8) {
-                                String url = "http://10.0.2.2:81/mebp/report.php";
-                                new DownloadFileFromURL().execute("http://10.0.2.2:81/mebp/report.php");
+                                String url = "http://10.0.2.2:81/mebp/report.php?user_id="+String.valueOf(prefs.getInt("userId",0));
+                                new DownloadFileFromURL().execute(url);
                             }
                         }
 
@@ -160,7 +160,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // set the selection to the item with the identifier 5
         if (savedInstanceState == null) {
-            result.setSelection(5, false);
+            result.setSelection(1, false);
         }
 
         //set the back arrow in the toolbar
@@ -305,7 +305,7 @@ public class HomeActivity extends AppCompatActivity {
                 // Output stream
                 OutputStream output = new FileOutputStream(Environment
                         .getExternalStorageDirectory().toString()
-                        + "/data/report.csv");
+                        + "/Download/report.csv");
 
                 byte data[] = new byte[1024];
 

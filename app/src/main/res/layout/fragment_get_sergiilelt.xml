@@ -28,7 +28,7 @@
                     android:layout_width="130dp"
                     android:padding="10dp"
                     android:layout_height="wrap_content"
-                    android:text="Огноо" />
+                    android:text="@string/date" />
 
                 <TextView
                     android:id="@+id/date_text"

@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -354,7 +355,10 @@ public class EditUvchinFragment extends Fragment {
             gazar_ner = gazarEdt.getText().toString();
             uvchin_turul = uvchin_turul_spinner.getSelectedItem().toString();
             uvchin_ner = uvchin_ner_spinner.getSelectedItem().toString();
-            ustgah_arga = ustgah_arga_spinner.getSelectedItem().toString();
+            if(ustgah_arga_spinner.getSelectedItem()!=null)
+                ustgah_arga = ustgah_arga_spinner.getSelectedItem().toString();
+            else
+                ustgah_arga = "";
 
             zuvlusun_h = zuvlusun_h_edt.getText().toString().equals("") ? "0" : zuvlusun_h_edt.getText().toString();
             zuvlusun_y = zuvlusun_y_edt.getText().toString().equals("") ? "0" : zuvlusun_y_edt.getText().toString();
@@ -423,7 +427,7 @@ public class EditUvchinFragment extends Fragment {
                                 bagEdt.setText(json.getString("bag_horoo"));
                                 gazarEdt.setText(json.getString("gazar_ner"));
                                 uvchin_turul_spinner.setSelection(uvchin_turul_adapter.getPosition(json.getString("uvchin_turul")));
-                                uvchin_ner_spinner.setSelection(uvchin_ner_adapter.getPosition(json.getString("sorits_ner")));
+                                uvchin_ner_spinner.setSelection(uvchin_ner_adapter.getPosition(json.getString("uvchin_ner")));
 
                                 zuvlusun_h_edt.setText(json.getString("zuvlusun_h"));
                                 zuvlusun_y_edt.setText(json.getString("zuvlusun_y"));
@@ -450,6 +454,7 @@ public class EditUvchinFragment extends Fragment {
                                 horogdson_t_edt.setText(json.getString("horogdson_t"));
 
 
+                                ustgah_arga_spinner.setSelection(uvchin_ner_adapter.getPosition(json.getString("ustgah_arga")));
                                 latEdt.setText(json.getString("latitude"));
                                 lonEdt.setText(json.getString("longitude"));
                             } catch (JSONException e) {
@@ -540,8 +545,13 @@ public class EditUvchinFragment extends Fragment {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(pActivity.getBaseContext(), "Амжилттай хадгалагдлаа.", Toast.LENGTH_LONG).show();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, ListUvchinFragment.newInstance())
+                                    .commit();
                         }
                     });
+
                 } else {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {

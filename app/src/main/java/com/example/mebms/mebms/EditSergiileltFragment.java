@@ -1,14 +1,14 @@
 package com.example.mebms.mebms;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,16 +32,13 @@ public class EditSergiileltFragment extends Fragment {
     private EditSergiilelt editAuthTask = null;
     private GetSergiilelt getAuthTask = null;
 
-    Spinner sergiilelt_turul_spinner;
     Spinner darhlaajuulalt_tuluv_spinner;
     Spinner darhlaajuulalt_ner_spinner;
-    Spinner vaktsin_nershil_spinner;
     Spinner haldvarguitgesen_obekt_spinner;
 
     ArrayAdapter<CharSequence> sergiilelt_turul_adapter;
     ArrayAdapter<CharSequence> darhlaajuulalt_tuluv_adapter;
     ArrayAdapter<CharSequence> darhlaajuulalt_ner_adapter;
-    ArrayAdapter<CharSequence> vaktsin_nershil_adapter;
     ArrayAdapter<CharSequence> haldvarguitgesen_obekt_adapter;
 
     EditText urhCodeEdt;
@@ -125,7 +122,7 @@ public class EditSergiileltFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_edit_shinjilgee,
+        View rootView = inflater.inflate(R.layout.fragment_edit_sergiilelt,
                 container, false);
 
         darhlaajuulalt_layout = (LinearLayout) rootView.findViewById(R.id.darhlaajuulalt_layout);
@@ -201,7 +198,7 @@ public class EditSergiileltFragment extends Fragment {
         haldvarguitgesen_obekt_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         haldvarguitgesen_obekt_spinner.setAdapter(haldvarguitgesen_obekt_adapter);
 
-        saveBtn = (Button) rootView.findViewById(R.id.shinjilgee_save);
+        saveBtn = (Button) rootView.findViewById(R.id.sergiilelt_save);
 
         saveBtn.setOnClickListener(new OnClickListener() {
 
@@ -242,10 +239,9 @@ public class EditSergiileltFragment extends Fragment {
             bag_horoo = bagEdt.getText().toString();
             gazar_ner = gazarEdt.getText().toString();
 
-            sergiilelt_turul = sergiilelt_turul_spinner.getSelectedItem().toString();
             darhlaajuulalt_tuluv = darhlaajuulalt_tuluv_spinner.getSelectedItem().toString();
             darhlaajuulalt_ner = darhlaajuulalt_ner_spinner.getSelectedItem().toString();
-            vaktsin_nershil = vaktsin_nershil_spinner.getSelectedItem().toString();
+            vaktsin_nershil = vaktsinNershilEdt.getText().toString();
             haldvarguitgesen_obekt = haldvarguitgesen_obekt_spinner.getSelectedItem().toString();
 
             niit_honi = niit_honi_edt.getText().toString().equals("") ? "0" : niit_honi_edt.getText().toString();
@@ -284,7 +280,7 @@ public class EditSergiileltFragment extends Fragment {
         protected String doInBackground(String... args) {
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("shinjilgee_id", String.valueOf(sergiilelt_id)));
+            params.add(new BasicNameValuePair("sergiilelt_id", String.valueOf(sergiilelt_id)));
 
             json = jsonParser.makeHttpRequest(url_get_sergiilelt, "GET",
                     params);
@@ -316,11 +312,19 @@ public class EditSergiileltFragment extends Fragment {
                                 hamragdsan_mori_edt.setText(json.getString("hamragdsan_mori"));
                                 hamragdsan_temee_edt.setText(json.getString("hamragdsan_temee"));
 
-                                sergiilelt_turul_spinner.setSelection(sergiilelt_turul_adapter.getPosition("sergiilelt_turul"));
-                                darhlaajuulalt_tuluv_spinner.setSelection(darhlaajuulalt_tuluv_adapter.getPosition("sergiilelt_turul"));
-                                darhlaajuulalt_ner_spinner.setSelection(darhlaajuulalt_ner_adapter.getPosition("sergiilelt_turul"));
-                                vaktsin_nershil_spinner.setSelection(vaktsin_nershil_adapter.getPosition("sergiilelt_turul"));
-                                haldvarguitgesen_obekt_spinner.setSelection(haldvarguitgesen_obekt_adapter.getPosition("sergiilelt_turul"));
+                                if(json.getString("sergiilelt_turul_darhlaajuulalt").equals("true")){
+                                    darhlaajuulalt_check.setChecked(true);
+                                    darhlaajuulalt_layout.setVisibility(View.VISIBLE);
+                                }
+                                if(json.getString("sergiilelt_turul_haldvarguitgel").equals("true")){
+                                    haldvarguitgel_check.setChecked(true);
+                                    haldvarguitgel_layout.setVisibility(View.VISIBLE);
+                                }
+
+                                darhlaajuulalt_tuluv_spinner.setSelection(darhlaajuulalt_tuluv_adapter.getPosition(json.getString("darhlaajuulalt_tuluv")));
+                                darhlaajuulalt_ner_spinner.setSelection(darhlaajuulalt_ner_adapter.getPosition(json.getString("darhlaajuulalt_ner")));
+                                vaktsinNershilEdt.setText(json.getString("vaktsin_nershil"));
+                                haldvarguitgesen_obekt_spinner.setSelection(haldvarguitgesen_obekt_adapter.getPosition(json.getString("haldvarguitgesen_obekt")));
 
                                 latEdt.setText(json.getString("latitude"));
                                 lonEdt.setText(json.getString("longitude"));
@@ -399,8 +403,13 @@ public class EditSergiileltFragment extends Fragment {
                             Toast.makeText(pActivity.getBaseContext(),
                                     "Амжилттай хадгалагдлаа.",
                                     Toast.LENGTH_LONG).show();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, ListSergiileltFragment.newInstance())
+                                    .commit();
                         }
                     });
+
                 } else {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {

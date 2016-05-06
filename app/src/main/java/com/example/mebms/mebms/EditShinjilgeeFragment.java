@@ -370,7 +370,7 @@ public class EditShinjilgeeFragment extends Fragment {
 
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction()
-                                    .replace(R.id.frame_container, ShinjilgeeListFragment.newInstance())
+                                    .replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
                                     .commit();
                         }
                     });

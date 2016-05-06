@@ -70,6 +70,7 @@
     <string name="ustgah_arga">Устгал хийхэд ашигласан арга</string>
     <string name="longitude">Уртраг</string>
     <string name="latitude">Өргөрөг</string>
+    <string name="date">Огноо</string>
     <string name="date_filter">Огноогоор шүүх</string>
     <string name="type_filter">Төрлөөр шүүх</string>
 

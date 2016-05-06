@@ -24,7 +24,10 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +36,17 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class GetUvchinFragment extends Fragment {
 
     private GetUvchin mAuthTask = null;
+
+    CheckBox zuvlusun_check;
+    CheckBox ustgasan_check;
+    CheckBox emchilsen_check;
+    CheckBox horogdson_check;
+
+    LinearLayout zuvlusun_layout;
+    LinearLayout ustgasan_layout;
+    LinearLayout emchilsen_layout;
+    LinearLayout horogdson_layout;
+    LinearLayout ustgah_arga_layout;
 
     TextView uvchin_turul_text;
     TextView uvchin_ner_text;
@@ -101,6 +115,58 @@ public class GetUvchinFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_get_uvchin,
                 container, false);
 
+        zuvlusun_layout = (LinearLayout) rootView.findViewById(R.id.zuvlusun_layout);
+        ustgasan_layout = (LinearLayout) rootView.findViewById(R.id.ustgasan_layout);
+        emchilsen_layout = (LinearLayout) rootView.findViewById(R.id.emchilsen_layout);
+        horogdson_layout = (LinearLayout) rootView.findViewById(R.id.horogdson_layout);
+        ustgah_arga_layout = (LinearLayout) rootView.findViewById(R.id.ustgah_arga_layout);
+
+        zuvlusun_check = (CheckBox) rootView.findViewById(R.id.zuvlusun_check);
+        zuvlusun_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    zuvlusun_layout.setVisibility(View.VISIBLE);
+                } else {
+                    zuvlusun_layout.setVisibility(View.GONE);
+                }
+            }
+        });
+        ustgasan_check = (CheckBox) rootView.findViewById(R.id.ustgasan_check);
+        ustgasan_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    ustgasan_layout.setVisibility(View.VISIBLE);
+                    ustgah_arga_layout.setVisibility(View.VISIBLE);
+                } else {
+                    ustgasan_layout.setVisibility(View.GONE);
+                    ustgah_arga_layout.setVisibility(View.GONE);
+                }
+            }
+        });
+        emchilsen_check = (CheckBox) rootView.findViewById(R.id.emchilsen_check);
+        emchilsen_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    emchilsen_layout.setVisibility(View.VISIBLE);
+                } else {
+                    emchilsen_layout.setVisibility(View.GONE);
+                }
+            }
+        });
+        horogdson_check = (CheckBox) rootView.findViewById(R.id.horogdson_check);
+        horogdson_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    horogdson_layout.setVisibility(View.VISIBLE);
+                } else {
+                    horogdson_layout.setVisibility(View.GONE);
+                }
+            }
+        });
 
         urh_code_text = (TextView) rootView.findViewById(R.id.urh_code_text);
         urh_ezen_ner_text = (TextView) rootView.findViewById(R.id.urh_ezen_ner_text);
@@ -205,6 +271,9 @@ public class GetUvchinFragment extends Fragment {
                                 urh_ezen_ner_text.setText(json.getString("urh_ezen_ner"));
                                 bag_text.setText(json.getString("bag_horoo"));
                                 gazar_text.setText(json.getString("gazar_ner"));
+                                uvchin_turul_text.setText(json.getString("uvchin_turul"));
+                                uvchin_ner_text.setText(json.getString("uvchin_ner"));
+
                                 ustgasan_h_text.setText(json.getString("ustgasan_h"));
                                 ustgasan_y_text.setText(json.getString("ustgasan_y"));
                                 ustgasan_u_text.setText(json.getString("ustgasan_u"));

@@ -282,7 +282,7 @@ public class NewShinjilgeeFragment extends Fragment {
 									Toast.LENGTH_LONG).show();
 							FragmentManager fragmentManager = getFragmentManager();
 							fragmentManager.beginTransaction()
-									.replace(R.id.frame_container, ShinjilgeeListFragment.newInstance())
+									.replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
 									.commit();
 						}
 					});

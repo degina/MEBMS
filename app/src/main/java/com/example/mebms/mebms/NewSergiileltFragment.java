@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -174,6 +175,13 @@ public class NewSergiileltFragment extends Fragment {
             sergiilelt_turul_haldvarguitgel="true";
         else
             sergiilelt_turul_haldvarguitgel="false";
+        if(sergiilelt_turul_darhlaajuulalt.equals("true") && sergiilelt_turul_haldvarguitgel.equals("false")){
+            sergiilelt_turul=getResources().getString(R.string.darhlaajuulalt);
+        } else if(sergiilelt_turul_darhlaajuulalt.equals("false") && sergiilelt_turul_haldvarguitgel.equals("true")){
+            sergiilelt_turul=getResources().getString(R.string.haldvarguitgel);
+        } else {
+            sergiilelt_turul=getResources().getString(R.string.darhlaajuulalt)+","+getResources().getString(R.string.haldvarguitgel);
+        }
         vaktsinNershilEdt = (EditText) rootView.findViewById(R.id.vaktsin_nershil_edt);
         latEdt = (EditText) rootView.findViewById(R.id.latitude_edt);
         lonEdt = (EditText) rootView.findViewById(R.id.longitude_edt);
@@ -310,6 +318,11 @@ public class NewSergiileltFragment extends Fragment {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(pActivity.getBaseContext(), "Амжилттай хадгалагдлаа.", Toast.LENGTH_LONG).show();
+
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, ListSergiileltFragment.newInstance())
+                                    .commit();
                         }
                     });
                 } else {

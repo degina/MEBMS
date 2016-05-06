@@ -70,7 +70,7 @@ public class GetSergiileltFragment extends Fragment {
 
     Activity parentActivity;
 
-    private static String url_get_shijilgee = "http://10.0.2.2:81/mebp/getshinjilgee.php";
+    private static String url_get_shijilgee = "http://10.0.2.2:81/mebp/getsergiilelt.php";
     JSONParser jsonParser = new JSONParser();
 
     int sergiilelt_id;

@@ -17,6 +17,7 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -109,17 +110,29 @@ public class ListShinjilgeeFragment extends ListFragment implements OnItemClickL
 				container, false);
 		dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		calendar = Calendar.getInstance();
-		datePickerDialog = new DatePickerDialog(parentActivity, new OnDateSetListener() {
-
-			public void onDateSet(DatePicker view, int y, int m, int d) {
-				Calendar newDate = Calendar.getInstance();
-				newDate.set(y, m, d);
-				date=newDate.getTime();
-				btnChangeDate.setText(dateFormatter.format(newDate.getTime()));
-				getList();
+		datePickerDialog = new DatePickerDialog(parentActivity, null ,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+		datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == DialogInterface.BUTTON_POSITIVE) {
+					final DatePicker picker = datePickerDialog.getDatePicker();
+					Calendar newDate = Calendar.getInstance();
+					newDate.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
+					date=newDate.getTime();
+					btnChangeDate.setText(dateFormatter.format(newDate.getTime()));
+					getList();
+				}
 			}
-
-		},calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+		});
+		datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == DialogInterface.BUTTON_NEGATIVE) {
+					Log.d("Datepicker","cancel");
+					date=null;
+					btnChangeDate.setText(getResources().getString(R.string.date_filter));
+					getList();
+				}
+			}
+		});
 		btnChangeDate = (Button)rootView.findViewById(R.id.changeDateBtn);
 		btnChangeDate.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -276,30 +289,14 @@ public class ListShinjilgeeFragment extends ListFragment implements OnItemClickL
 					Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
 				}
 			});
-			v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					deleteRow(shinjilgeeID.get(p));
-				}
-			});
-			v.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					getActivity().getIntent().putExtra("selected_shinjilgee_id",shinjilgeeID.get(p));
-
-
-
-					FragmentManager fragmentManager = getFragmentManager();
-					fragmentManager.beginTransaction()
-							.replace(R.id.frame_container, EditShinjilgeeFragment.newInstance())
-							.commit();
-				}
-			});
 			return v;
 		}
 
 		@Override
 		public void fillValues(int position, View convertView) {
+
+			final int p= position;
+
 			TextView idEdt = (TextView) convertView
 				.findViewById(R.id.id);
 			TextView urhCodeEdt = (TextView) convertView
@@ -312,6 +309,29 @@ public class ListShinjilgeeFragment extends ListFragment implements OnItemClickL
 			urhCodeEdt.setText("Өрхийн код: "+urh_codeArray.get(position));
 			shinj_turulEdt.setText("Шинжилгээний төрөл: "+shinjilgee_turulArray.get(position));
 			ognooEdt.setText("Огноо: "+ognooArray.get(position));
+
+
+			convertView.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Log.d("selected_pos",String.valueOf(p));
+					deleteRow(shinjilgeeID.get(p));
+				}
+			});
+			convertView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Log.d("selected_pos",String.valueOf(p));
+					getActivity().getIntent().putExtra("selected_shinjilgee_id",shinjilgeeID.get(p));
+
+
+
+					FragmentManager fragmentManager = getFragmentManager();
+					fragmentManager.beginTransaction()
+							.replace(R.id.frame_container, EditShinjilgeeFragment.newInstance())
+							.commit();
+				}
+			});
 		}
 	}
 
@@ -354,8 +374,13 @@ public class ListShinjilgeeFragment extends ListFragment implements OnItemClickL
 							getList();
 							Toast.makeText(pActivity.getBaseContext(),
 									"Амжилттай устаглаа.", Toast.LENGTH_LONG).show();
+							FragmentManager fragmentManager = getFragmentManager();
+							fragmentManager.beginTransaction()
+									.replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
+									.commit();
 						}
 					});
+					getList();
 				} else {
 					pActivity.runOnUiThread(new Runnable() {
 						public void run() {
@@ -378,18 +403,18 @@ public class ListShinjilgeeFragment extends ListFragment implements OnItemClickL
 	}
 	private void getList() {
 		if (mListAuthTask != null) {
-			Log.d("on item click","1");
 			return;
 		}
-		Log.d("on item click","2");
 		if(date!=null)
 			date_filter = dateFormatter.format(date);
+		else{
+			date_filter="";
+		}
 //			if(shinjilgee_turul_spinner.getSelectedItem()!=null)
 //			type_filter = shinjilgee_turul_spinner.getSelectedItem().toString();
 
 		mListAuthTask = new GetShinjilgee(parentActivity);
 		mListAuthTask.execute();
-		Log.d("on item click","3");
 	}
 	class GetShinjilgee extends AsyncTask<String, String, String> {
 		private Activity pActivity;

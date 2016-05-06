@@ -16,10 +16,13 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.swipe.SimpleSwipeListener;
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.BaseSwipeAdapter;
+import com.rey.material.widget.FloatingActionButton;
+
 
 public class ListUvchinFragment extends ListFragment implements OnItemClickListener {
     private OnFragmentInteractionListener mListener;
@@ -40,14 +48,22 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
     ArrayList<String> uvchin_turulArray = new ArrayList<String>();
     ArrayList<String> ognooArray = new ArrayList<String>();
     ArrayList<Integer> uvchinID = new ArrayList<Integer>();
+
     private static String url_get_uvchin = "http://10.0.2.2:81/mebp/uvchinlist.php";
+    private static String url_delete_uvchin = "http://10.0.2.2:81/mebp/deleteuvchin.php";
     JSONParser jsonParser = new JSONParser();
-    private GetUvchin mAuthTask = null;
+    private GetUvchin mListAuthTask = null;
+    private DeleteUvchin mDeleteAuthTask = null;
+
+    private FloatingActionButton addUvchin;
     private Button btnChangeDate;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     private Calendar calendar;
     public Date date;
+
+    JSONObject json;
+
     ListUvchinAdapter adapter;
     Activity parentActivity;
     String date_filter ="";
@@ -72,17 +88,43 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
                 container, false);
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         calendar = Calendar.getInstance();
-        datePickerDialog = new DatePickerDialog(parentActivity, new OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int y, int m, int d) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(y, m, d);
-                date=newDate.getTime();
-                btnChangeDate.setText(dateFormatter.format(newDate.getTime()));
-                getList();
+        datePickerDialog = new DatePickerDialog(parentActivity, null ,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.save), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    final DatePicker picker = datePickerDialog.getDatePicker();
+                    Log.d("Datepicker","set"+picker.getYear()+picker.getMonth()+picker.getDayOfMonth());
+                    Calendar newDate = Calendar.getInstance();
+                    newDate.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
+                    date=newDate.getTime();
+                    btnChangeDate.setText(dateFormatter.format(newDate.getTime()));
+                    getList();
+                }
             }
+        });
+        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    Log.d("Datepicker","cancel");
+                    date=null;
+                    btnChangeDate.setText(getResources().getString(R.string.date_filter));
+                    getList();
+                }
+            }
+        });
 
-        },calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        addUvchin = (FloatingActionButton ) rootView.findViewById(R.id.addButtonFloat);
+        addUvchin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, NewUvchinFragment.newInstance())
+                        .commit();
+            }
+        });
+
         btnChangeDate = (Button)rootView.findViewById(R.id.changeDateBtn);
         btnChangeDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +134,7 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
         });
 
 
-        adapter = new ListUvchinAdapter(uvchinID,urh_codeArray,uvchin_turulArray,ognooArray);
+        adapter = new ListUvchinAdapter(parentActivity,uvchinID,urh_codeArray,uvchin_turulArray,ognooArray);
         setListAdapter(adapter);
 
         getList();
@@ -154,18 +196,25 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
     }
 
-    private class ListUvchinAdapter extends BaseAdapter {
+    private class ListUvchinAdapter extends BaseSwipeAdapter {
+
+        private Context mContext;
 
         ArrayList<String> urh_codeArray = new ArrayList<String>();
         ArrayList<String> uvchin_turulArray = new ArrayList<String>();
         ArrayList<String> ognooArray = new ArrayList<String>();
         ArrayList<Integer> uvchinID = new ArrayList<Integer>();
 
-        public ListUvchinAdapter(ArrayList<Integer> id,ArrayList<String> urh_code,ArrayList<String> uvchin_turul,ArrayList<String> ognoo) {
+        public ListUvchinAdapter(Context mContext,ArrayList<Integer> id,ArrayList<String> urh_code,ArrayList<String> uvchin_turul,ArrayList<String> ognoo) {
             this.urh_codeArray=urh_code;
             this.uvchin_turulArray=uvchin_turul;
             this.ognooArray=ognoo;
             this.uvchinID=id;
+            this.mContext = mContext;
+        }
+        @Override
+        public int getSwipeLayoutResourceId(int position) {
+            return R.id.swipe;
         }
         @Override
         public int getCount() {
@@ -181,14 +230,32 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
         public long getItemId(int i) {
             return i;
         }
-
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View generateView(int position, ViewGroup parent) {
             // If we weren't given a view, inflate one
-            if (convertView == null) {
-                convertView = getActivity().getLayoutInflater().inflate(
-                        R.layout.uvchin_list_row, null);
-            }
+            View v = LayoutInflater.from(mContext).inflate(R.layout.uvchin_list_row, null);
+
+            final int p = position;
+
+            SwipeLayout swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
+            swipeLayout.addSwipeListener(new SimpleSwipeListener() {
+                @Override
+                public void onOpen(SwipeLayout layout) {
+//					YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
+                }
+            });
+            swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
+                @Override
+                public void onDoubleClick(SwipeLayout layout, boolean surface) {
+                    Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
+                }
+            });
+            return v;
+        }
+        @Override
+        public void fillValues(int position, View convertView) {
+
+            final int p= position;
 
             TextView idEdt = (TextView) convertView
                     .findViewById(R.id.id);
@@ -202,20 +269,113 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
             urhCodeEdt.setText("Өрхийн код: "+urh_codeArray.get(position));
             shinj_turulEdt.setText("Өвчний төрөл: "+uvchin_turulArray.get(position));
             ognooEdt.setText("Огноо: "+ognooArray.get(position));
-            return convertView;
+            convertView.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("selected_pos",String.valueOf(p));
+                    deleteRow(uvchinID.get(p));
+                }
+            });
+            convertView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("selected_pos",String.valueOf(p));
+                    getActivity().getIntent().putExtra("selected_uvchin_id",uvchinID.get(p));
+
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frame_container, EditUvchinFragment.newInstance())
+                            .commit();
+                }
+            });
+        }
+    }
+
+    private void deleteRow(int uvchin_id) {
+        if (mDeleteAuthTask != null) {
+            return;
+        }
+
+        mDeleteAuthTask = new DeleteUvchin(parentActivity,uvchin_id);
+        mDeleteAuthTask.execute();
+    }
+    class DeleteUvchin extends AsyncTask<String, String, String> {
+        private Activity pActivity;
+        private int uvchin_id;
+        public DeleteUvchin(Activity parent,int uvchin_id) {
+            this.uvchin_id=uvchin_id;
+            this.pActivity = parent;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("uvchin_id", String.valueOf(uvchin_id)));
+
+            json = jsonParser.makeHttpRequest(url_delete_uvchin, "GET",
+                    params);
+
+            try {
+                int success = json.getInt("success");
+
+                if (success == 1) {
+                    pActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            getList();
+                            Toast.makeText(pActivity.getBaseContext(),
+                                    "Амжилттай устаглаа.", Toast.LENGTH_LONG).show();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, ListUvchinFragment.newInstance())
+                                    .commit();
+                        }
+                    });
+                    getList();
+                } else {
+                    pActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(pActivity.getBaseContext(),
+                                    "Алдаа гарлаа!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            mDeleteAuthTask = null;
         }
     }
 
     private void getList() {
-        if (mAuthTask != null) {
+        Log.d("Datepicker","1");
+        if (mListAuthTask != null) {
+            Log.d("Datepicker","2");
             return;
         }
         if(date!=null)
             date_filter = dateFormatter.format(date);
+        else{
+            date_filter="";
+        }
+        Log.d("Datepicker",date_filter);
 //			if(shinjilgee_turul_spinner.getSelectedItem()!=null)
 //			type_filter = shinjilgee_turul_spinner.getSelectedItem().toString();
 
-        new GetUvchin(parentActivity).execute();
+
+        mListAuthTask = new GetUvchin(parentActivity);
+        mListAuthTask.execute();
     }
     class GetUvchin extends AsyncTask<String, String, String> {
         private Activity pActivity;
@@ -262,7 +422,7 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
                             setListAdapter(null);
-                            adapter = new ListUvchinAdapter(uvchinID,urh_codeArray,uvchin_turulArray,ognooArray);
+                            adapter = new ListUvchinAdapter(pActivity,uvchinID,urh_codeArray,uvchin_turulArray,ognooArray);
                             setListAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         }
@@ -284,6 +444,7 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
 
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
+            mListAuthTask=null;
         }
     }
 }
