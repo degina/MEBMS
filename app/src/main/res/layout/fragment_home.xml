@@ -48,29 +48,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_section8"
-        android:id="@+id/button" />
+        android:id="@+id/uvchin_list_btn" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_section9"
-        android:id="@+id/button2" />
+        android:id="@+id/sergiilelt_list_btn" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_section10"
-        android:id="@+id/button3" />
+        android:id="@+id/emchilgee_list_btn" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_section11"
-        android:id="@+id/button4" />
+        android:id="@+id/shinjilgee_list_btn" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_section12"
-        android:id="@+id/button5" />
+        android:id="@+id/shiljilt_list_btn" />
 </LinearLayout>
