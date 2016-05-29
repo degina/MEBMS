@@ -70,7 +70,7 @@ public class GetSergiileltFragment extends Fragment {
 
     Activity parentActivity;
 
-    private static String url_get_shijilgee = "http://10.0.2.2:81/mebp/getsergiilelt.php";
+    private static String url_get_shinjilgee = "http://10.0.2.2:81/mebp/getsergiilelt.php";
     JSONParser jsonParser = new JSONParser();
 
     int sergiilelt_id;
@@ -181,7 +181,7 @@ public class GetSergiileltFragment extends Fragment {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("sergiilelt_id", String.valueOf(sergiilelt_id)));
 
-            json = jsonParser.makeHttpRequest(url_get_shijilgee, "GET",
+            json = jsonParser.makeHttpRequest(url_get_shinjilgee, "GET",
                     params);
 
             try {
@@ -198,7 +198,7 @@ public class GetSergiileltFragment extends Fragment {
                                 gazar_text.setText(json.getString("gazar_ner"));
 
                                 sergiilelt_turul_text.setText(json.getString("sergiilelt_turul"));
-                                if(json.getString("sergiilelt_turul").equals(getResources().getStringArray(R.array.darhlaajuulalt_tuluv_array)[0])) {
+                                if(json.getString("sergiilelt_turul_darhlaajuulalt").equals(true)) {
                                     darhlaajuulalt_tuluv_text.setText(json.getString("darhlaajuulalt_tuluv"));
                                     darhlaajuulalt_ner_text.setText(json.getString("darhlaajuulalt_ner"));
                                     vaktsin_nershil_text.setText(json.getString("vaktsin_nershil"));
@@ -215,7 +215,7 @@ public class GetSergiileltFragment extends Fragment {
                                     hamragdsan_temee_text.setText(json.getString("hamragdsan_temee"));
                                     darhlaajuulalt_layout.setVisibility(View.VISIBLE);
                                 }
-                                if(json.getString("sergiilelt_turul").equals(getResources().getStringArray(R.array.darhlaajuulalt_tuluv_array)[1])) {
+                                if(json.getString("sergiilelt_turul_haldvarguitgel").equals(true)) {
                                     haldvarguitgesen_obekt_text.setText(json.getString("haldvarguitgesen_obekt"));
                                     haldvarguitgel_layout.setVisibility(View.VISIBLE);
                                 }

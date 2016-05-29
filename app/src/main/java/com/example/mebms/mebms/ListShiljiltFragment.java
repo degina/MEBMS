@@ -1,5 +1,4 @@
 package com.example.mebms.mebms;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,12 +17,9 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,22 +38,22 @@ import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import com.rey.material.widget.FloatingActionButton;
-public class ListEmchilgeeFragment extends ListFragment implements OnItemClickListener {
 
+public class ListShiljiltFragment extends ListFragment implements OnItemClickListener {
     private OnFragmentInteractionListener mListener;
 
     ArrayList<String> urh_codeArray = new ArrayList<String>();
+    ArrayList<String> shiljilt_turulArray = new ArrayList<String>();
     ArrayList<String> ognooArray = new ArrayList<String>();
-    ArrayList<Integer> emchilgeeID = new ArrayList<Integer>();
-    ArrayList<String> emchilgee_turulArray = new ArrayList<String>();
+    ArrayList<Integer> shiljiltID = new ArrayList<Integer>();
 
-    private static String url_get_emchilgee = "http://10.0.2.2:81/mebp/emchilgeelist.php";
-    private static String url_delete_emchilgee = "http://10.0.2.2:81/mebp/deleteemchilgee.php";
+    private static String url_get_shiljilt = "http://10.0.2.2:81/mebp/shiljilt.php";
+    private static String url_delete_shiljilt = "http://10.0.2.2:81/mebp/deleteshiljilt.php";
     JSONParser jsonParser = new JSONParser();
-    private GetEmchilgee mListAuthTask = null;
-    private DeleteEmchilgee mDeleteAuthTask = null;
+    private GetShiljilt mListAuthTask = null;
+    private DeleteShiljilt mDeleteAuthTask = null;
 
-    private FloatingActionButton addEmchilgee;
+    private FloatingActionButton addShiljilt;
     private Button btnChangeDate;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
@@ -66,18 +62,16 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
 
     JSONObject json;
 
-    EmchilgeeListAdapter adapter;
-
+    ShiljiltListAdapter adapter;
     Activity parentActivity;
-
     String date_filter ="";
 
-    public static ListEmchilgeeFragment newInstance() {
-        ListEmchilgeeFragment fragment = new ListEmchilgeeFragment();
+    public static ListShiljiltFragment newInstance() {
+        ListShiljiltFragment fragment = new ListShiljiltFragment();
         return fragment;
     }
 
-    public ListEmchilgeeFragment() {
+    public ListShiljiltFragment() {
     }
 
     @Override
@@ -88,7 +82,7 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_emchilgee_list,
+        View rootView = inflater.inflate(R.layout.fragment_shiljilt_list,
                 container, false);
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         calendar = Calendar.getInstance();
@@ -123,27 +117,24 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
             }
         });
 
-        addEmchilgee = (FloatingActionButton ) rootView.findViewById(R.id.addButtonFloat);
-        addEmchilgee.setOnClickListener(new View.OnClickListener() {
+        addShiljilt = (FloatingActionButton ) rootView.findViewById(R.id.addButtonFloat);
+        addShiljilt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, NewShinjilgeeFragment.newInstance())
+                        .replace(R.id.frame_container, NewShiljiltFragment.newInstance())
                         .commit();
             }
         });
 
-        adapter = new EmchilgeeListAdapter(parentActivity,emchilgeeID,urh_codeArray,emchilgee_turulArray,ognooArray);
+        adapter = new ShiljiltListAdapter(parentActivity,shiljiltID,urh_codeArray,shiljilt_turulArray,ognooArray);
         setListAdapter(adapter);
-
         getList();
-
         return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -165,49 +156,51 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
     @Override
-    public void onListItemClick(ListView l, View view, int position, long id) {
-        getActivity().getIntent().putExtra("selected_emchilgee_id",emchilgeeID.get(position));
+    public void onListItemClick(ListView l, View view, int position,
+                                long id) {
+
+
+        getActivity().getIntent().putExtra("selected_shiljilt_id",shiljiltID.get(position));
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.frame_container, GetEmchilgeeFragment.newInstance())
+                .replace(R.id.frame_container, GetShiljiltFragment.newInstance())
                 .commit();
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
     }
 
-    private class EmchilgeeListAdapter extends BaseSwipeAdapter {
+    private class ShiljiltListAdapter extends BaseSwipeAdapter {
 
         private Context mContext;
 
         ArrayList<String> urh_codeArray = new ArrayList<String>();
-        ArrayList<String> emchilgee_turulArray = new ArrayList<String>();
+        ArrayList<String> shiljilt_turulArray = new ArrayList<String>();
         ArrayList<String> ognooArray = new ArrayList<String>();
-        ArrayList<Integer> emchilgeeID = new ArrayList<Integer>();
+        ArrayList<Integer> shiljiltID = new ArrayList<Integer>();
 
-        public EmchilgeeListAdapter(Context mContext,ArrayList<Integer> id,ArrayList<String> urh_code,ArrayList<String> shinjilgee_turul,ArrayList<String> ognoo) {
+        public ShiljiltListAdapter(Context mContext,ArrayList<Integer> id,ArrayList<String> urh_code,ArrayList<String> shiljilt_turul,ArrayList<String> ognoo) {
             this.urh_codeArray=urh_code;
-            this.emchilgee_turulArray=shinjilgee_turul;
+            this.shiljilt_turulArray=shiljilt_turul;
             this.ognooArray=ognoo;
-            this.emchilgeeID=id;
+            this.shiljiltID=id;
             this.mContext = mContext;
         }
-
         @Override
         public int getSwipeLayoutResourceId(int position) {
             return R.id.swipe;
         }
         @Override
         public int getCount() {
-            return emchilgeeID.size();
+            return shiljiltID.size();
         }
 
         @Override
@@ -221,7 +214,7 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
         }
         @Override
         public View generateView(int position, ViewGroup parent) {
-            View v = LayoutInflater.from(mContext).inflate(R.layout.emchilgee_list_row, null);
+            View v = LayoutInflater.from(mContext).inflate(R.layout.shiljilt_list_row, null);
 
             final int p = position;
 
@@ -240,7 +233,6 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
             });
             return v;
         }
-
         @Override
         public void fillValues(int position, View convertView) {
 
@@ -250,50 +242,49 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
                     .findViewById(R.id.id);
             TextView urhCodeEdt = (TextView) convertView
                     .findViewById(R.id.urh_code);
-            TextView emchilgee_turulEdt = (TextView) convertView
-                    .findViewById(R.id.emchilgee_turul);
+            TextView shinj_turulEdt = (TextView) convertView
+                    .findViewById(R.id.shiljilt_turul);
             TextView ognooEdt = (TextView) convertView
                     .findViewById(R.id.ognoo);
-            idEdt.setText("Дугаар: "+emchilgeeID.get(position).toString());
+            idEdt.setText("Дугаар: "+shiljiltID.get(position).toString());
             urhCodeEdt.setText("Өрхийн код: "+urh_codeArray.get(position));
-            emchilgee_turulEdt.setText("Эмчилгээний төрөл: "+emchilgee_turulArray.get(position));
+            shinj_turulEdt.setText("Шилжилтийн төрөл: "+shiljilt_turulArray.get(position));
             ognooEdt.setText("Огноо: "+ognooArray.get(position));
-
             convertView.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.d("selected_pos",String.valueOf(p));
-                    deleteRow(emchilgeeID.get(p));
+                    deleteRow(shiljiltID.get(p));
                 }
             });
             convertView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.d("selected_pos",String.valueOf(p));
-                    getActivity().getIntent().putExtra("selected_emchilgee_id",emchilgeeID.get(p));
+                    getActivity().getIntent().putExtra("selected_sergiilelt_id",shiljiltID.get(p));
 
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.frame_container, EditEmchilgeeFragment.newInstance())
+                            .replace(R.id.frame_container, EditSergiileltFragment.newInstance())
                             .commit();
                 }
             });
         }
     }
 
-    private void deleteRow(int emchilgee_id) {
+    private void deleteRow(int sergiilelt_id) {
         if (mDeleteAuthTask != null) {
             return;
         }
 
-        mDeleteAuthTask = new DeleteEmchilgee(parentActivity,emchilgee_id);
+        mDeleteAuthTask = new DeleteShiljilt(parentActivity,shiljilt_id);
         mDeleteAuthTask.execute();
     }
-    class DeleteEmchilgee extends AsyncTask<String, String, String> {
+    class DeleteShiljilt extends AsyncTask<String, String, String> {
         private Activity pActivity;
-        private int emchilgee_id;
-        public DeleteEmchilgee(Activity parent,int emchilgee_id) {
-            this.emchilgee_id = emchilgee_id;
+        private int shiljilt_id;
+        public DeleteShiljilt(Activity parent,int shiljilt_id) {
+            this.shiljilt_id = shiljilt_id;
             this.pActivity = parent;
         }
 
@@ -306,9 +297,9 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
         protected String doInBackground(String... args) {
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("emchilgee_id", String.valueOf(emchilgee_id)));
+            params.add(new BasicNameValuePair("shiljilt_id", String.valueOf(shiljilt_id)));
 
-            json = jsonParser.makeHttpRequest(url_delete_emchilgee, "GET",
+            json = jsonParser.makeHttpRequest(url_delete_shiljilt, "GET",
                     params);
 
             try {
@@ -322,7 +313,7 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
                                     "Амжилттай устгалаа.", Toast.LENGTH_LONG).show();
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction()
-                                    .replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
+                                    .replace(R.id.frame_container, ListShiljiltFragment.newInstance())
                                     .commit();
                         }
                     });
@@ -356,13 +347,13 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
             date_filter="";
         }
 
-        mListAuthTask = new GetEmchilgee(parentActivity);
+        mListAuthTask = new GetShiljilt(parentActivity);
         mListAuthTask.execute();
     }
-    class GetEmchilgee extends AsyncTask<String, String, String> {
+    class GetShiljilt extends AsyncTask<String, String, String> {
         private Activity pActivity;
 
-        public GetEmchilgee(Activity parent) {
+        public GetShiljilt(Activity parent) {
             this.pActivity = parent;
         }
 
@@ -377,30 +368,31 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("date_filter", date_filter));
 
-            json = jsonParser.makeHttpRequest(url_get_emchilgee, "GET", params);
+            JSONObject json = jsonParser.makeHttpRequest(url_get_shiljilt, "GET",
+                    params);
 
             try {
                 int success = json.getInt("success");
                 urh_codeArray.clear();
-                emchilgee_turulArray.clear();
+                shiljilt_turulArray.clear();
                 ognooArray.clear();
-                emchilgeeID.clear();
+                shiljiltID.clear();
 
                 if (success == 1) {
-                    for (int i = 0; i < json.getJSONArray("emchilgee").length(); i++) {
-                        urh_codeArray.add(json.getJSONArray("emchilgee")
+                    for (int i = 0; i < json.getJSONArray("shiljilt").length(); i++) {
+                        urh_codeArray.add(json.getJSONArray("shiljilt")
                                 .getJSONObject(i).getString("urh_code"));
-                        emchilgee_turulArray.add(json.getJSONArray("emchilgee")
-                                .getJSONObject(i).getString("emchilgee_turul"));
-                        ognooArray.add(json.getJSONArray("emchilgee")
+                        shiljilt_turulArray.add(json.getJSONArray("shiljilt")
+                                .getJSONObject(i).getString("shiljilt_turul"));
+                        ognooArray.add(json.getJSONArray("shiljilt")
                                 .getJSONObject(i).getString("date"));
-                        emchilgeeID.add(json.getJSONArray("emchilgee")
+                        shiljiltID.add(json.getJSONArray("shiljilt")
                                 .getJSONObject(i).getInt("id"));
                     }
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
                             setListAdapter(null);
-                            adapter = new EmchilgeeListAdapter(pActivity,emchilgeeID,urh_codeArray,emchilgee_turulArray,ognooArray);
+                            adapter = new ShiljiltListAdapter(pActivity,shiljiltID,urh_codeArray,shiljilt_turulArray,ognooArray);
                             setListAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         }
@@ -421,7 +413,7 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
 
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
-            mListAuthTask = null;
+            mListAuthTask=null;
         }
     }
 }

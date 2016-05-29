@@ -298,33 +298,34 @@ public class EditSergiileltFragment extends Fragment {
                                 bagEdt.setText(json.getString("bag_horoo"));
                                 gazarEdt.setText(json.getString("gazar_ner"));
 
-
-
-                                niit_honi_edt.setText(json.getString("niit_honi"));
-                                niit_yamaa_edt.setText(json.getString("niit_yamaa"));
-                                niit_uher_edt.setText(json.getString("niit_uher"));
-                                niit_mori_edt.setText(json.getString("niit_mori"));
-                                niit_temee_edt.setText(json.getString("niit_temee"));
-
-                                hamragdsan_honi_edt.setText(json.getString("hamragdsan_honi"));
-                                hamragdsan_yamaa_edt.setText(json.getString("hamragdsan_yamaa"));
-                                hamragdsan_uher_edt.setText(json.getString("hamragdsan_uher"));
-                                hamragdsan_mori_edt.setText(json.getString("hamragdsan_mori"));
-                                hamragdsan_temee_edt.setText(json.getString("hamragdsan_temee"));
-
                                 if(json.getString("sergiilelt_turul_darhlaajuulalt").equals("true")){
                                     darhlaajuulalt_check.setChecked(true);
                                     darhlaajuulalt_layout.setVisibility(View.VISIBLE);
-                                }
-                                if(json.getString("sergiilelt_turul_haldvarguitgel").equals("true")){
-                                    haldvarguitgel_check.setChecked(true);
-                                    haldvarguitgel_layout.setVisibility(View.VISIBLE);
+
+                                    darhlaajuulalt_tuluv_spinner.setSelection(darhlaajuulalt_tuluv_adapter.getPosition(json.getString("darhlaajuulalt_tuluv")));
+                                    darhlaajuulalt_ner_spinner.setSelection(darhlaajuulalt_ner_adapter.getPosition(json.getString("darhlaajuulalt_ner")));
+                                    vaktsinNershilEdt.setText(json.getString("vaktsin_nershil"));
+
+                                    niit_honi_edt.setText(json.getString("niit_honi"));
+                                    niit_yamaa_edt.setText(json.getString("niit_yamaa"));
+                                    niit_uher_edt.setText(json.getString("niit_uher"));
+                                    niit_mori_edt.setText(json.getString("niit_mori"));
+                                    niit_temee_edt.setText(json.getString("niit_temee"));
+
+                                    hamragdsan_honi_edt.setText(json.getString("hamragdsan_honi"));
+                                    hamragdsan_yamaa_edt.setText(json.getString("hamragdsan_yamaa"));
+                                    hamragdsan_uher_edt.setText(json.getString("hamragdsan_uher"));
+                                    hamragdsan_mori_edt.setText(json.getString("hamragdsan_mori"));
+                                    hamragdsan_temee_edt.setText(json.getString("hamragdsan_temee"));
+
                                 }
 
-                                darhlaajuulalt_tuluv_spinner.setSelection(darhlaajuulalt_tuluv_adapter.getPosition(json.getString("darhlaajuulalt_tuluv")));
-                                darhlaajuulalt_ner_spinner.setSelection(darhlaajuulalt_ner_adapter.getPosition(json.getString("darhlaajuulalt_ner")));
-                                vaktsinNershilEdt.setText(json.getString("vaktsin_nershil"));
-                                haldvarguitgesen_obekt_spinner.setSelection(haldvarguitgesen_obekt_adapter.getPosition(json.getString("haldvarguitgesen_obekt")));
+                                if(json.getString("sergiilelt_turul_haldvarguitgel").equals("true")) {
+                                    haldvarguitgel_check.setChecked(true);
+                                    haldvarguitgel_layout.setVisibility(View.VISIBLE);
+
+                                    haldvarguitgesen_obekt_spinner.setSelection(haldvarguitgesen_obekt_adapter.getPosition(json.getString("haldvarguitgesen_obekt")));
+                                }
 
                                 latEdt.setText(json.getString("latitude"));
                                 lonEdt.setText(json.getString("longitude"));

@@ -1,0 +1,330 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.mebms.mebms.NewEmchilgeeFragment">
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/date" />
+                <TextView
+                    android:id="@+id/date_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/urh_code"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/urh_code" />
+                <TextView
+                    android:id="@+id/urh_code_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/urh_ezen_ner"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/urh_ezen_ner" />
+                <TextView
+                    android:id="@+id/urh_ezen_ner_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/shimegchteh_yamaa_text"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/bag_horoo"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/bag_horoo" />
+                <TextView
+                    android:id="@+id/bag_horoo_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/gazar_ner"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/gazar_ner" />
+                <TextView
+                    android:id="@+id/gazar_ner_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/emchilgee_turul"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/emchilgee_turul" />
+                <TextView
+                    android:id="@+id/emchilgee_turul_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/shimegchteh_ner"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/shimegchteh_uvchin_ner" />
+                <TextView
+                    android:id="@+id/shimegchteh_ner_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="130dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/hamragdsan_too"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/hamragdsan_too" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/shimegchteh_honi"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/honi" />
+
+                    <TextView
+                        android:id="@+id/shimegchteh_honi_text"
+                        android:layout_width="match_parent"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/shimegchteh_yamaa"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yamaa" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/shimegchteh_uher"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uher" />
+
+                    <TextView
+                        android:id="@+id/shimegchteh_uher_text"
+                        android:layout_width="match_parent"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/shimegchteh_mori"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mori" />
+
+                    <TextView
+                        android:id="@+id/shimegchteh_mori_text"
+                        android:layout_width="match_parent"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/shimegchteh_temee"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/temee" />
+
+                    <TextView
+                        android:id="@+id/shimegchteh_temee_text"
+                        android:layout_width="match_parent"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/beldmel_ner"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/beldmel_ner" />
+                <TextView
+                    android:id="@+id/beldmel_ner_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/longitude"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/longitude" />
+                <TextView
+                    android:id="@+id/longitude_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="numberDecimal">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/latitude"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/latitude" />
+                <TextView
+                    android:id="@+id/latitude_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="numberDecimal">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/edit_emchilgee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="zasah"/>
+                <Button
+                    android:id="@+id/delete_emchilgee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ustgah"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

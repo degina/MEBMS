@@ -1,53 +1,36 @@
 package com.example.mebms.mebms;
 
 import java.util.ArrayList;
-import java.sql.Date;
-import java.util.Calendar;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.net.Uri;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
-public class NewShiljiltFragment extends Fragment {
+public class EditShiljiltFragment extends Fragment {
 
-    CheckBox mal_check;
-    CheckBox buteegdehuun_check;
-
-    LinearLayout hudaldsan_mal_layout;
-    LinearLayout hudaldsan_buteegdehuun_layout;
+    private EditShiljilt editAuthTask = null;
+    private GetShiljilt getAuthTask = null;
 
     Spinner hudaldsan_buteegdehuun_ner_spinner;
     Spinner negj_spinner;
@@ -69,13 +52,22 @@ public class NewShiljiltFragment extends Fragment {
     EditText hudaldsan_mori_edt;
     EditText hudaldsan_temee_edt;
 
+    LinearLayout hudaldsan_mal_layout;
+    LinearLayout hudaldsan_buteegdehuun_layout;
+
+    CheckBox mal_check;
+    CheckBox buteegdehuun_check;
+
+    int shiljilt_id;
+
+    JSONObject json;
+
     Button saveBtn;
 
     Activity parentActivity;
 
-    private ShiljiltNew mAuthTask = null;
-
-    private static String url_shiljilt_new = "http://10.0.2.2:81/mebp/newshiljilt.php";
+    private static String url_save_shiljilt = "http://10.0.2.2:81/mebp/saveshiljilt.php";
+    private static String url_get_shiljilt = "http://10.0.2.2:81/mebp/getshiljilt.php";
     JSONParser jsonParser = new JSONParser();
 
     String urh_code;
@@ -96,16 +88,12 @@ public class NewShiljiltFragment extends Fragment {
     String hudaldsan_mori;
     String hudaldsan_temee;
 
-    Date date;
-
-    // TODO: Rename and change types and number of parameters
-    public static NewShiljiltFragment newInstance() {
-        NewShiljiltFragment fragment = new NewShiljiltFragment();
+    public static EditShiljiltFragment newInstance() {
+        EditShiljiltFragment fragment = new EditShiljiltFragment();
         return fragment;
     }
 
-    public NewShiljiltFragment() {
-        // Required empty public constructor
+    public EditShiljiltFragment() {
     }
 
     @Override
@@ -116,8 +104,8 @@ public class NewShiljiltFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_new_shiljilt, container,
-                false);
+        View rootView = inflater.inflate(R.layout.fragment_edit_shiljilt,
+                container, false);
 
         hudaldsan_mal_layout = (LinearLayout) rootView.findViewById(R.id.hudaldsan_mal_layout);
         hudaldsan_buteegdehuun_layout = (LinearLayout) rootView.findViewById(R.id.hudaldsan_buteegdehuun_layout);
@@ -176,20 +164,33 @@ public class NewShiljiltFragment extends Fragment {
 
         saveBtn = (Button) rootView.findViewById(R.id.shiljilt_save);
 
-
         saveBtn.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                attemptLogin();
+                attemptEdit();
             }
         });
 
+        getInfo();
         return rootView;
     }
 
-    private void attemptLogin() {
-        if (mAuthTask != null) {
+    private void getInfo() {
+        if (getAuthTask != null) {
+            return;
+        }
+        shiljilt_id =getActivity().getIntent().getIntExtra("selected_shiljilt_id",0);
+
+        if(shiljilt_id == 0) {
+            Toast.makeText(parentActivity.getBaseContext(), "Шаардлагатай нүдийг бөглөнө үү!", Toast.LENGTH_LONG).show();
+        }else {
+            getAuthTask = new GetShiljilt(parentActivity);
+            getAuthTask.execute();
+        }
+    }
+    private void attemptEdit() {
+        if (editAuthTask != null) {
             return;
         }
 
@@ -219,18 +220,17 @@ public class NewShiljiltFragment extends Fragment {
             hudaldsan_mori = hudaldsan_mori_edt.getText().toString().equals("") ? "0" : hudaldsan_mori_edt.getText().toString();
             hudaldsan_temee = hudaldsan_temee_edt.getText().toString().equals("") ? "0" : hudaldsan_temee_edt.getText().toString();
 
-            date = new Date(Calendar.getInstance().getTimeInMillis());
             longitude = lonEdt.getText().toString().equals("") ? "0" : lonEdt.getText().toString();
             latitude = latEdt.getText().toString().equals("") ? "0" : latEdt.getText().toString();
 
-            mAuthTask = new ShiljiltNew(parentActivity);
-            mAuthTask.execute();
+            editAuthTask = new EditShiljilt(parentActivity);
+            editAuthTask.execute();
         }
     }
 
-    class ShiljiltNew extends AsyncTask<String, String, String> {
+    class GetShiljilt extends AsyncTask<String, String, String> {
         private Activity pActivity;
-        public ShiljiltNew(Activity parent) {
+        public GetShiljilt(Activity parent) {
             this.pActivity = parent;
         }
 
@@ -241,7 +241,89 @@ public class NewShiljiltFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... args) {
+
             List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("shiljilt_id", String.valueOf(shiljilt_id)));
+
+            json = jsonParser.makeHttpRequest(url_get_shiljilt, "GET",
+                    params);
+
+            try {
+                int success = json.getInt("success");
+
+                if (success == 1) {
+                    pActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+
+                            try {
+                                urhCodeEdt.setText(json.getString("urh_code"));
+                                urhEzenNerEdt.setText(json.getString("urh_ezen_ner"));
+                                bagEdt.setText(json.getString("bag_horoo"));
+                                gazarEdt.setText(json.getString("gazar_ner"));
+
+                                if(json.getString("shiljilt_turul_mal").equals("true")){
+                                    mal_check.setChecked(true);
+                                    hudaldsan_mal_layout.setVisibility(View.VISIBLE);
+
+                                    hudaldsan_honi_edt.setText(json.getString("hudaldsan_honi"));
+                                    hudaldsan_yamaa_edt.setText(json.getString("hudaldsan_yamaa"));
+                                    hudaldsan_uher_edt.setText(json.getString("hudaldsan_uher"));
+                                    hudaldsan_mori_edt.setText(json.getString("hudaldsan_mori"));
+                                    hudaldsan_temee_edt.setText(json.getString("hudaldsan_temee"));
+                                }
+
+                                if(json.getString("shiljilt_turul_buteegdehuun").equals("true")){
+                                    buteegdehuun_check.setChecked(true);
+                                    hudaldsan_buteegdehuun_layout.setVisibility(View.VISIBLE);
+
+                                    hudaldsan_buteegdehuun_ner_spinner.setSelection(hudaldsan_buteegdehuun_ner_adapter.getPosition(json.getString("hudaldsan_buteegdehuun_ner")));
+                                    negj_spinner.setSelection(negj_adapter.getPosition(json.getString("negj")));
+                                    hudaldsanButeegdehuunTooEdt.setText(json.getString("hudaldsan_buteegdehuun_too"));
+                                }
+
+                                latEdt.setText(json.getString("latitude"));
+                                lonEdt.setText(json.getString("longitude"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                } else {
+                    pActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(pActivity.getBaseContext(),
+                                    "Алдаа гарлаа!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(String file_url) {
+        }
+    }
+
+    class EditShiljilt extends AsyncTask<String, String, String> {
+        private Activity pActivity;
+        public EditShiljilt(Activity parent) {
+            this.pActivity = parent;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("shiljilt_id", String.valueOf(shiljilt_id)));
+
             params.add(new BasicNameValuePair("urh_code", urh_code));
             params.add(new BasicNameValuePair("urh_ezen_ner", urh_ezen_ner));
             params.add(new BasicNameValuePair("bag_horoo", bag_horoo));
@@ -260,11 +342,8 @@ public class NewShiljiltFragment extends Fragment {
             params.add(new BasicNameValuePair("hudaldsan_mori", hudaldsan_mori));
             params.add(new BasicNameValuePair("hudaldsan_temee", hudaldsan_temee));
 
-
-            params.add(new BasicNameValuePair("date", date.toString()));
-            Log.d("date", date.toString());
-
-            JSONObject json = jsonParser.makeHttpRequest(url_shiljilt_new, "GET", params);
+            JSONObject json = jsonParser.makeHttpRequest(url_save_shiljilt, "GET",
+                    params);
 
             try {
                 int success = json.getInt("success");
@@ -272,23 +351,32 @@ public class NewShiljiltFragment extends Fragment {
                 if (success == 1) {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(pActivity.getBaseContext(), "Амжилттай хадгалагдлаа.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(pActivity.getBaseContext(),
+                                    "Амжилттай хадгалагдлаа.",
+                                    Toast.LENGTH_LONG).show();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, ListShiljiltFragment.newInstance())
+                                    .commit();
                         }
                     });
+
                 } else {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(pActivity.getBaseContext(), "Алдаа гарлаа!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(pActivity.getBaseContext(),
+                                    "Алдаа гарлаа!", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             return null;
         }
+
         protected void onPostExecute(String file_url) {
-            // dismiss the dialog once done
         }
     }
 
@@ -296,6 +384,6 @@ public class NewShiljiltFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         parentActivity = activity;
-        ((HomeActivity) activity).onSectionAttached(5);
+        ((HomeActivity) activity).onSectionAttached(4);
     }
 }

@@ -25,6 +25,7 @@
             android:background="#FF0000"
             android:src="@drawable/trash"
             android:theme="?android:borderlessButtonStyle" />
+        <!--What you want to show-->
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -61,13 +62,13 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/sergiilelt_turul"
+                android:id="@+id/shinjilgee_turul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:clickable="false"
-                android:text="Эмчилгээний төрөл: "
+                android:text="Шилжилтийн төрөл: "
                 android:textSize="20dp" />
 
             <TextView

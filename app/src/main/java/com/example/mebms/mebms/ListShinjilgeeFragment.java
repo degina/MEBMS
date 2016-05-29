@@ -373,7 +373,7 @@ public class ListShinjilgeeFragment extends ListFragment implements OnItemClickL
 						public void run() {
 							getList();
 							Toast.makeText(pActivity.getBaseContext(),
-									"Амжилттай устаглаа.", Toast.LENGTH_LONG).show();
+									"Амжилттай устгалаа.", Toast.LENGTH_LONG).show();
 							FragmentManager fragmentManager = getFragmentManager();
 							fragmentManager.beginTransaction()
 									.replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
