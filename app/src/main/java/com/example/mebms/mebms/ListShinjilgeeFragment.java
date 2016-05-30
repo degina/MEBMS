@@ -62,8 +62,8 @@ public class ListShinjilgeeFragment extends ListFragment implements OnItemClickL
 	ArrayList<String> ognooArray = new ArrayList<String>();
 	ArrayList<Integer> shinjilgeeID = new ArrayList<Integer>();
 
-	private static String url_get_shinjilgee = "http://10.0.2.2:81/mebp/shinjilgeelist.php";
-	private static String url_delete_shijilgee = "http://10.0.2.2:81/mebp/deleteshinjilgee.php";
+	private static String url_get_shinjilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/shinjilgeelist.php";
+	private static String url_delete_shijilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/deleteshinjilgee.php";
 	JSONParser jsonParser = new JSONParser();
 	private GetShinjilgee mListAuthTask = null;
 	private DeleteShinjilgee mDeleteAuthTask = null;

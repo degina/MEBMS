@@ -54,7 +54,7 @@ public class EmchilgeeListFragment extends ListFragment implements OnItemClickLi
 	ArrayList<String> ognooArray = new ArrayList<String>();
 	ArrayList<Integer> shinjilgeeID = new ArrayList<Integer>();
 
-	private static String url_get_emchilgee = "http://10.0.2.2:81/mebp/emchilgeelist.php";
+	private static String url_get_emchilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/emchilgeelist.php";
 	JSONParser jsonParser = new JSONParser();
 	private GetEmchilgee mAuthTask = null;
 

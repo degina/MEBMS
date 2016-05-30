@@ -77,8 +77,8 @@ public class EditSergiileltFragment extends Fragment {
 
     Activity parentActivity;
 
-    private static String url_save_sergiilelt = "http://10.0.2.2:81/mebp/savesergiilelt.php";
-    private static String url_get_sergiilelt = "http://10.0.2.2:81/mebp/getsergiilelt.php";
+    private static String url_save_sergiilelt = "http://"+Const.IP_ADDRESS1+":81/mebp/savesergiilelt.php";
+    private static String url_get_sergiilelt = "http://"+Const.IP_ADDRESS1+":81/mebp/getsergiilelt.php";
     JSONParser jsonParser = new JSONParser();
 
     String urh_code;

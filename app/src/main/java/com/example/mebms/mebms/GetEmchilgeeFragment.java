@@ -60,7 +60,7 @@ public class GetEmchilgeeFragment extends Fragment {
 
     Activity parentActivity;
 
-    private static String url_get_emchilgee = "http://10.0.2.2:81/mebp/getemchilgee.php";
+    private static String url_get_emchilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/getemchilgee.php";
     JSONParser jsonParser = new JSONParser();
 
     int emchilgee_id;

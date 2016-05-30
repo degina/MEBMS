@@ -59,7 +59,7 @@ public class GetShinjilgeeFragment extends Fragment {
 
     Activity parentActivity;
 
-    private static String url_get_shijilgee = "http://10.0.2.2:81/mebp/getshinjilgee.php";
+    private static String url_get_shijilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/getshinjilgee.php";
     JSONParser jsonParser = new JSONParser();
 
     int shinjilgee_id;

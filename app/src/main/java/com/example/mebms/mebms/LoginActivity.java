@@ -47,7 +47,7 @@ public class LoginActivity extends Activity {
     private EditText mPasswordView;
     private View newProgressView;
     private Button mLogInButton;
-    private static String url_log_in = "http://10.0.2.2:81/mebp/login.php";
+    private static String url_log_in = "http://"+Const.IP_ADDRESS1+":81/mebp/login.php";
     public static final String PREFS_NAME = "MEBP";
     public SharedPreferences prefs;
 

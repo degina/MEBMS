@@ -49,8 +49,8 @@ public class ListSergiileltFragment extends ListFragment implements OnItemClickL
     ArrayList<String> ognooArray = new ArrayList<String>();
     ArrayList<Integer> sergiileltID = new ArrayList<Integer>();
 
-    private static String url_get_sergiilelt = "http://10.0.2.2:81/mebp/sergiileltlist.php";
-    private static String url_delete_sergiilelt = "http://10.0.2.2:81/mebp/deletesergiilelt.php";
+    private static String url_get_sergiilelt = "http://"+Const.IP_ADDRESS1+":81/mebp/sergiileltlist.php";
+    private static String url_delete_sergiilelt = "http://"+Const.IP_ADDRESS1+":81/mebp/deletesergiilelt.php";
     JSONParser jsonParser = new JSONParser();
     private GetSergiilelt mListAuthTask = null;
     private DeleteSergiilelt mDeleteAuthTask = null;

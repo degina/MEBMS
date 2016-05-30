@@ -64,8 +64,8 @@ public class EditEmchilgeeFragment extends Fragment {
 
     Activity parentActivity;
 
-    private static String url_save_emchilgee = "http://10.0.2.2:81/mebp/saveemchilgee.php";
-    private static String url_get_emchilgee = "http://10.0.2.2:81/mebp/getemchilgee.php";
+    private static String url_save_emchilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/saveemchilgee.php";
+    private static String url_get_emchilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/getemchilgee.php";
     JSONParser jsonParser = new JSONParser();
 
     String date;

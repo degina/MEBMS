@@ -51,8 +51,8 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
     ArrayList<String> ognooArray = new ArrayList<String>();
     ArrayList<Integer> uvchinID = new ArrayList<Integer>();
 
-    private static String url_get_uvchin = "http://10.0.2.2:81/mebp/uvchinlist.php";
-    private static String url_delete_uvchin = "http://10.0.2.2:81/mebp/deleteuvchin.php";
+    private static String url_get_uvchin = "http://"+Const.IP_ADDRESS1+":81/mebp/uvchinlist.php";
+    private static String url_delete_uvchin = "http://"+Const.IP_ADDRESS1+":81/mebp/deleteuvchin.php";
     JSONParser jsonParser = new JSONParser();
     private GetUvchin mListAuthTask = null;
     private DeleteUvchin mDeleteAuthTask = null;

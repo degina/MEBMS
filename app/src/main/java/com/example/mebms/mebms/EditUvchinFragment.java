@@ -109,8 +109,8 @@ public class EditUvchinFragment extends Fragment {
 
     int uvchin_id;
 
-    private static String url_save_uvchin = "http://10.0.2.2:81/mebp/saveuvchin.php";
-    private static String url_get_uvchin = "http://10.0.2.2:81/mebp/getuvchin.php";
+    private static String url_save_uvchin = "http://"+Const.IP_ADDRESS1+":81/mebp/saveuvchin.php";
+    private static String url_get_uvchin = "http://"+Const.IP_ADDRESS1+":81/mebp/getuvchin.php";
     JSONParser jsonParser = new JSONParser();
 
     JSONObject json;

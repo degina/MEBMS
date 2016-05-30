@@ -69,7 +69,7 @@ public class NewShinjilgeeFragment extends Fragment {
 
 	Activity parentActivity;
 
-	private static String url_new_shijilgee = "http://10.0.2.2:81/mebp/newshinjilgee.php";
+	private static String url_new_shijilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/newshinjilgee.php";
 	JSONParser jsonParser = new JSONParser();
 
 	public static final String PREFS_NAME = "MEBP";

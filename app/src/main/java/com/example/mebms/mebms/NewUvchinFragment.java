@@ -104,7 +104,7 @@ public class NewUvchinFragment extends Fragment {
 
     private UvchinNew mAuthTask = null;
 
-    private static String url_uvchin_new = "http://10.0.2.2:81/mebp/newuvchin.php";
+    private static String url_uvchin_new = "http://"+Const.IP_ADDRESS1+":81/mebp/newuvchin.php";
     JSONParser jsonParser = new JSONParser();
 
     public static final String PREFS_NAME = "MEBP";

@@ -140,6 +140,10 @@ public class HomeActivity extends AppCompatActivity {
                                 new DownloadFileFromURL().execute(url);
                             } else if (drawerItem.getIdentifier() == 9) {
                                 finish();
+                            } else {
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container, ListUvchinFragment.newInstance())
+                                        .commit();
                             }
                         }
 

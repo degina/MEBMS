@@ -51,8 +51,8 @@ public class EditAjiltanFragment extends Fragment {
 
     Button saveBtn;
 
-    private static String url_get_ajiltan = "http://10.0.2.2:81/mebp/getajiltan.php";
-    private static String url_save_ajiltan = "http://10.0.2.2:81/mebp/saveajiltan.php";
+    private static String url_get_ajiltan = "http://"+Const.IP_ADDRESS1+":81/mebp/getajiltan.php";
+    private static String url_save_ajiltan = "http://"+Const.IP_ADDRESS1+":81/mebp/saveajiltan.php";
     JSONParser jsonParser = new JSONParser();
     JSONObject json;
 

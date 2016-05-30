@@ -68,9 +68,4 @@
         android:text="@string/title_section11"
         android:id="@+id/shinjilgee_list_btn" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_section12"
-        android:id="@+id/shiljilt_list_btn" />
 </LinearLayout>

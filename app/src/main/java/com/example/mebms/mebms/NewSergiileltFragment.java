@@ -86,7 +86,7 @@ public class NewSergiileltFragment extends Fragment {
 
     private SergiileltNew mAuthTask = null;
 
-    private static String url_sergiilelt_new = "http://10.0.2.2:81/mebp/newsergiilelt.php";
+    private static String url_sergiilelt_new = "http://"+Const.IP_ADDRESS1+":81/mebp/newsergiilelt.php";
     JSONParser jsonParser = new JSONParser();
 
     public static final String PREFS_NAME = "MEBP";

@@ -75,7 +75,7 @@ public class NewEmchilgeeFragment extends Fragment {
 
     private EmchilgeeNew mAuthTask = null;
 
-    private static String url_emchilgee_new = "http://10.0.2.2:81/mebp/newemchilgee.php";
+    private static String url_emchilgee_new = "http://"+Const.IP_ADDRESS1+":81/mebp/newemchilgee.php";
     JSONParser jsonParser = new JSONParser();
 
     public static final String PREFS_NAME = "MEBP";

@@ -89,7 +89,7 @@ public class GetUvchinFragment extends Fragment {
     Button editBtn;
     Activity parentActivity;
 
-    private static String url_get_uvchin = "http://10.0.2.2:81/mebp/getuvchin.php";
+    private static String url_get_uvchin = "http://"+Const.IP_ADDRESS1+":81/mebp/getuvchin.php";
     JSONParser jsonParser = new JSONParser();
 
     int uvchin_id;

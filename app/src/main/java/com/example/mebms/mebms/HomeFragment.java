@@ -16,8 +16,6 @@ public class HomeFragment extends Fragment {
 	private Button sergiileltListBtn;
 	private Button emchilgeeListBtn;
 	private Button shinjilgeeListBtn;
-	private Button shiljiltListBtn;
-	// TODO: Rename and change types and number of parameters
 	public static HomeFragment newInstance() {
 		HomeFragment fragment = new HomeFragment();
 		return fragment;
@@ -37,7 +35,6 @@ public class HomeFragment extends Fragment {
 		sergiileltListBtn = (Button) rootView.findViewById(R.id.sergiilelt_list_btn);
 		emchilgeeListBtn = (Button) rootView.findViewById(R.id.emchilgee_list_btn);
 		shinjilgeeListBtn = (Button) rootView.findViewById(R.id.shinjilgee_list_btn);
-		shiljiltListBtn = (Button) rootView.findViewById(R.id.shiljilt_list_btn);
 
 		uvchinListBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -63,10 +60,10 @@ public class HomeFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 
-//				FragmentManager fragmentManager = getFragmentManager();
-//				fragmentManager.beginTransaction()
-//						.replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
-//						.commit();
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction()
+						.replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
+						.commit();
 			}
 		});
 		shinjilgeeListBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,16 +74,6 @@ public class HomeFragment extends Fragment {
 				fragmentManager.beginTransaction()
 						.replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
 						.commit();
-			}
-		});
-		shiljiltListBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-
-//				FragmentManager fragmentManager = getFragmentManager();
-//				fragmentManager.beginTransaction()
-//						.replace(R.id.frame_container, ListShiljiltFragment.newInstance())
-//						.commit();
 			}
 		});
 

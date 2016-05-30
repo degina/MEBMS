@@ -52,8 +52,8 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
     ArrayList<Integer> emchilgeeID = new ArrayList<Integer>();
     ArrayList<String> emchilgee_turulArray = new ArrayList<String>();
 
-    private static String url_get_emchilgee = "http://10.0.2.2:81/mebp/emchilgeelist.php";
-    private static String url_delete_emchilgee = "http://10.0.2.2:81/mebp/deleteemchilgee.php";
+    private static String url_get_emchilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/emchilgeelist.php";
+    private static String url_delete_emchilgee = "http://"+Const.IP_ADDRESS1+":81/mebp/deleteemchilgee.php";
     JSONParser jsonParser = new JSONParser();
     private GetEmchilgee mListAuthTask = null;
     private DeleteEmchilgee mDeleteAuthTask = null;

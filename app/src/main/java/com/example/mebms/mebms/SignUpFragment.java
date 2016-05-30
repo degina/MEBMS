@@ -55,7 +55,7 @@ public class SignUpFragment extends Fragment {
 
     Button okBtn;
 
-    private static String url_sign_up = "http://10.0.2.2:81/mebp/signup.php";
+    private static String url_sign_up = "http://"+Const.IP_ADDRESS1+":81/mebp/signup.php";
     JSONParser jsonParser = new JSONParser();
     JSONObject json;
 

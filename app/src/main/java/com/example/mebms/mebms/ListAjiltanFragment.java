@@ -45,8 +45,8 @@ public class ListAjiltanFragment extends ListFragment {
     ArrayList<String> ajiltan_codeArray = new ArrayList<String>();
     ArrayList<Integer> ajiltan_idArray = new ArrayList<Integer>();
 
-    private static String url_get_ajiltan = "http://10.0.2.2:81/mebp/ajiltanlist.php";
-    private static String url_delete_ajiltan = "http://10.0.2.2:81/mebp/deleteajiltan.php";
+    private static String url_get_ajiltan = "http://"+Const.IP_ADDRESS1+":81/mebp/ajiltanlist.php";
+    private static String url_delete_ajiltan = "http://"+Const.IP_ADDRESS1+":81/mebp/deleteajiltan.php";
     JSONParser jsonParser = new JSONParser();
     private GetAjiltan mListAuthTask = null;
     private DeleteAjiltan mDeleteAuthTask = null;
