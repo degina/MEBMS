@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
@@ -64,6 +65,10 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
     private Calendar calendar;
     public Date date;
 
+    public static final String PREFS_NAME = "MEBP";
+    public SharedPreferences prefs;
+    private int user_id;
+
     JSONObject json;
 
     EmchilgeeListAdapter adapter;
@@ -90,10 +95,14 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_emchilgee_list,
                 container, false);
+
+        prefs = parentActivity.getSharedPreferences(PREFS_NAME, 0);
+        user_id = prefs.getInt("userId", 0);
+
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         calendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(parentActivity, null ,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.filter), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     final DatePicker picker = datePickerDialog.getDatePicker();
@@ -105,7 +114,7 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
                 }
             }
         });
-        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.back), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_NEGATIVE) {
                     Log.d("Datepicker","cancel");
@@ -130,7 +139,7 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
 
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, NewShinjilgeeFragment.newInstance())
+                        .replace(R.id.frame_container, NewEmchilgeeFragment.newInstance())
                         .commit();
             }
         });
@@ -193,9 +202,9 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
         ArrayList<String> ognooArray = new ArrayList<String>();
         ArrayList<Integer> emchilgeeID = new ArrayList<Integer>();
 
-        public EmchilgeeListAdapter(Context mContext,ArrayList<Integer> id,ArrayList<String> urh_code,ArrayList<String> shinjilgee_turul,ArrayList<String> ognoo) {
+        public EmchilgeeListAdapter(Context mContext,ArrayList<Integer> id,ArrayList<String> urh_code,ArrayList<String> emchilgee_turul,ArrayList<String> ognoo) {
             this.urh_codeArray=urh_code;
-            this.emchilgee_turulArray=shinjilgee_turul;
+            this.emchilgee_turulArray=emchilgee_turul;
             this.ognooArray=ognoo;
             this.emchilgeeID=id;
             this.mContext = mContext;
@@ -263,7 +272,24 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
                 @Override
                 public void onClick(View view) {
                     Log.d("selected_pos",String.valueOf(p));
-                    deleteRow(emchilgeeID.get(p));
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    deleteRow(emchilgeeID.get(p));
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
+                    builder.setMessage("Та устахыг хүсч байна уу??").setPositiveButton(R.string.ok, dialogClickListener)
+                            .setNegativeButton(R.string.back, dialogClickListener).show();
                 }
             });
             convertView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
@@ -322,7 +348,7 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
                                     "Амжилттай устгалаа.", Toast.LENGTH_LONG).show();
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction()
-                                    .replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
+                                    .replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
                                     .commit();
                         }
                     });
@@ -376,6 +402,7 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("date_filter", date_filter));
+            params.add(new BasicNameValuePair("user_id", String.valueOf(user_id)));
 
             json = jsonParser.makeHttpRequest(url_get_emchilgee, "GET", params);
 
@@ -403,6 +430,13 @@ public class ListEmchilgeeFragment extends ListFragment implements OnItemClickLi
                             adapter = new EmchilgeeListAdapter(pActivity,emchilgeeID,urh_codeArray,emchilgee_turulArray,ognooArray);
                             setListAdapter(adapter);
                             adapter.notifyDataSetChanged();
+                        }
+                    });
+                } else if(success == 0) {
+                    pActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(pActivity.getBaseContext(),
+                                    "Мэдээлэл алга!", Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {

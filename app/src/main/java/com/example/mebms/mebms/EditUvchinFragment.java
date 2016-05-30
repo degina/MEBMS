@@ -46,6 +46,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mikepenz.materialdrawer.Drawer;
+
 public class EditUvchinFragment extends Fragment {
 
     CheckBox zuvlusun_check;
@@ -169,6 +171,22 @@ public class EditUvchinFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit_uvchin, container,
                 false);
+
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListUvchinFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
 
         zuvlusun_layout = (LinearLayout) rootView.findViewById(R.id.zuvlusun_layout);
         ustgasan_layout = (LinearLayout) rootView.findViewById(R.id.ustgasan_layout);
@@ -427,7 +445,34 @@ public class EditUvchinFragment extends Fragment {
                                 bagEdt.setText(json.getString("bag_horoo"));
                                 gazarEdt.setText(json.getString("gazar_ner"));
                                 uvchin_turul_spinner.setSelection(uvchin_turul_adapter.getPosition(json.getString("uvchin_turul")));
-                                uvchin_ner_spinner.setSelection(uvchin_ner_adapter.getPosition(json.getString("uvchin_ner")));
+                                switch (uvchin_turul_adapter.getPosition(json.getString("uvchin_turul"))) {
+                                    case 0:
+                                        uvchin_ner_adapter = ArrayAdapter.createFromResource(parentActivity,
+                                                R.array.haldvart_ner_array, android.R.layout.simple_spinner_item);
+                                        break;
+                                    case 1:
+                                        uvchin_ner_adapter = ArrayAdapter.createFromResource(parentActivity,
+                                                R.array.shimegchteh_ner_array, android.R.layout.simple_spinner_item);
+                                        break;
+                                    case 2:
+                                        uvchin_ner_adapter = ArrayAdapter.createFromResource(parentActivity,
+                                                R.array.haldvargui_ner_array, android.R.layout.simple_spinner_item);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                Log.d("Uvchin ner position", json.getString("uvchin_ner"));
+                                Log.d("Uvchin ner position", String.valueOf(uvchin_ner_adapter.getPosition(json.getString("uvchin_ner"))));
+
+                                uvchin_ner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                uvchin_ner_spinner.setAdapter(uvchin_ner_adapter);
+                                Log.d("Uvchin ner position", json.getString("uvchin_ner"));
+                                Log.d("Uvchin ner position", String.valueOf(uvchin_ner_adapter.getPosition(json.getString("uvchin_ner"))));
+
+                                uvchin_ner_spinner.setSelection(uvchin_ner_adapter.getPosition(json.getString("uvchin_ner")),false);
+                                Log.d("Uvchin ner position", String.valueOf(uvchin_ner_spinner.getSelectedItemPosition()));
+
+
 
                                 zuvlusun_h_edt.setText(json.getString("zuvlusun_h"));
                                 zuvlusun_y_edt.setText(json.getString("zuvlusun_y"));
@@ -478,7 +523,7 @@ public class EditUvchinFragment extends Fragment {
         }
 
         protected void onPostExecute(String file_url) {
-            // dismiss the dialog once done
+            getAuthTask=null;
         }
     }
 
@@ -549,6 +594,8 @@ public class EditUvchinFragment extends Fragment {
                             fragmentManager.beginTransaction()
                                     .replace(R.id.frame_container, ListUvchinFragment.newInstance())
                                     .commit();
+                            ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
                         }
                     });
 

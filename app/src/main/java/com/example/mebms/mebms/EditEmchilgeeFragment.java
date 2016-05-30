@@ -27,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.mikepenz.materialdrawer.Drawer;
+
 public class EditEmchilgeeFragment extends Fragment {
 
     private EditEmchilgee editAuthTask = null;
@@ -44,6 +46,7 @@ public class EditEmchilgeeFragment extends Fragment {
     EditText shimegchteh_mori_edt;
     EditText shimegchteh_temee_edt;
 
+    TextView dateText;
     TextView idText;
     EditText urhCodeEdt;
     EditText urhEzenNerEdt;
@@ -65,6 +68,7 @@ public class EditEmchilgeeFragment extends Fragment {
     private static String url_get_emchilgee = "http://10.0.2.2:81/mebp/getemchilgee.php";
     JSONParser jsonParser = new JSONParser();
 
+    String date;
     String urh_code;
     String urh_ezen_ner;
     String bag_horoo;
@@ -99,8 +103,27 @@ public class EditEmchilgeeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit_emchilgee,
                 container, false);
-        idText=(TextView)rootView.findViewById(R.id.id);
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
+
+
+
+        idText=(TextView)rootView.findViewById(R.id.id_text);
         idText.setText(String.valueOf(getActivity().getIntent().getIntExtra("selected_emchilgee_id",0)));
+        dateText=(TextView)rootView.findViewById(R.id.date_text);
         urhCodeEdt = (EditText) rootView.findViewById(R.id.urh_code_edt);
         urhEzenNerEdt = (EditText) rootView.findViewById(R.id.urh_ezen_ner_edt);
         bagEdt = (EditText) rootView.findViewById(R.id.bag_horoo_edt);
@@ -126,12 +149,12 @@ public class EditEmchilgeeFragment extends Fragment {
         shimegchteh_ner_spinner = (Spinner) rootView
                 .findViewById(R.id.shimegchteh_ner_spinner);
         shimegchteh_ner_adapter = ArrayAdapter.createFromResource(rootView.getContext(),
-                R.array.sorits_ner_array, android.R.layout.simple_spinner_item);
+                R.array.shimegchteh_ner_array, android.R.layout.simple_spinner_item);
         shimegchteh_ner_adapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shimegchteh_ner_spinner.setAdapter(shimegchteh_ner_adapter);
 
-        saveBtn = (Button) rootView.findViewById(R.id.shinjilgee_save);
+        saveBtn = (Button) rootView.findViewById(R.id.save_emchilgee);
 
         saveBtn.setOnClickListener(new OnClickListener() {
 
@@ -203,7 +226,7 @@ public class EditEmchilgeeFragment extends Fragment {
         protected String doInBackground(String... args) {
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("shinjilgee_id", String.valueOf(emchilgee_id)));
+            params.add(new BasicNameValuePair("emchilgee_id", String.valueOf(emchilgee_id)));
 
             json = jsonParser.makeHttpRequest(url_get_emchilgee, "GET",
                     params);
@@ -216,6 +239,7 @@ public class EditEmchilgeeFragment extends Fragment {
                         public void run() {
 
                             try {
+                                dateText.setText(json.getString("date"));
                                 urhCodeEdt.setText(json.getString("urh_code"));
                                 urhEzenNerEdt.setText(json.getString("urh_ezen_ner"));
                                 bagEdt.setText(json.getString("bag_horoo"));
@@ -304,8 +328,10 @@ public class EditEmchilgeeFragment extends Fragment {
 
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction()
-                                    .replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
+                                    .replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
                                     .commit();
+                            ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
                         }
                     });
                 } else {

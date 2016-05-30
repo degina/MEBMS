@@ -181,7 +181,7 @@ public class LoginActivity extends Activity {
                     int userId = json.getInt("UID");
                     editor.putInt("userId", userId);
                     editor.putString("username", mUsername);
-                    editor.putString("password", mUsername);
+                    editor.putString("password", mPassword);
                     editor.commit();
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
@@ -190,7 +190,6 @@ public class LoginActivity extends Activity {
                     });
                     Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(i);
-                    finish();
                 } else if (success == 0){
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
@@ -220,13 +219,6 @@ public class LoginActivity extends Activity {
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
         }
 
         @Override

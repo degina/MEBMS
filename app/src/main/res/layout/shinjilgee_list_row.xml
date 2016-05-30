@@ -45,10 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:clickable="false"
                 android:text="ID: 00000"
-                android:textSize="24dp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -56,17 +56,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:text="Өрхийн код: "
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/shinjilgee_turul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:text="Шинжилгээний төрөл: "
                 android:textSize="20dp" />
@@ -76,10 +74,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:clickable="false"
                 android:text="Огноо: "
-                android:textSize="20dp" />
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout

@@ -31,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.mikepenz.materialdrawer.Drawer;
+
 public class GetEmchilgeeFragment extends Fragment {
 
     private GetEmchilgee mAuthTask = null;
@@ -45,6 +47,7 @@ public class GetEmchilgeeFragment extends Fragment {
     TextView shimegchteh_mori_text;
     TextView shimegchteh_temee_text;
 
+    TextView id_text;
     TextView date_text;
     TextView urh_code_text;
     TextView urh_ezen_ner_text;
@@ -54,7 +57,6 @@ public class GetEmchilgeeFragment extends Fragment {
     TextView lon_text;
 
     Button editBtn;
-    Button deleteBtn;
 
     Activity parentActivity;
 
@@ -84,6 +86,25 @@ public class GetEmchilgeeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_get_emchilgee,
                 container, false);
 
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
+
+
+        id_text = (TextView)rootView.findViewById(R.id.id_text);
+        id_text.setText(String.valueOf(getActivity().getIntent().getIntExtra("selected_emchilgee_id",0)));
         urh_code_text = (TextView) rootView.findViewById(R.id.urh_code_text);
         urh_ezen_ner_text = (TextView) rootView.findViewById(R.id.urh_ezen_ner_text);
         bag_text = (TextView) rootView.findViewById(R.id.bag_horoo_text);
@@ -103,7 +124,6 @@ public class GetEmchilgeeFragment extends Fragment {
         shimegchteh_temee_text = (TextView) rootView.findViewById(R.id.shimegchteh_temee_text);
 
         editBtn = (Button) rootView.findViewById(R.id.edit_emchilgee);
-        deleteBtn = (Button) rootView.findViewById(R.id.delete_emchilgee);
 
         editBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -113,11 +133,6 @@ public class GetEmchilgeeFragment extends Fragment {
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, EditEmchilgeeFragment.newInstance())
                         .commit();
-            }
-        });
-        deleteBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
             }
         });
 

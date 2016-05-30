@@ -106,14 +106,6 @@
         android:layout_gravity="bottom"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/forgot_password"
-            android:textSize="15dp"
-            android:theme="?android:attr/borderlessButtonStyle" />
 
 
     </FrameLayout>

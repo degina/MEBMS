@@ -318,12 +318,7 @@
                     android:id="@+id/edit_shinjilgee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="zasah"/>
-                <Button
-                    android:id="@+id/delete_shinjilgee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ustgah"/>
+                    android:text="@string/edit"/>
             </LinearLayout>
 
 

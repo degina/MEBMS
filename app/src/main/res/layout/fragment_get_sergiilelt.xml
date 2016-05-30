@@ -26,7 +26,7 @@
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="130dp"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:layout_height="wrap_content"
                     android:text="@string/date" />
 
@@ -34,7 +34,7 @@
                     android:id="@+id/date_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:inputType="numberDecimal">
                 </TextView>
             </LinearLayout>
@@ -46,7 +46,7 @@
                 <TextView
                     android:id="@+id/urh_code"
                     android:layout_width="130dp"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:layout_height="wrap_content"
                     android:text="@string/urh_code" />
 
@@ -54,7 +54,7 @@
                     android:id="@+id/urh_code_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:inputType="numberDecimal">
                 </TextView>
             </LinearLayout>
@@ -67,14 +67,14 @@
                     android:id="@+id/urh_ezen_ner"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:text="@string/urh_ezen_ner" />
 
                 <TextView
                     android:id="@+id/urh_ezen_ner_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:inputType="text"></TextView>
             </LinearLayout>
 
@@ -86,14 +86,14 @@
                     android:id="@+id/bag_horoo"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:text="@string/bag_horoo" />
 
                 <TextView
                     android:id="@+id/bag_horoo_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:inputType="numberDecimal"></TextView>
             </LinearLayout>
 
@@ -105,14 +105,14 @@
                     android:id="@+id/gazar_ner"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:text="@string/gazar_ner" />
 
                 <TextView
                     android:id="@+id/gazar_ner_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:inputType="text"></TextView>
             </LinearLayout>
 
@@ -129,14 +129,14 @@
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="fill"
-                        android:padding="10dp"
+                        android:padding="4dp"
                         android:text="Сэргийлэлтийн төрөл" />
 
                     <TextView
                         android:id="@+id/sergiilelt_turul_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp" />
+                        android:padding="4dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -150,14 +150,14 @@
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:text="@string/darhlaajuulalt_tuluv"
-                        android:padding="10dp" />
+                        android:padding="4dp" />
 
                     <TextView
                         android:id="@+id/darhlaajuulalt_tuluv_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="10dp" />
+                        android:padding="4dp" />
                 </LinearLayout>
 
             <LinearLayout
@@ -180,7 +180,7 @@
                             android:id="@+id/niit_too"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
+                            android:padding="4dp"
                             android:text="@string/niit_too" />
                     </LinearLayout>
 
@@ -204,7 +204,7 @@
                             <TextView
                                 android:id="@+id/niit_honi_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
 
@@ -222,7 +222,7 @@
                             <TextView
                                 android:id="@+id/niit_yamaa_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
 
@@ -240,7 +240,7 @@
                             <TextView
                                 android:id="@+id/niit_uher_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
 
@@ -258,7 +258,7 @@
                             <TextView
                                 android:id="@+id/niit_mori_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
 
@@ -277,7 +277,7 @@
                             <TextView
                                 android:id="@+id/niit_temee_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                     </LinearLayout>
@@ -296,7 +296,7 @@
                             android:id="@+id/hamragdsan_too"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
+                            android:padding="4dp"
                             android:text="@string/hamragdsan_too" />
                     </LinearLayout>
 
@@ -308,7 +308,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp">
+                            android:padding="4dp">
 
                             <TextView
                                 android:id="@+id/hamragdsan_honi"
@@ -319,14 +319,14 @@
                             <TextView
                                 android:id="@+id/hamragdsan_honi_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp">
+                            android:padding="4dp">
 
                             <TextView
                                 android:id="@+id/hamragdsan_yamaa"
@@ -337,14 +337,14 @@
                             <TextView
                                 android:id="@+id/hamragdsan_yamaa_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp">
+                            android:padding="4dp">
 
                             <TextView
                                 android:id="@+id/hamragdsan_uher"
@@ -355,14 +355,14 @@
                             <TextView
                                 android:id="@+id/hamragdsan_uher_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp">
+                            android:padding="4dp">
 
                             <TextView
                                 android:id="@+id/hamragdsan_mori"
@@ -374,7 +374,7 @@
                             <TextView
                                 android:id="@+id/hamragdsan_mori_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content" />
 
                         </LinearLayout>
@@ -382,7 +382,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp">
+                            android:padding="4dp">
 
                             <TextView
                                 android:id="@+id/hamragdsan_temee"
@@ -393,7 +393,7 @@
                             <TextView
                                 android:id="@+id/hamragdsan_temee_text"
                                 android:layout_width="match_parent"
-                                android:padding="10dp"
+                                android:padding="4dp"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                     </LinearLayout>
@@ -407,14 +407,14 @@
                         android:id="@+id/darhlaajuulalt_ner"
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="4dp"
                         android:text="@string/darhlaajuulalt_ner" />
 
                     <TextView
                         android:id="@+id/darhlaajuulalt_ner_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="4dp"
                         android:layout_weight="1" />
                 </LinearLayout>
 
@@ -427,14 +427,14 @@
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="fill"
-                        android:padding="10dp"
+                        android:padding="4dp"
                         android:text="@string/vaktsin_nershil" />
 
                     <TextView
                         android:id="@+id/vaktsin_nershil_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="4dp"
                         android:inputType="text"></TextView>
                 </LinearLayout>
             </LinearLayout>
@@ -454,14 +454,14 @@
                         android:id="@+id/haldvarguitgesen_obekt"
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="4dp"
                         android:text="@string/haldvarguitgesen_obekt" />
 
                     <TextView
                         android:id="@+id/haldvarguitgesen_obekt_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="4dp"
                         android:layout_weight="1" />
                 </LinearLayout>
             </LinearLayout>
@@ -473,7 +473,7 @@
                 <TextView
                     android:id="@+id/longitude"
                     android:layout_width="130dp"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:layout_height="wrap_content"
                     android:text="@string/longitude" />
 
@@ -481,7 +481,7 @@
                     android:id="@+id/longitude_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:inputType="numberDecimal"></TextView>
             </LinearLayout>
 
@@ -492,7 +492,7 @@
                 <TextView
                     android:id="@+id/latitude"
                     android:layout_width="130dp"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:layout_height="wrap_content"
                     android:text="@string/latitude" />
 
@@ -500,7 +500,7 @@
                     android:id="@+id/latitude_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:inputType="numberDecimal"></TextView>
             </LinearLayout>
 
@@ -513,12 +513,7 @@
                     android:id="@+id/edit_sergiilelt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="zasah"/>
-                <Button
-                    android:id="@+id/delete_sergiilelt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ustgah"/>
+                    android:text="@string/edit"/>
             </LinearLayout>
 
         </LinearLayout>

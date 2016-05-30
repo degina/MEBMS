@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
+
+import com.mikepenz.materialdrawer.Drawer;
 
 public class NewShinjilgeeFragment extends Fragment {
 
@@ -69,6 +72,11 @@ public class NewShinjilgeeFragment extends Fragment {
 	private static String url_new_shijilgee = "http://10.0.2.2:81/mebp/newshinjilgee.php";
 	JSONParser jsonParser = new JSONParser();
 
+	public static final String PREFS_NAME = "MEBP";
+	public SharedPreferences prefs;
+	private int user_id;
+
+
 	String urh_code;
 	String urh_ezen_ner;
 	String bag_horoo;
@@ -106,6 +114,25 @@ public class NewShinjilgeeFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_new_shinjilgee,
 				container, false);
+
+		prefs = parentActivity.getSharedPreferences(PREFS_NAME, 0);
+		user_id = prefs.getInt("userId", 0);
+
+		((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+		((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+		((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+			@Override
+			public boolean onNavigationClickListener(View clickedView) {
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction()
+						.replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
+						.commit();
+				((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+				((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+				return true;
+			}
+		});
 
 		urhCodeEdt = (EditText) rootView.findViewById(R.id.urh_code_edt);
 		urhEzenNerEdt = (EditText) rootView.findViewById(R.id.urh_ezen_ner_edt);
@@ -248,6 +275,7 @@ public class NewShinjilgeeFragment extends Fragment {
 		protected String doInBackground(String... args) {
 
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("user_id", String.valueOf(user_id)));
 			params.add(new BasicNameValuePair("urh_code", urh_code));
 			params.add(new BasicNameValuePair("urh_ezen_ner", urh_ezen_ner));
 			params.add(new BasicNameValuePair("bag_horoo", bag_horoo));
@@ -284,6 +312,8 @@ public class NewShinjilgeeFragment extends Fragment {
 							fragmentManager.beginTransaction()
 									.replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
 									.commit();
+							((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+							((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
 						}
 					});
 				} else {

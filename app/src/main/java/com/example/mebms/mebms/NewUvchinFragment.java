@@ -1,5 +1,7 @@
 package com.example.mebms.mebms;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.Calendar;
@@ -41,6 +43,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mikepenz.materialdrawer.Drawer;
 
 public class NewUvchinFragment extends Fragment {
 
@@ -103,6 +107,10 @@ public class NewUvchinFragment extends Fragment {
     private static String url_uvchin_new = "http://10.0.2.2:81/mebp/newuvchin.php";
     JSONParser jsonParser = new JSONParser();
 
+    public static final String PREFS_NAME = "MEBP";
+    public SharedPreferences prefs;
+    private int user_id;
+
     String urh_code;
     String urh_ezen_ner;
     String bag_horoo;
@@ -159,6 +167,25 @@ public class NewUvchinFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_new_uvchin, container,
                 false);
+
+        prefs = parentActivity.getSharedPreferences(PREFS_NAME, 0);
+        user_id = prefs.getInt("userId", 0);
+
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListUvchinFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
 
         zuvlusun_layout = (LinearLayout) rootView.findViewById(R.id.zuvlusun_layout);
         ustgasan_layout = (LinearLayout) rootView.findViewById(R.id.ustgasan_layout);
@@ -380,6 +407,7 @@ public class NewUvchinFragment extends Fragment {
         @Override
         protected String doInBackground(String... args) {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("user_id", String.valueOf(user_id)));
             params.add(new BasicNameValuePair("urh_code", urh_code));
             params.add(new BasicNameValuePair("urh_ezen_ner", urh_ezen_ner));
             params.add(new BasicNameValuePair("bag_horoo", bag_horoo));
@@ -414,7 +442,9 @@ public class NewUvchinFragment extends Fragment {
             params.add(new BasicNameValuePair("horogdson_m", horogdson_m));
             params.add(new BasicNameValuePair("horogdson_t", horogdson_t));
 
-            params.add(new BasicNameValuePair("date", date.toString()));
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Log.d("date",df.format(date));
+            params.add(new BasicNameValuePair("date", df.format(date)));
             Log.d("date", date.toString());
 
             JSONObject json = jsonParser.makeHttpRequest(url_uvchin_new, "GET", params);
@@ -431,6 +461,8 @@ public class NewUvchinFragment extends Fragment {
                             fragmentManager.beginTransaction()
                                     .replace(R.id.frame_container, ListUvchinFragment.newInstance())
                                     .commit();
+                            ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
                         }
                     });
                 } else {

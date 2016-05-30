@@ -33,6 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.mikepenz.materialdrawer.Drawer;
+
 public class GetUvchinFragment extends Fragment {
 
     private GetUvchin mAuthTask = null;
@@ -85,8 +87,6 @@ public class GetUvchinFragment extends Fragment {
     TextView lon_text;
 
     Button editBtn;
-    Button deleteBtn;
-
     Activity parentActivity;
 
     private static String url_get_uvchin = "http://10.0.2.2:81/mebp/getuvchin.php";
@@ -114,6 +114,22 @@ public class GetUvchinFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_get_uvchin,
                 container, false);
+
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListUvchinFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
 
         zuvlusun_layout = (LinearLayout) rootView.findViewById(R.id.zuvlusun_layout);
         ustgasan_layout = (LinearLayout) rootView.findViewById(R.id.ustgasan_layout);
@@ -204,7 +220,6 @@ public class GetUvchinFragment extends Fragment {
         horogdson_t_text = (TextView) rootView.findViewById(R.id.horogdson_temee_text);
 
         editBtn = (Button) rootView.findViewById(R.id.edit_uvchin);
-        deleteBtn = (Button) rootView.findViewById(R.id.delete_uvchin);
 
         editBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -214,12 +229,6 @@ public class GetUvchinFragment extends Fragment {
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, EditUvchinFragment.newInstance())
                         .commit();
-            }
-        });
-        deleteBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
             }
         });
         getInfo();

@@ -27,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.mikepenz.materialdrawer.Drawer;
+
 public class EditShinjilgeeFragment extends Fragment {
 
     private EditShinjilgee editAuthTask = null;
@@ -112,6 +114,24 @@ public class EditShinjilgeeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit_shinjilgee,
                 container, false);
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
+
+
+
         idText=(TextView)rootView.findViewById(R.id.id);
         idText.setText(String.valueOf(getActivity().getIntent().getIntExtra("selected_shinjilgee_id",0)));
         urhCodeEdt = (EditText) rootView.findViewById(R.id.urh_code_edt);
@@ -372,6 +392,8 @@ public class EditShinjilgeeFragment extends Fragment {
                             fragmentManager.beginTransaction()
                                     .replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
                                     .commit();
+                            ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
                         }
                     });
                 } else {

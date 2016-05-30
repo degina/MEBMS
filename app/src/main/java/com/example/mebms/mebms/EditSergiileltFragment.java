@@ -27,6 +27,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.mikepenz.materialdrawer.Drawer;
+
 public class EditSergiileltFragment extends Fragment {
 
     private EditSergiilelt editAuthTask = null;
@@ -124,6 +126,22 @@ public class EditSergiileltFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit_sergiilelt,
                 container, false);
+
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListSergiileltFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
 
         darhlaajuulalt_layout = (LinearLayout) rootView.findViewById(R.id.darhlaajuulalt_layout);
         haldvarguitgel_layout = (LinearLayout) rootView.findViewById(R.id.haldvarguitgel_layout);
@@ -408,6 +426,8 @@ public class EditSergiileltFragment extends Fragment {
                             fragmentManager.beginTransaction()
                                     .replace(R.id.frame_container, ListSergiileltFragment.newInstance())
                                     .commit();
+                            ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
                         }
                     });
 

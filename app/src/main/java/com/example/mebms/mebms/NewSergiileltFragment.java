@@ -1,5 +1,7 @@
 package com.example.mebms.mebms;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.Calendar;
@@ -87,6 +89,10 @@ public class NewSergiileltFragment extends Fragment {
     private static String url_sergiilelt_new = "http://10.0.2.2:81/mebp/newsergiilelt.php";
     JSONParser jsonParser = new JSONParser();
 
+    public static final String PREFS_NAME = "MEBP";
+    public SharedPreferences prefs;
+    private int user_id;
+
     String urh_code;
     String urh_ezen_ner;
     String bag_horoo;
@@ -136,6 +142,9 @@ public class NewSergiileltFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_new_sergiilelt, container,
                 false);
 
+        prefs = parentActivity.getSharedPreferences(PREFS_NAME, 0);
+        user_id = prefs.getInt("userId", 0);
+
         darhlaajuulalt_layout = (LinearLayout) rootView.findViewById(R.id.darhlaajuulalt_layout);
         haldvarguitgel_layout = (LinearLayout) rootView.findViewById(R.id.haldvarguitgel_layout);
 
@@ -167,20 +176,20 @@ public class NewSergiileltFragment extends Fragment {
         urhEzenNerEdt = (EditText) rootView.findViewById(R.id.urh_ezen_ner_edt);
         bagEdt = (EditText) rootView.findViewById(R.id.bag_horoo_edt);
         gazarEdt = (EditText) rootView.findViewById(R.id.gazar_ner_edt);
-        if(darhlaajuulalt_check.isChecked())
-            sergiilelt_turul_darhlaajuulalt="true";
+        if (darhlaajuulalt_check.isChecked())
+            sergiilelt_turul_darhlaajuulalt = "true";
         else
-            sergiilelt_turul_darhlaajuulalt="false";
-        if(haldvarguitgel_check.isChecked())
-            sergiilelt_turul_haldvarguitgel="true";
+            sergiilelt_turul_darhlaajuulalt = "false";
+        if (haldvarguitgel_check.isChecked())
+            sergiilelt_turul_haldvarguitgel = "true";
         else
-            sergiilelt_turul_haldvarguitgel="false";
-        if(sergiilelt_turul_darhlaajuulalt.equals("true") && sergiilelt_turul_haldvarguitgel.equals("false")){
-            sergiilelt_turul=getResources().getString(R.string.darhlaajuulalt);
-        } else if(sergiilelt_turul_darhlaajuulalt.equals("false") && sergiilelt_turul_haldvarguitgel.equals("true")){
-            sergiilelt_turul=getResources().getString(R.string.haldvarguitgel);
+            sergiilelt_turul_haldvarguitgel = "false";
+        if (sergiilelt_turul_darhlaajuulalt.equals("true") && sergiilelt_turul_haldvarguitgel.equals("false")) {
+            sergiilelt_turul = getResources().getString(R.string.darhlaajuulalt);
+        } else if (sergiilelt_turul_darhlaajuulalt.equals("false") && sergiilelt_turul_haldvarguitgel.equals("true")) {
+            sergiilelt_turul = getResources().getString(R.string.haldvarguitgel);
         } else {
-            sergiilelt_turul=getResources().getString(R.string.darhlaajuulalt)+","+getResources().getString(R.string.haldvarguitgel);
+            sergiilelt_turul = getResources().getString(R.string.darhlaajuulalt) + "," + getResources().getString(R.string.haldvarguitgel);
         }
         vaktsinNershilEdt = (EditText) rootView.findViewById(R.id.vaktsin_nershil_edt);
         latEdt = (EditText) rootView.findViewById(R.id.latitude_edt);
@@ -234,10 +243,12 @@ public class NewSergiileltFragment extends Fragment {
         if (mAuthTask != null) {
             return;
         }
-        if(urhCodeEdt.getText().toString().equals("") || urhEzenNerEdt.getText().toString().equals("") || bagEdt.getText().toString().equals("")
-                || gazarEdt.getText().toString().equals("")|| lonEdt.getText().toString().equals("")|| latEdt.getText().toString().equals("")) {
+        if (urhCodeEdt.getText().toString().equals("") || urhEzenNerEdt.getText().toString().equals("") || bagEdt.getText().toString().equals("")
+                || gazarEdt.getText().toString().equals("") || lonEdt.getText().toString().equals("") || latEdt.getText().toString().equals("")) {
             Toast.makeText(parentActivity.getBaseContext(), "Шаардлагатай нүдийг бөглөнө үү!", Toast.LENGTH_LONG).show();
-        }else {
+        } else if (!darhlaajuulalt_check.isChecked() && !haldvarguitgel_check.isChecked()) {
+            Toast.makeText(parentActivity.getBaseContext(), "Сэргийлэлтийн аль нэг төрөл сонгоно уу!", Toast.LENGTH_LONG).show();
+        } else {
             urh_code = urhCodeEdt.getText().toString();
             urh_ezen_ner = urhEzenNerEdt.getText().toString();
             bag_horoo = bagEdt.getText().toString();
@@ -245,6 +256,22 @@ public class NewSergiileltFragment extends Fragment {
             darhlaajuulalt_tuluv = darhlaajuulalt_tuluv_spinner.getSelectedItem().toString();
             darhlaajuulalt_ner = darhlaajuulalt_ner_spinner.getSelectedItem().toString();
             haldvarguitgesen_obekt = haldvarguitgesen_obekt_spinner.getSelectedItem().toString();
+
+            if (darhlaajuulalt_check.isChecked())
+                sergiilelt_turul_darhlaajuulalt = "true";
+            else
+                sergiilelt_turul_darhlaajuulalt = "false";
+            if (haldvarguitgel_check.isChecked())
+                sergiilelt_turul_haldvarguitgel = "true";
+            else
+                sergiilelt_turul_haldvarguitgel = "false";
+            if (sergiilelt_turul_darhlaajuulalt.equals("true") && sergiilelt_turul_haldvarguitgel.equals("false")) {
+                sergiilelt_turul = getResources().getString(R.string.darhlaajuulalt);
+            } else if (sergiilelt_turul_darhlaajuulalt.equals("false") && sergiilelt_turul_haldvarguitgel.equals("true")) {
+                sergiilelt_turul = getResources().getString(R.string.haldvarguitgel);
+            } else {
+                sergiilelt_turul = getResources().getString(R.string.darhlaajuulalt) + "," + getResources().getString(R.string.haldvarguitgel);
+            }
 
             niit_honi = niit_honi_edt.getText().toString().equals("") ? "0" : lonEdt.getText().toString();
             niit_yamaa = niit_yamaa_edt.getText().toString().equals("") ? "0" : niit_yamaa_edt.getText().toString();
@@ -268,6 +295,7 @@ public class NewSergiileltFragment extends Fragment {
 
     class SergiileltNew extends AsyncTask<String, String, String> {
         private Activity pActivity;
+
         public SergiileltNew(Activity parent) {
             this.pActivity = parent;
         }
@@ -280,6 +308,7 @@ public class NewSergiileltFragment extends Fragment {
         @Override
         protected String doInBackground(String... args) {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("user_id", String.valueOf(user_id)));
             params.add(new BasicNameValuePair("urh_code", urh_code));
             params.add(new BasicNameValuePair("urh_ezen_ner", urh_ezen_ner));
             params.add(new BasicNameValuePair("bag_horoo", bag_horoo));
@@ -306,7 +335,9 @@ public class NewSergiileltFragment extends Fragment {
             params.add(new BasicNameValuePair("hamragdsan_mori", hamragdsan_mori));
             params.add(new BasicNameValuePair("hamragdsan_temee", hamragdsan_temee));
 
-            params.add(new BasicNameValuePair("date", date.toString()));
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Log.d("date", df.format(date));
+            params.add(new BasicNameValuePair("date", df.format(date)));
             Log.d("date", date.toString());
 
             JSONObject json = jsonParser.makeHttpRequest(url_sergiilelt_new, "GET", params);
@@ -323,6 +354,8 @@ public class NewSergiileltFragment extends Fragment {
                             fragmentManager.beginTransaction()
                                     .replace(R.id.frame_container, ListSergiileltFragment.newInstance())
                                     .commit();
+                            ((HomeActivity) parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            ((HomeActivity) parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
                         }
                     });
                 } else {
@@ -337,6 +370,7 @@ public class NewSergiileltFragment extends Fragment {
             }
             return null;
         }
+
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
         }

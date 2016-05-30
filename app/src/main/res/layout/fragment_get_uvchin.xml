@@ -26,7 +26,7 @@
             <TextView
                 android:id="@+id/date"
                 android:layout_width="130dp"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content"
                 android:text="@string/date" />
 
@@ -34,7 +34,7 @@
                 android:id="@+id/date_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:inputType="numberDecimal">
             </TextView>
         </LinearLayout>
@@ -47,14 +47,14 @@
                 android:id="@+id/urh_code"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:text="@string/urh_code" />
 
             <TextView
                 android:id="@+id/urh_code_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:inputType="numberDecimal">
             </TextView>
         </LinearLayout>
@@ -67,14 +67,14 @@
                 android:id="@+id/urh_ezen_ner"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:text="@string/urh_ezen_ner" />
 
             <TextView
                 android:id="@+id/urh_ezen_ner_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:inputType="text"></TextView>
         </LinearLayout>
 
@@ -86,14 +86,14 @@
                 android:id="@+id/bag_horoo"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:text="@string/bag_horoo" />
 
             <TextView
                 android:id="@+id/bag_horoo_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:inputType="numberDecimal"></TextView>
         </LinearLayout>
 
@@ -105,14 +105,14 @@
                 android:id="@+id/gazar_ner"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:text="@string/gazar_ner" />
 
             <TextView
                 android:id="@+id/gazar_ner_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:inputType="text"></TextView>
         </LinearLayout>
 
@@ -124,14 +124,14 @@
                 android:id="@+id/uvchin_turul"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:text="@string/uvchin_turul" />
 
             <TextView
                 android:id="@+id/uvchin_turul_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -143,14 +143,14 @@
                 android:id="@+id/uvchin_ner"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:text="@string/uvchin_ner" />
 
             <TextView
                 android:id="@+id/uvchin_ner_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -260,7 +260,7 @@
                     android:id="@+id/zuvlusun"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:text="@string/zuvlusun" />
                 <TextView
                     android:id="@+id/zuvlusun_honi"
@@ -271,7 +271,7 @@
                 <TextView
                     android:id="@+id/zuvlusun_honi_text"
                     android:layout_width="match_parent"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
@@ -291,7 +291,7 @@
                 <TextView
                     android:id="@+id/zuvlusun_yamaa_text"
                     android:layout_width="match_parent"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
@@ -311,7 +311,7 @@
                 <TextView
                     android:id="@+id/zuvlusun_uher_text"
                     android:layout_width="match_parent"
-                    android:padding="10dp"
+                    android:padding="4dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
@@ -329,7 +329,7 @@
             <TextView
                 android:id="@+id/zuvlusun_mori_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -349,7 +349,7 @@
             <TextView
                 android:id="@+id/zuvlusun_temee_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -372,7 +372,7 @@
                 android:id="@+id/ustgasan"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:text="@string/ustgasan" />
             <TextView
                 android:id="@+id/ustgasan_honi"
@@ -382,7 +382,7 @@
             <TextView
                 android:id="@+id/ustgasan_honi_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
             </LinearLayout>
         <LinearLayout
@@ -400,7 +400,7 @@
             <TextView
                 android:id="@+id/ustgasan_yamaa_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content"/>
             </LinearLayout>
         <LinearLayout
@@ -419,7 +419,7 @@
             <TextView
                 android:id="@+id/ustgasan_uher_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content"/>
             </LinearLayout>
         <LinearLayout
@@ -437,7 +437,7 @@
             <TextView
                 android:id="@+id/ustgasan_mori_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -456,7 +456,7 @@
             <TextView
                 android:id="@+id/ustgasan_temee_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
@@ -478,7 +478,7 @@
                 android:id="@+id/emchilsen"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:text="@string/emchilsen" />
             <TextView
                 android:id="@+id/emchilsen_honi"
@@ -488,7 +488,7 @@
             <TextView
                 android:id="@+id/emchilsen_honi_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
             </LinearLayout>
         <LinearLayout
@@ -506,7 +506,7 @@
             <TextView
                 android:id="@+id/emchilsen_yamaa_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
             </LinearLayout>
         <LinearLayout
@@ -524,7 +524,7 @@
             <TextView
                 android:id="@+id/emchilsen_uher_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
             </LinearLayout>
         <LinearLayout
@@ -543,7 +543,7 @@
             <TextView
                 android:id="@+id/emchilsen_mori_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -562,7 +562,7 @@
             <TextView
                 android:id="@+id/emchilsen_temee_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
@@ -584,7 +584,7 @@
                 android:id="@+id/horogdson"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:text="@string/horogdson" />
             <TextView
                 android:id="@+id/horogdson_honi"
@@ -594,7 +594,7 @@
             <TextView
                 android:id="@+id/horogdson_honi_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
             </LinearLayout>
         <LinearLayout
@@ -612,7 +612,7 @@
             <TextView
                 android:id="@+id/horogdson_yamaa_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content"/>
             </LinearLayout>
         <LinearLayout
@@ -630,7 +630,7 @@
             <TextView
                 android:id="@+id/horogdson_uher_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
             </LinearLayout>
         <LinearLayout
@@ -648,7 +648,7 @@
             <TextView
                 android:id="@+id/horogdson_mori_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -667,7 +667,7 @@
             <TextView
                 android:id="@+id/horogdson_temee_text"
                 android:layout_width="match_parent"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
@@ -681,7 +681,7 @@
         <TextView
             android:id="@+id/ustgah_arga"
             android:layout_width="130dp"
-            android:padding="10dp"
+            android:padding="4dp"
             android:layout_height="wrap_content"
             android:text="@string/ustgah_arga" />
 
@@ -689,7 +689,7 @@
             android:id="@+id/ustgah_arga_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="4dp"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -700,7 +700,7 @@
         <TextView
             android:id="@+id/longitude"
             android:layout_width="130dp"
-            android:padding="10dp"
+            android:padding="4dp"
             android:layout_height="wrap_content"
             android:text="@string/longitude" />
 
@@ -708,7 +708,7 @@
             android:id="@+id/longitude_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="4dp"
             android:inputType="numberDecimal" />
     </LinearLayout>
 
@@ -719,7 +719,7 @@
         <TextView
             android:id="@+id/latitude"
             android:layout_width="130dp"
-            android:padding="10dp"
+            android:padding="4dp"
             android:layout_height="wrap_content"
             android:text="@string/latitude" />
 
@@ -727,7 +727,7 @@
             android:id="@+id/latitude_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="4dp"
             android:inputType="numberDecimal" />
     </LinearLayout>
 
@@ -745,12 +745,7 @@
             android:id="@+id/edit_uvchin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="zasah"/>
-        <Button
-            android:id="@+id/delete_uvchin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ustgah"/>
+            android:text="@string/edit"/>
     </LinearLayout>
 
 </LinearLayout></ScrollView></LinearLayout>

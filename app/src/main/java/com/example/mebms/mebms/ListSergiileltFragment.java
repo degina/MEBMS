@@ -12,11 +12,13 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -60,6 +62,10 @@ public class ListSergiileltFragment extends ListFragment implements OnItemClickL
     private Calendar calendar;
     public Date date;
 
+    public static final String PREFS_NAME = "MEBP";
+    public SharedPreferences prefs;
+    private int user_id;
+
     JSONObject json;
 
     SergiileltListAdapter adapter;
@@ -84,10 +90,14 @@ public class ListSergiileltFragment extends ListFragment implements OnItemClickL
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sergiilelt_list,
                 container, false);
+
+        prefs = parentActivity.getSharedPreferences(PREFS_NAME, 0);
+        user_id = prefs.getInt("userId", 0);
+
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         calendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(parentActivity, null ,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.filter), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     final DatePicker picker = datePickerDialog.getDatePicker();
@@ -99,7 +109,7 @@ public class ListSergiileltFragment extends ListFragment implements OnItemClickL
                 }
             }
         });
-        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.back), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_NEGATIVE) {
                     Log.d("Datepicker","cancel");
@@ -265,7 +275,24 @@ public class ListSergiileltFragment extends ListFragment implements OnItemClickL
                 @Override
                 public void onClick(View view) {
                     Log.d("selected_pos",String.valueOf(p));
-                    deleteRow(sergiileltID.get(p));
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    deleteRow(sergiileltID.get(p));
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
+                    builder.setMessage("Та устахыг хүсч байна уу??").setPositiveButton(R.string.ok, dialogClickListener)
+                            .setNegativeButton(R.string.back, dialogClickListener).show();
                 }
             });
             convertView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
@@ -381,8 +408,7 @@ public class ListSergiileltFragment extends ListFragment implements OnItemClickL
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("date_filter", date_filter));
-
-//			params.add(new BasicNameValuePair("type_filter", type_filter));
+            params.add(new BasicNameValuePair("user_id", String.valueOf(user_id)));
 
             JSONObject json = jsonParser.makeHttpRequest(url_get_sergiilelt, "GET",
                     params);
@@ -411,6 +437,13 @@ public class ListSergiileltFragment extends ListFragment implements OnItemClickL
                             adapter = new SergiileltListAdapter(pActivity,sergiileltID,urh_codeArray,sergiilelt_turulArray,ognooArray);
                             setListAdapter(adapter);
                             adapter.notifyDataSetChanged();
+                        }
+                    });
+                } else if(success == 0) {
+                    pActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(pActivity.getBaseContext(),
+                                    "Мэдээлэл алга!", Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {

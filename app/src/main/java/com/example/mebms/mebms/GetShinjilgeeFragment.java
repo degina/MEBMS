@@ -30,6 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.mikepenz.materialdrawer.Drawer;
+
 public class GetShinjilgeeFragment extends Fragment {
 
     private GetShinjilgee mAuthTask = null;
@@ -54,7 +56,6 @@ public class GetShinjilgeeFragment extends Fragment {
     TextView lon_text;
 
     Button editBtn;
-    Button deleteBtn;
 
     Activity parentActivity;
 
@@ -84,7 +85,21 @@ public class GetShinjilgeeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_get_shinjilgee,
                 container, false);
-
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
 
         urh_code_text = (TextView) rootView.findViewById(R.id.urh_code_text);
         urh_ezen_ner_text = (TextView) rootView.findViewById(R.id.urh_ezen_ner_text);
@@ -106,7 +121,6 @@ public class GetShinjilgeeFragment extends Fragment {
         ilgeeh_arga_text = (TextView) rootView.findViewById(R.id.ilgeeh_arga_text);
 
         editBtn = (Button) rootView.findViewById(R.id.edit_shinjilgee);
-        deleteBtn = (Button) rootView.findViewById(R.id.delete_shinjilgee);
 
         editBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -116,12 +130,6 @@ public class GetShinjilgeeFragment extends Fragment {
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, EditShinjilgeeFragment.newInstance())
                         .commit();
-            }
-        });
-        deleteBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
             }
         });
 

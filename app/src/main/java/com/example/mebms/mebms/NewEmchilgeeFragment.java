@@ -1,5 +1,7 @@
 package com.example.mebms.mebms;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.Calendar;
@@ -14,6 +16,7 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -40,6 +43,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
 
 public class NewEmchilgeeFragment extends Fragment {
 
@@ -72,6 +78,10 @@ public class NewEmchilgeeFragment extends Fragment {
     private static String url_emchilgee_new = "http://10.0.2.2:81/mebp/newemchilgee.php";
     JSONParser jsonParser = new JSONParser();
 
+    public static final String PREFS_NAME = "MEBP";
+    public SharedPreferences prefs;
+    private int user_id;
+
     String urh_code;
     String urh_ezen_ner;
     String bag_horoo;
@@ -90,14 +100,12 @@ public class NewEmchilgeeFragment extends Fragment {
 
     Date date;
 
-    // TODO: Rename and change types and number of parameters
     public static NewEmchilgeeFragment newInstance() {
         NewEmchilgeeFragment fragment = new NewEmchilgeeFragment();
         return fragment;
     }
 
     public NewEmchilgeeFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -111,6 +119,24 @@ public class NewEmchilgeeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_new_emchilgee, container,
                 false);
 
+        prefs = parentActivity.getSharedPreferences(PREFS_NAME, 0);
+        user_id = prefs.getInt("userId", 0);
+
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
         urhCodeEdt = (EditText) rootView.findViewById(R.id.urh_code_edt);
         urhEzenNerEdt = (EditText) rootView.findViewById(R.id.urh_ezen_ner_edt);
         bagEdt = (EditText) rootView.findViewById(R.id.bag_horoo_edt);
@@ -195,6 +221,7 @@ public class NewEmchilgeeFragment extends Fragment {
         @Override
         protected String doInBackground(String... args) {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("user_id", String.valueOf(user_id)));
             params.add(new BasicNameValuePair("urh_code", urh_code));
             params.add(new BasicNameValuePair("urh_ezen_ner", urh_ezen_ner));
             params.add(new BasicNameValuePair("bag_horoo", bag_horoo));
@@ -211,7 +238,9 @@ public class NewEmchilgeeFragment extends Fragment {
             params.add(new BasicNameValuePair("shimegchteh_mori", shimegchteh_mori));
             params.add(new BasicNameValuePair("shimegchteh_temee", shimegchteh_temee));
 
-            params.add(new BasicNameValuePair("date", date.toString()));
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Log.d("date",df.format(date));
+            params.add(new BasicNameValuePair("date", df.format(date)));
             Log.d("date", date.toString());
 
             JSONObject json = jsonParser.makeHttpRequest(url_emchilgee_new, "GET", params);
@@ -223,6 +252,12 @@ public class NewEmchilgeeFragment extends Fragment {
                     pActivity.runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(pActivity.getBaseContext(), "Амжилттай хадгалагдлаа.", Toast.LENGTH_LONG).show();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
+                                    .commit();
+                            ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
                         }
                     });
                 } else {

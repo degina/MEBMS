@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.mikepenz.materialdrawer.Drawer;
 
 
 public class SignUpFragment extends Fragment {
@@ -81,6 +84,23 @@ public class SignUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_sign_up, container, false);
+
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListAjiltanFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
+
 
         usernameEdt = (EditText) rootView.findViewById(R.id.username_edt);
         passwordEdt = (EditText) rootView.findViewById(R.id.password_edt);
@@ -174,6 +194,8 @@ public class SignUpFragment extends Fragment {
 
                 sum_adapter = ArrayAdapter.createFromResource(parentActivity.getBaseContext(),
                         array_id, android.R.layout.simple_spinner_item);
+                sum_adapter
+                        .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 sum_spinner.setAdapter(sum_adapter);
             }
 
@@ -229,9 +251,9 @@ public class SignUpFragment extends Fragment {
                 || lastnameEdt.getText().toString().equals("") || emch_dugaarEdt.getText().toString().equals("")) {
             Toast.makeText(parentActivity.getBaseContext(), "Шаардлагатай нүдийг бөглөнө үү!", Toast.LENGTH_LONG).show();
         } else if(!isPasswordValid(passwordEdt.getText().toString())){
-            Toast.makeText(parentActivity.getBaseContext(), "Нууц үгийн урт 8 ба түүнээс их үсэг тооноос бүрдсэн байх ёстой!", Toast.LENGTH_LONG).show();
+            Toast.makeText(parentActivity.getBaseContext(), "Нууц үгийн урт 8 ба түүнээс их үсэг, тооноос бүрдсэн байх ёстой!", Toast.LENGTH_LONG).show();
         } else if(!passwordEdt.getText().toString().equals(repeatEdt.getText().toString())){
-            Toast.makeText(parentActivity.getBaseContext(), "Нууц үгүүд тохирохгүй байна!", Toast.LENGTH_LONG).show();
+            Toast.makeText(parentActivity.getBaseContext(), "Нууц үгнүүд тохирохгүй байна!", Toast.LENGTH_LONG).show();
         } else {
             username = usernameEdt.getText().toString();
             password = passwordEdt.getText().toString();
@@ -284,6 +306,12 @@ public class SignUpFragment extends Fragment {
                         public void run() {
                             Toast.makeText(pActivity.getBaseContext(),
                                     "Амжилттай бүртгэлээ.", Toast.LENGTH_LONG).show();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, ListAjiltanFragment.newInstance())
+                                    .commit();
+                            ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
                         }
                     });
                 } else {

@@ -31,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.mikepenz.materialdrawer.Drawer;
+
 public class GetSergiileltFragment extends Fragment {
 
     private GetSergiilelt mAuthTask = null;
@@ -66,7 +68,6 @@ public class GetSergiileltFragment extends Fragment {
     LinearLayout haldvarguitgel_layout;
 
     Button editBtn;
-    Button deleteBtn;
 
     Activity parentActivity;
 
@@ -96,6 +97,21 @@ public class GetSergiileltFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_get_sergiilelt,
                 container, false);
+        ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((HomeActivity)parentActivity).getSupportActionBar().setHomeButtonEnabled(true);
+        ((HomeActivity)parentActivity).result.setOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
+            @Override
+            public boolean onNavigationClickListener(View clickedView) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, ListSergiileltFragment.newInstance())
+                        .commit();
+                ((HomeActivity)parentActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((HomeActivity)parentActivity).result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+                return true;
+            }
+        });
 
 
         urh_code_text = (TextView) rootView.findViewById(R.id.urh_code_text);
@@ -127,7 +143,6 @@ public class GetSergiileltFragment extends Fragment {
         haldvarguitgel_layout = (LinearLayout) rootView.findViewById(R.id.haldvarguitgel_layout);
 
         editBtn = (Button) rootView.findViewById(R.id.edit_sergiilelt);
-        deleteBtn = (Button) rootView.findViewById(R.id.delete_sergiilelt);
 
         editBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -137,12 +152,6 @@ public class GetSergiileltFragment extends Fragment {
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, EditSergiileltFragment.newInstance())
                         .commit();
-            }
-        });
-        deleteBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
             }
         });
 

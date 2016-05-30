@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
 
     //save our header or result
     private AccountHeader headerResult = null;
-    private Drawer result = null;
+    public Drawer result = null;
 
     public static final String PREFS_NAME = "MEBP";
     public SharedPreferences prefs;
@@ -57,6 +57,8 @@ public class HomeActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     public static final int progress_bar_type = 0;
 
+    private int user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,24 +66,24 @@ public class HomeActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences(PREFS_NAME, 0);
 
+        user_id = prefs.getInt("userId", 0);
+
         // Handle Toolbar
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_activity_home);
 
         // Create a few sample profile
-        final IProfile profile = new ProfileDrawerItem().withName(prefs.getString("username","User")).withIcon(R.drawable.my_profile);
+        final IProfile profile = new ProfileDrawerItem().withName(prefs.getString("username", "User")).withIcon(R.drawable.my_profile);
 
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withCompactStyle(true)
+                .withSelectionListEnabledForSingleProfile(false)
                 .withHeaderBackground(R.drawable.header_2)
                 .addProfiles(
-                        profile,
-                        //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
-                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withIdentifier(PROFILE_SETTING),
-                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
+                        profile
                 )
                 .withSavedInstance(savedInstanceState)
                 .build();
@@ -100,14 +102,9 @@ public class HomeActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.title_section9).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(3),
                         new PrimaryDrawerItem().withName(R.string.title_section10).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(4),
                         new PrimaryDrawerItem().withName(R.string.title_section11).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(5),
-                        new PrimaryDrawerItem().withName(R.string.title_section12).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(6),
                         new PrimaryDrawerItem().withName(R.string.title_section6).withIcon(FontAwesome.Icon.faw_hospital_o).withIdentifier(7),
                         new PrimaryDrawerItem().withName("Тайлан татах").withIcon(FontAwesome.Icon.faw_paperclip).withIdentifier(8),
-                        new SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(false),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_bullhorn)
+                        new SecondaryDrawerItem().withName(R.string.logout).withIcon(FontAwesome.Icon.faw_power_off).withIdentifier(9)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -118,7 +115,7 @@ public class HomeActivity extends AppCompatActivity {
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container, HomeFragment.newInstance())
                                         .commit();
-                             } else if (drawerItem.getIdentifier() == 2) {
+                            } else if (drawerItem.getIdentifier() == 2) {
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container, ListUvchinFragment.newInstance())
                                         .commit();
@@ -127,24 +124,22 @@ public class HomeActivity extends AppCompatActivity {
                                         .replace(R.id.frame_container, ListSergiileltFragment.newInstance())
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 4) {
-//                                fragmentManager.beginTransaction()
-//                                        .replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
-//                                        .commit();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container, ListEmchilgeeFragment.newInstance())
+                                        .commit();
                             } else if (drawerItem.getIdentifier() == 5) {
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container, ListShinjilgeeFragment.newInstance())
                                         .commit();
-                             } else if (drawerItem.getIdentifier() == 6) {
-//                                fragmentManager.beginTransaction()
-//                                        .replace(R.id.frame_container, ListShiljiltFragment.newInstance())
-//                                        .commit();
                             } else if (drawerItem.getIdentifier() == 7) {
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, SignUpFragment.newInstance())
+                                        .replace(R.id.frame_container, ListAjiltanFragment.newInstance())
                                         .commit();
                             } else if (drawerItem.getIdentifier() == 8) {
-                                String url = "http://10.0.2.2:81/mebp/report.php?user_id="+String.valueOf(prefs.getInt("userId",0));
+                                String url = "http://10.0.2.2:81/mebp/report.php?user_id=" + String.valueOf(prefs.getInt("userId", 0));
                                 new DownloadFileFromURL().execute(url);
+                            } else if (drawerItem.getIdentifier() == 9) {
+                                finish();
                             }
                         }
 
@@ -209,7 +204,7 @@ public class HomeActivity extends AppCompatActivity {
         //handle the click on the back arrow click
         switch (item.getItemId()) {
             case android.R.id.home:
-//                onBackPressed();
+                onBackPressed();
                 return true;
 
             default:
@@ -223,7 +218,15 @@ public class HomeActivity extends AppCompatActivity {
         if (result != null && result.isDrawerOpen()) {
             result.closeDrawer();
         } else {
-            super.onBackPressed();
+            int count = getFragmentManager().getBackStackEntryCount();
+
+            if (count == 0) {
+                super.onBackPressed();
+                //additional code
+            } else {
+                getFragmentManager().popBackStack();
+            }
+
         }
     }
 
@@ -256,6 +259,7 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         }
     }
+
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -272,11 +276,12 @@ public class HomeActivity extends AppCompatActivity {
                 return null;
         }
     }
+
     class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
         /**
          * Before starting background thread Show Progress Bar Dialog
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -285,7 +290,7 @@ public class HomeActivity extends AppCompatActivity {
 
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -337,7 +342,7 @@ public class HomeActivity extends AppCompatActivity {
 
         /**
          * Updating progress bar
-         * */
+         */
         protected void onProgressUpdate(String... progress) {
             // setting progress percentage
             pDialog.setProgress(Integer.parseInt(progress[0]));
@@ -345,7 +350,7 @@ public class HomeActivity extends AppCompatActivity {
 
         /**
          * After completing background task Dismiss the progress dialog
-         * **/
+         **/
         @Override
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after the file was downloaded

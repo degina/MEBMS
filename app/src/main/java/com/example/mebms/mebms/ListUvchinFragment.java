@@ -13,11 +13,13 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -62,6 +64,11 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
     private Calendar calendar;
     public Date date;
 
+    public static final String PREFS_NAME = "MEBP";
+    public SharedPreferences prefs;
+    private int user_id;
+
+
     JSONObject json;
 
     ListUvchinAdapter adapter;
@@ -86,10 +93,14 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_uvchin_list,
                 container, false);
+
+        prefs = parentActivity.getSharedPreferences(PREFS_NAME, 0);
+        user_id = prefs.getInt("userId", 0);
+
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         calendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(parentActivity, null ,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.save), new DialogInterface.OnClickListener() {
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.filter), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     final DatePicker picker = datePickerDialog.getDatePicker();
@@ -102,7 +113,7 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
                 }
             }
         });
-        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.back), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_NEGATIVE) {
                     Log.d("Datepicker","cancel");
@@ -273,7 +284,24 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
                 @Override
                 public void onClick(View view) {
                     Log.d("selected_pos",String.valueOf(p));
-                    deleteRow(uvchinID.get(p));
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    deleteRow(uvchinID.get(p));
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
+                    builder.setMessage("Та устахыг хүсч байна уу??").setPositiveButton(R.string.ok, dialogClickListener)
+                            .setNegativeButton(R.string.back, dialogClickListener).show();
                 }
             });
             convertView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
@@ -329,7 +357,7 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
                         public void run() {
                             getList();
                             Toast.makeText(pActivity.getBaseContext(),
-                                    "Амжилттай устаглаа.", Toast.LENGTH_LONG).show();
+                                    "Амжилттай устгалаа.", Toast.LENGTH_LONG).show();
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction()
                                     .replace(R.id.frame_container, ListUvchinFragment.newInstance())
@@ -395,8 +423,7 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("date_filter", date_filter));
-
-//			params.add(new BasicNameValuePair("type_filter", type_filter));
+            params.add(new BasicNameValuePair("user_id", String.valueOf(user_id)));
 
             JSONObject json = jsonParser.makeHttpRequest(url_get_uvchin, "GET",
                     params);
@@ -425,6 +452,13 @@ public class ListUvchinFragment extends ListFragment implements OnItemClickListe
                             adapter = new ListUvchinAdapter(pActivity,uvchinID,urh_codeArray,uvchin_turulArray,ognooArray);
                             setListAdapter(adapter);
                             adapter.notifyDataSetChanged();
+                        }
+                    });
+                } else if(success == 0) {
+                    pActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(pActivity.getBaseContext(),
+                                    "Мэдээлэл алга!", Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
